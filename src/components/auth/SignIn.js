@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,Link } from 'react-router-dom'
 
 import { signIn } from '../../api/auth'
 import messages from '../shared/AutoDismissAlert/messages'
@@ -8,23 +8,12 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
 const SignIn = (props) => {
-	// constructor(props) {
-	// 	super(props)
 
-	// 	this.state = {
-	// 		email: '',
-	// 		password: '',
-	// 	}
-	// }
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     const navigate = useNavigate()
 
-	// handleChange = (event) =>
-	// 	this.setState({
-	// 		[event.target.name]: event.target.value,
-	// 	})
 
 	const onSignIn = (event) => {
 		event.preventDefault()
@@ -55,8 +44,8 @@ const SignIn = (props) => {
 	}
 
     return (
-        <div className='row'>
-            <div className='col-sm-10 col-md-8 mx-auto mt-5'>
+        <div className='credentials-container'>
+            <div className='signin'>
                 <h3>Sign In</h3>
                 <Form onSubmit={onSignIn}>
                     <Form.Group controlId='email'>
@@ -85,6 +74,10 @@ const SignIn = (props) => {
                         Submit
                     </Button>
                 </Form>
+                <div>
+                    New User?
+                    <Link to='/sign-up'>Sign Up Here</Link>
+                </div>
             </div>
         </div>
     )
