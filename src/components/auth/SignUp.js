@@ -9,18 +9,15 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
 const SignUp = (props) => {
-	// constructor(props) {
-	// 	super(props)
-
-	// 	this.state = {
-	// 		email: '',
-	// 		password: '',
-	// 		passwordConfirmation: '',
-	// 	}
-	// }    
+  
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
+    const [first, setFirst] = useState('')
+    const [last, setLast] = useState('')
+    const [role, setRole] = useState('')
+    // org == organization
+    const [org, setOrg] = useState('')
 
     const navigate = useNavigate()
 
@@ -29,7 +26,7 @@ const SignUp = (props) => {
 
 		const { msgAlert, setUser } = props
 
-        const credentials = {email, password, passwordConfirmation}
+        const credentials = {email, password, passwordConfirmation, first, last, role, org}
 
 		signUp(credentials)
 			.then(() => signIn(credentials))
@@ -60,6 +57,29 @@ const SignUp = (props) => {
             <div className='col-sm-10 col-md-8 mx-auto mt-5'>
                 <h3>Sign Up</h3>
                 <Form onSubmit={onSignUp}>
+                    <Form.Group controlId='firstName'>
+                            <Form.Label>First Name</Form.Label>
+                            <Form.Control
+                                required
+                                type='string'
+                                name='firstName'
+                                value={first}
+                                placeholder='Enter First Name'
+                                onChange={e => setFirst(e.target.value)}
+                            />
+                        </Form.Group>
+                    <Form.Group controlId='lastName'>
+                        <Form.Label>Last Name</Form.Label>
+                        <Form.Control
+                            required
+                            type='string'
+                            name='lastName'
+                            value={last}
+                            placeholder='Enter Last Name'
+                            onChange={e => setLast(e.target.value)}
+                        />
+                    </Form.Group>
+                    
                     <Form.Group controlId='email'>
                         <Form.Label>Email address</Form.Label>
                         <Form.Control
@@ -70,6 +90,36 @@ const SignUp = (props) => {
                             placeholder='Enter email'
                             onChange={e => setEmail(e.target.value)}
                         />
+                    </Form.Group>
+                    <Form.Group controlId="formBasicSelect">
+                        <Form.Label>Role</Form.Label>
+                        <Form.Control
+                            as="select"
+                            onChange={e => setRole(e.target.value)}
+                            name="type"
+                            type="string"
+                        >
+                            <option value="">Select Role</option>
+                            <option value="fsdev">Back End Engineer</option>
+                            <option value="ds">Data Scientist</option>
+                            <option value="fedev">Front End Engineer</option>
+                            <option value="fsdev">Full Stack Engineer</option>
+                            <option value="intern">Intern</option>
+                            <option value="pm">Product Manager</option>
+                            <option value="tl">Tech Lead</option>
+                        </Form.Control>
+                    </Form.Group>
+                    <Form.Group controlId="formBasicSelect">
+                        <Form.Label>Company/Organization</Form.Label>
+                        <Form.Control
+                            as="select"
+                            onChange={e => setOrg(e.target.value)}
+                            name="type"
+                            type="string"
+                        >
+                            <option value="">Select Company/Organization</option>
+                            <option value="demo">Demo</option>
+                        </Form.Control>
                     </Form.Group>
                     <Form.Group controlId='password'>
                         <Form.Label>Password</Form.Label>
