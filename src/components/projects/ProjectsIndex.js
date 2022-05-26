@@ -12,47 +12,37 @@ const ProjectsIndex = (props) => {
 
     useEffect(()=> {
         fetchData()
-        
-
     },[])
 
+    //fetchData fxn -> fetches data from the db
     const fetchData = async () => {
         const response = await showProjects(user)
         setProject(response.data.projects)
-        console.log('response from fetchdata',response.data)
     }
 
-
+    //shows spinner while awaiting for api resp
     if (!project) {
         return<Spinner animation="border" role="status">
         <span className="visually-hidden">Loading</span>
       </Spinner>
-    } 
+    }
+    //maps through projects arr to render project data
     else {
-        projectDetails = project.map((i) => {
-            <ListGroup.Item>
-                <Row>
-                    <Col>{i}</Col>
-                </Row>
-
-            </ListGroup.Item>
-                                    
-
+        projectDetails = project.map((item,index) => {
+            return (
+                <ListGroup.Item key={`project${index}`}>
+                    {item.title}
+                </ListGroup.Item>
+            )
 
         })
     }
-    //reponse from db for showProjects 
-    //0: {_id: '628eaa62a602b66988d8f4a6', title: 'te3t', description: 'th3n!!!', organization: 'demo', owner: '628c44b5a99f9e4e7bb59d6c', …}
-
-
-
-	
+ 
 
 	return (
-		<>
-			<h2>Projects</h2>
-            <div>{projectDetails}</div>
-
+		<> 
+            <ListGroup.Item style={{color:'black',fontWeight:'bold',fontSize:'20px'}}>Projects</ListGroup.Item>
+            {projectDetails}
 		</>
 	)
 }
