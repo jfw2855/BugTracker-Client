@@ -1,4 +1,5 @@
 import ProjectsIndex from "./projects/ProjectsIndex"
+import { ListGroup } from "react-bootstrap"
 
 const Home = (props) => {
 	const { msgAlert, user } = props
@@ -6,7 +7,11 @@ const Home = (props) => {
 	return (
 		<>
 			<h2>Home Page</h2>
-			<ProjectsIndex user={user}/>
+			<div style={{border:'1px solid red'}}>
+                <ListGroup style={{border:'2px dashed purple',width:'30%'}}>
+					<ProjectsIndex user={user}/>
+                </ListGroup>
+			</div>
 		</>
 	)
 }
