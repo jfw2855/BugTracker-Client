@@ -3,7 +3,18 @@ import axios from 'axios'
 
 
 // POST -> creates project
+export const createProject = (user,project) => {
 
+    const config = {
+      method: 'POST',
+      url: `${apiUrl}/project`,
+      headers: {
+        Authorization: `Token token=${user.token}`
+      },
+      data: {project}
+    }
+    return axios(config)
+  }
 
 
 // GET -> index projects
