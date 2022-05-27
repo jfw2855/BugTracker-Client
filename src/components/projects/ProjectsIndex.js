@@ -14,7 +14,7 @@ const ProjectsIndex = (props) => {
         fetchData()
     },[])
 
-    //fetchData fxn -> fetches data from the db
+    //fetchData function -> fetches data from the db
     const fetchData = async () => {
         const response = await showProjects(user)
         setProject(response.data.projects)
