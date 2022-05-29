@@ -2,6 +2,7 @@ import ProjectsIndex from "./projects/ProjectsIndex"
 import IssuesIndex from "./issues/IssuesIndex"
 import { Button, ButtonGroup, ListGroup } from "react-bootstrap"
 import { useState } from "react"
+import ProjectNewModal from "./projects/ProjectNewModal"
 
 const Home = (props) => {
 	const { msgAlert, user } = props
@@ -36,8 +37,15 @@ const Home = (props) => {
 				<Button onClick={handleNewIssue}>
 					Create New Issue
 				</Button>
-
 			</ButtonGroup>
+			<ProjectNewModal
+				show={projectOpen}
+				user={user}
+				msgAlert={msgAlert}
+				handleClose={() => {
+					setProjectOpen(false)
+				}}
+			/>  
 		</>
 	)
 }
