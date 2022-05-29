@@ -5,14 +5,14 @@ import { Spinner, ListGroup, Row, Col } from 'react-bootstrap'
 
 
 const ProjectsIndex = (props) => {
-    const {user} = props
+    const {user,refresh} = props
     const [project,setProject] = useState(null)
 
     let projectDetails
 
     useEffect(()=> {
         fetchData()
-    },[])
+    },[refresh])
 
     //fetchData function -> fetches data from the db
     const fetchData = async () => {
