@@ -22,6 +22,12 @@ const ProjectNewModal = (props) => {
         })
     }
 
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        let newReq = await createProject(user,project)
+        handleClose()
+    }
+
 
   return (
     <>
@@ -31,7 +37,7 @@ const ProjectNewModal = (props) => {
       </Modal.Header>
       <Modal.Body>
         <Container className="justify-content-center">
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <Row>
               <Col>
                 <Form.Label>Title</Form.Label>
