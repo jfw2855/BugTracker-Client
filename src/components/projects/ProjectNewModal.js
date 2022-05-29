@@ -4,7 +4,7 @@ import {Modal, Container, Form, Button, Col, Row } from 'react-bootstrap'
 
 const ProjectNewModal = (props) => {
 
-    const { show, user, triggerRefresh, createProject, handleClose, msgAlert } = props
+    const { show, user, refreshProjects, createProject, handleClose, msgAlert } = props
     const [project, setProject] = useState('')
 
     // updates the project state variable for each key stroke
@@ -22,9 +22,11 @@ const ProjectNewModal = (props) => {
         })
     }
 
+    //creates new project in the db and refreshes ProjectsIndex component
     const handleSubmit = async (e) => {
         e.preventDefault()
-        let newReq = await createProject(user,project)
+        await createProject(user,project)
+        refreshProjects()
         handleClose()
     }
 
