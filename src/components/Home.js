@@ -1,9 +1,22 @@
 import ProjectsIndex from "./projects/ProjectsIndex"
 import IssuesIndex from "./issues/IssuesIndex"
-import { ListGroup } from "react-bootstrap"
+import { Button, ButtonGroup, ListGroup } from "react-bootstrap"
+import { useState } from "react"
 
 const Home = (props) => {
 	const { msgAlert, user } = props
+	const [projectOpen,setProjectOpen] = useState(false)
+	const [issueOpen,setIssueOpen] = useState(false)
+	
+	//handle function to open New Project Modal
+	const handleNewProject = () => {
+		setProjectOpen(true)
+	}
+
+	//handle function to open New Issue Modal
+	const handleNewIssue = () => {
+		setIssueOpen(true)
+	}
 
 	return (
 		<>
@@ -16,6 +29,15 @@ const Home = (props) => {
 					<IssuesIndex user={user}/>
                 </ListGroup>
 			</div>
+			<ButtonGroup className="home-btn-container">
+				<Button onClick={handleNewProject}>
+					Create New Project
+				</Button>
+				<Button onClick={handleNewIssue}>
+					Create New Issue
+				</Button>
+
+			</ButtonGroup>
 		</>
 	)
 }
