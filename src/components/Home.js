@@ -1,21 +1,44 @@
 import ProjectsIndex from "./projects/ProjectsIndex"
 import IssuesIndex from "./issues/IssuesIndex"
-import { Button, ButtonGroup, ListGroup } from "react-bootstrap"
+import { Button, ButtonGroup, ListGroup,Spinner } from "react-bootstrap"
 import { useEffect, useState } from "react"
 import ProjectNewModal from "./projects/ProjectNewModal"
+import IssueNewModal from "./issues/IssueNewModal"
 import { createProject } from "../api/project"
+import { showProjects } from "../api/project"
 
 const Home = (props) => {
 	const { msgAlert, user } = props
 	const [projectOpen,setProjectOpen] = useState(false)
 	const [issueOpen,setIssueOpen] = useState(false)
 	const [projectRefresh,setProjectRefresh] = useState(false)
+	const [projOptions,setProjOptions] = useState(null)
 
-	//resets the refresh state variable
+	//resets the refresh state variable & calls for proj info
 	useEffect(() => {
 		setProjectRefresh(false)
+		fetchProj()
 
 	},[projectRefresh])
+
+	//fetches project name & ids to render as options for new issue modal
+	const fetchProj = async () => {
+		let apiResp = await showProjects(user)
+		let temp = apiResp.data.projects.map((item)=> {
+			return (
+				<option key={`pOpt${item._id}`} value={item._id}>{item.title}</option>
+				)
+			})
+		setProjOptions(temp)
+	}
+
+	//renders spinner until api responds
+	if (!projOptions) {
+        return<Spinner animation="border" role="status">
+        <span className="visually-hidden">Loading</span>
+      </Spinner>
+    }
+
 	
 	//handle function to open New Project Modal
 	const handleNewProject = () => {
@@ -60,7 +83,16 @@ const Home = (props) => {
 				handleClose={() => {
 					setProjectOpen(false)
 				}}
-			/>  
+			/>
+			<IssueNewModal
+				show={issueOpen}
+				user={user}
+				msgAlert={msgAlert}
+				options={projOptions}
+				handleClose={() => {
+					setIssueOpen(false)
+				}}
+			/>
 		</>
 	)
 }
