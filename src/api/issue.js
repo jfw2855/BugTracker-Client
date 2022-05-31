@@ -2,26 +2,38 @@ import apiUrl from '../apiConfig'
 import axios from 'axios'
 
 
-//create issue
-
+//POST issue -> creates new issue 
+export const createIssue = (issue,projectId,user) => {
+  
+  const config = {
+    method: 'POST',
+    url: `${apiUrl}/issue/project/${projectId}`,
+    headers: {
+      Authorization: `Token token=${user.token}`
+    },
+    data: {issue}
+  }
+  return axios(config)
+}
 
 //show issues
 
 //GET user issues -> displays all issues user created 
 export const showMyIssues = (user) => {
 
-    const config = {
-      method: 'GET',
-      url: `${apiUrl}/user/issues`,
-      headers: {
-          Authorization: `Token token=${user.token}`
-      }
+  const config = {
+    method: 'GET',
+    url: `${apiUrl}/user/issues`,
+    headers: {
+      Authorization: `Token token=${user.token}`
     }
-    return axios(config)
   }
+  return axios(config)
+}
 
 // show individual issue
 
 // update issue
 
 // delete issue
+
