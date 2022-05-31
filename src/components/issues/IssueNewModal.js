@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import {Modal, Container, Form, Button, Col, Row } from 'react-bootstrap'
+import { createIssue } from '../../api/issue'
 
 
 const IssueNewModal = (props) => {
 
   const { show, user, handleClose, options, msgAlert } = props
   const [issue,setIssue] = useState('')
+  const [projId,setProjId] = useState('')
 
 
   // updates the project state variable for each key stroke
@@ -23,7 +25,16 @@ const IssueNewModal = (props) => {
       })
   }
 
-
+  const handleProjectId = (e) => {
+    e.persist()
+    setProjId(e.target.value)
+  }
+  //creates new issue in the db
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    await createIssue(issue,projId,user)
+    handleClose()
+  }
 
 
   return (
@@ -34,7 +45,7 @@ const IssueNewModal = (props) => {
       </Modal.Header>
       <Modal.Body>
         <Container className="justify-content-center">
-          <Form >
+          <Form onSubmit={handleSubmit}>
             <Row>
               <Col>
                 <Form.Label>Title</Form.Label>
@@ -56,17 +67,33 @@ const IssueNewModal = (props) => {
               </Col>
             </Row>
               <Form.Group controlId="formBasicSelect">
-                <Form.Label>Projects</Form.Label>
+                <Form.Label>Project</Form.Label>
                   <Form.Select
-                  onChange={handleChange}
+                  onChange={handleProjectId}
+                  name="projectId"
+                  type="string"
                   >
                     <option>select project</option>
                     {options}
       
                     </Form.Select>
               </Form.Group>
-            <Button className="new-transaction-btn" type="submit">
-              Add Project
+              <Form.Group controlId="formBasicSelect">
+                <Form.Label>Priority</Form.Label>
+                  <Form.Select
+                  onChange={handleChange}
+                  name="priority"
+                  type="string"
+                  >
+                    <option>select priority</option>
+                    <option value={'low'}>1 low</option>
+                    <option value={'medium'}>2 medium</option>
+                    <option value={'high'}>3 high</option>
+                    <option value={'critical'}>4 critical</option>
+                    </Form.Select>
+              </Form.Group>
+            <Button className="new-issue-btn" type="submit">
+              Add Issue
             </Button>
           </Form>
         </Container>
