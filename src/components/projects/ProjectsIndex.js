@@ -41,7 +41,6 @@ const ProjectsIndex = (props) => {
 
 	return (
 		<> 
-            <ListGroup.Item style={{color:'black',fontWeight:'bold',fontSize:'20px'}}>Projects</ListGroup.Item>
             {projectDetails}
 		</>
 	)
