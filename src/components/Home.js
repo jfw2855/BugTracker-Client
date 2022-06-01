@@ -64,14 +64,14 @@ const Home = (props) => {
 
 	return (
 		<>
-			<h2>Home Page</h2>
-			<div style={{border:'1px solid red',display:'flex',justifyContent:'space-between'}}>
-                <ListGroup style={{border:'2px dashed purple',width:'30%'}}>
-					<ProjectsIndex user={user} refresh={projectRefresh}/>
+			<h2 >Home Page</h2>
+			<div className="home-container">
+                <ListGroup className="scroll-show">
+					<ProjectsIndex user={user} refresh={projectRefresh} className="scroll-show"/>
                 </ListGroup>
-				<ListGroup style={{border:'2px dashed purple',width:'30%'}}>
+				<ListGroup className="scroll-show">
 					<IssuesIndex user={user} refresh={issueRefresh}/>
-                </ListGroup>
+				</ListGroup>
 			</div>
 			<ButtonGroup className="home-btn-container">
 				<Button onClick={handleNewProject}>
