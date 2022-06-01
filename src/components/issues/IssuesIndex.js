@@ -6,14 +6,14 @@ import { showMyIssues } from "../../api/issue"
 
 const IssuesIndex = (props) => {
 
-    const {user} = props
+    const {user,refresh} = props
     const [issues,setIssues] = useState(null)
 
     let issueDetails
 
     useEffect(()=> {
         fetchData()
-    },[])
+    },[refresh])
 
     //fetchData function -> fetches data from the db
     const fetchData = async () => {
