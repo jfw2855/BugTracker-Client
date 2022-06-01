@@ -10,3 +10,18 @@
   width: 30%;
   margin: 5%;
 }
+
+.scroll-show {
+  border: 5px solid rgb(126, 67, 33);
+  width: 30%;
+  margin: 2%;
+  overflow-y:auto;
+  height: 75%;
+}
+
+.home-container {
+  border: 2px solid rgb(181, 102, 164);
+  display: flex;
+  justify-content: space-around;
+  height: 70vh;
+}
