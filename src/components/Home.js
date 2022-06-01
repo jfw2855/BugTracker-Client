@@ -66,21 +66,25 @@ const Home = (props) => {
 		<>
 			<h2 >Home Page</h2>
 			<div className="home-container">
-                <ListGroup className="scroll-show">
-					<ProjectsIndex user={user} refresh={projectRefresh} className="scroll-show"/>
-                </ListGroup>
-				<ListGroup className="scroll-show">
-					<IssuesIndex user={user} refresh={issueRefresh}/>
-				</ListGroup>
+				<div className="home-details">
+					<h4>Projects</h4>
+					<ListGroup className="scroll-show">
+						<ProjectsIndex user={user} refresh={projectRefresh} className="scroll-show"/>
+					</ListGroup>
+					<Button onClick={handleNewProject} className="home-btn">
+						Create New Project
+					</Button>
+				</div>
+				<div className="home-details">
+					<h4>My Issues</h4>
+					<ListGroup className="scroll-show">
+						<IssuesIndex user={user} refresh={issueRefresh}/>
+					</ListGroup>
+					<Button onClick={handleNewIssue} className="home-btn">
+						Create New Issue
+					</Button>
+				</div>
 			</div>
-			<ButtonGroup className="home-btn-container">
-				<Button onClick={handleNewProject}>
-					Create New Project
-				</Button>
-				<Button onClick={handleNewIssue}>
-					Create New Issue
-				</Button>
-			</ButtonGroup>
 			<ProjectNewModal
 				show={projectOpen}
 				user={user}
