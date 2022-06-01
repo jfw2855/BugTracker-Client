@@ -5,7 +5,7 @@ import { createIssue } from '../../api/issue'
 
 const IssueNewModal = (props) => {
 
-  const { show, user, handleClose, options, msgAlert } = props
+  const { show, user, handleClose, refreshIssues, options, msgAlert } = props
   const [issue,setIssue] = useState('')
   const [projId,setProjId] = useState('')
 
@@ -33,6 +33,7 @@ const IssueNewModal = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     await createIssue(issue,projId,user)
+    refreshIssues()
     handleClose()
   }
 
