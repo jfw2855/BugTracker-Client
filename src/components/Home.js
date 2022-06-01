@@ -12,14 +12,16 @@ const Home = (props) => {
 	const [projectOpen,setProjectOpen] = useState(false)
 	const [issueOpen,setIssueOpen] = useState(false)
 	const [projectRefresh,setProjectRefresh] = useState(false)
+	const [issueRefresh,setIssueRefresh] = useState(false)
 	const [projOptions,setProjOptions] = useState(null)
 
 	//resets the refresh state variable & calls for proj info
 	useEffect(() => {
+		setIssueRefresh(false)
 		setProjectRefresh(false)
 		fetchProj()
 
-	},[projectRefresh])
+	},[projectRefresh,issueRefresh])
 
 	//fetches project name & ids to render as options for new issue modal
 	const fetchProj = async () => {
@@ -55,6 +57,11 @@ const Home = (props) => {
 		setProjectRefresh(true)
 	}
 
+	//rerenders issues index once a new issue is created
+	const refreshIssues = () => {
+		setIssueRefresh(true)
+	}
+
 	return (
 		<>
 			<h2>Home Page</h2>
@@ -63,7 +70,7 @@ const Home = (props) => {
 					<ProjectsIndex user={user} refresh={projectRefresh}/>
                 </ListGroup>
 				<ListGroup style={{border:'2px dashed purple',width:'30%'}}>
-					<IssuesIndex user={user}/>
+					<IssuesIndex user={user} refresh={issueRefresh}/>
                 </ListGroup>
 			</div>
 			<ButtonGroup className="home-btn-container">
@@ -89,6 +96,7 @@ const Home = (props) => {
 				user={user}
 				msgAlert={msgAlert}
 				options={projOptions}
+				refreshIssues={refreshIssues}
 				handleClose={() => {
 					setIssueOpen(false)
 				}}
