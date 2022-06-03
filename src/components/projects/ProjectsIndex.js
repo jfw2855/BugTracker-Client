@@ -1,6 +1,7 @@
 import { showProjects } from "../../api/project"
 import { useEffect,useState } from "react"
 import { Spinner, ListGroup, Row, Col } from 'react-bootstrap'
+import { Link } from "react-router-dom"
 
 
 
@@ -17,6 +18,7 @@ const ProjectsIndex = (props) => {
     //fetchData function -> fetches data from the db
     const fetchData = async () => {
         const response = await showProjects(user)
+        console.log('this is projects in fetchdata',response.data.projects)
         setProject(response.data.projects)
     }
 
@@ -30,10 +32,13 @@ const ProjectsIndex = (props) => {
     else {
         projectDetails = project.map((item,index) => {
             return (
-                <ListGroup.Item key={`project${index}`}>
-                    {item.title}
-                </ListGroup.Item>
+                <Link to={`/project/${item._id}`}>
+                    <ListGroup.Item key={`project${index}`}>
+                        {item.title}
+                    </ListGroup.Item>
+                </Link>
             )
+
 
         })
     }
