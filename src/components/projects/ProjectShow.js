@@ -10,10 +10,22 @@ const ProjectShow = (props) => {
     const {user} = props
     const location = useLocation()
     const {title,description,owner} = location.state
+    const params = useParams()
+    const {projId} = params 
 
 
+    useEffect(()=>{
+        fetchIssues()
 
+        
+    })
 
+    //function used in useEffect to fetch all project issues from db
+    const fetchIssues =  async () => {
+        let apiResp = await showProjectIssues(user,projId)
+        console.log('this is issues from apiResp!!!!',apiResp.data.issues)
+        
+    }
 
 
 	return (
