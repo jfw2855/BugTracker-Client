@@ -16,7 +16,18 @@ export const createIssue = (issue,projectId,user) => {
   return axios(config)
 }
 
-//show issues
+//GET project issues -> displays all issues for a project
+export const showProjectIssues = (user,projectId) => {
+
+  const config = {
+    method: 'GET',
+    url: `${apiUrl}/issue/project/${projectId}`,
+    headers: {
+      Authorization: `Token token=${user.token}`
+    }
+  }
+  return axios(config)
+}
 
 //GET user issues -> displays all issues user created 
 export const showMyIssues = (user) => {
