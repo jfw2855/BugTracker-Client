@@ -32,7 +32,10 @@ const ProjectsIndex = (props) => {
     else {
         projectDetails = project.map((item,index) => {
             return (
-                <Link to={`/project/${item._id}`}>
+                <Link
+                    to={`/project/${item._id}`}
+                    state={{title:`${item.title}`,description:`${item.description}`,owner:`${item.owner}`}}
+                >
                     <ListGroup.Item key={`project${index}`}>
                         {item.title}
                     </ListGroup.Item>
