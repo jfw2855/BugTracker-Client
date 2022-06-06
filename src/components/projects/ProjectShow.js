@@ -35,7 +35,7 @@ const ProjectShow = (props) => {
         setStatusLabels([])
         setStatusValues([])
         fetchIssues()
-    },[])
+    },[issueRefresh])
     
     //function used in useEffect to fetch all project issues from db
     const fetchIssues =  async () => {
