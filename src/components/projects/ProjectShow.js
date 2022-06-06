@@ -2,6 +2,7 @@ import { useLocation,useParams } from "react-router-dom"
 import { Button,ListGroup,ListGroupItem,Row,Col, Spinner } from "react-bootstrap"
 import { useEffect,useState } from "react"
 import { showProjectIssues } from "../../api/issue"
+import Plot from 'react-plotly.js'
 
 
 
@@ -13,14 +14,27 @@ const ProjectShow = (props) => {
     const params = useParams()
     const {projId} = params
     const [issues,setIssues]=useState(null)
+    const [priorityLabels,setPriorityLabels] = useState([])
+    const [priorityValues,setPriorityValues] = useState([])
+    const [ statusLabels, setStatusLabels] = useState([])
+    const [ statusValues, setStatusValues] = useState([])
 
     let issueDetails
     let priorityData = {}
     let statusData = {}
+    let statusChartData
+    let statusChart
+    let priorityChartData 
+    let priorityChart
 
 
 
     useEffect(()=>{
+        //resets state vars for graph data
+        setPriorityLabels([])
+        setPriorityValues([])
+        setStatusLabels([])
+        setStatusValues([])
         fetchIssues()
     },[])
     
@@ -51,6 +65,16 @@ const ProjectShow = (props) => {
                 statusData[`${status}`] = 1
             }
         }
+        //pushes issue status and priority data to arrays
+        for (let key in priorityData) {
+            setPriorityLabels(prevVal => [...prevVal,key])
+            setPriorityValues(prevVal => [...prevVal,priorityData[key]])
+        }
+        for (let key in statusData) {
+            setStatusLabels(prevVal=>[...prevVal,key])
+            setStatusValues(prevVal=>[...prevVal,statusData[key]])
+        }
+        console.log('this is status labels',statusLabels,statusValues)
     }
 
     //shows spinner while awaiting for api resp
@@ -91,10 +115,39 @@ const ProjectShow = (props) => {
         
     }
 
+    let layout = {
+        height: 350,
+        width: 320,
+        showlegend: true,
+        paper_bgcolor:'transparent',
+        }
+
+    if (statusValues.length>0) {
+        statusChartData = [{
+            values: statusValues,
+            labels: statusLabels,
+            name: 'Status Overview of Issues',
+            hoverinfo: 'label+value',
+            hole: 0.8,
+            type: 'pie'
+          }]
+        priorityChartData = [{
+            values: priorityValues,
+            labels: priorityLabels,
+            name: 'Priority Overview of Issues',
+            hoverinfo: 'label+value',
+            hole: 0.8,
+            type: 'pie'
+          }]
+        statusChart = <Plot data={statusChartData} layout={layout} />
+        priorityChart= <Plot data={priorityChartData} layout={layout}/>
+    }
+
 
 
 	return (
 		<>
+        
             <div className="project-header">
                 <h1>{`Project: ${title}`}</h1>
                 <Button variant='warning'>
@@ -106,6 +159,8 @@ const ProjectShow = (props) => {
 
             </div>
             <div className="project-body">
+                {statusChart}
+                {priorityChart}
                 <p>
                     {description}
                 </p>
