@@ -4,16 +4,19 @@ import { useEffect,useState } from "react"
 import { showProjectIssues } from "../../api/issue"
 import IssuePlots from "../issues/IssuePlots"
 import IssueDetails from "../issues/IssueDetails"
+import IssueNewModal from "../issues/IssueNewModal"
 
 
 const ProjectShow = (props) => {
 
-    const {user} = props
+    const {user,msgAlert} = props
     const location = useLocation()
     const {title,description,owner} = location.state
     const params = useParams()
     const {projId} = params
     const [issues,setIssues]=useState(null)
+    const [issueOpen,setIssueOpen] = useState(false)
+    const [issueRefresh,setIssueRefresh] = useState(false)
     const [priorityLabels,setPriorityLabels] = useState([])
     const [priorityValues,setPriorityValues] = useState([])
     const [ statusLabels, setStatusLabels] = useState([])
@@ -26,6 +29,7 @@ const ProjectShow = (props) => {
 
     useEffect(()=>{
         //resets state vars for graph data
+        setIssueRefresh(false)
         setPriorityLabels([])
         setPriorityValues([])
         setStatusLabels([])
@@ -93,6 +97,16 @@ const ProjectShow = (props) => {
         />
     }
 
+    //rerenders issues index once a new issue is created
+	const refreshIssues = () => {
+		setIssueRefresh(true)
+	}
+
+    //handle function to open New Issue Modal
+	const handleNewIssue = () => {
+		setIssueOpen(true)
+	}
+
 	return (
 		<>
             <div className="project-header">
@@ -122,7 +136,20 @@ const ProjectShow = (props) => {
                 <ListGroup className="issues-listgroup">
                     {issueDetails}
                 </ListGroup>
+                <Button onClick={handleNewIssue} className="home-btn">
+						Create New Issue
+				</Button>
             </div>
+            <IssueNewModal
+				show={issueOpen}
+				user={user}
+				msgAlert={msgAlert}
+				projectSelected={projId}
+				refreshIssues={refreshIssues}
+				handleClose={() => {
+					setIssueOpen(false)
+				}}
+			/>
 		</>
 	)
 }
