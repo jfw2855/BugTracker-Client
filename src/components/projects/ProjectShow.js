@@ -2,8 +2,7 @@ import { useLocation,useParams } from "react-router-dom"
 import { Button,ListGroup,ListGroupItem,Row,Col, Spinner } from "react-bootstrap"
 import { useEffect,useState } from "react"
 import { showProjectIssues } from "../../api/issue"
-import Plot from 'react-plotly.js'
-
+import IssuePlots from "../issues/IssuePlots"
 
 
 const ProjectShow = (props) => {
@@ -22,12 +21,7 @@ const ProjectShow = (props) => {
     let issueDetails
     let priorityData = {}
     let statusData = {}
-    let statusChartData
-    let statusChart
-    let priorityChartData 
-    let priorityChart
-
-
+    let pieCharts
 
     useEffect(()=>{
         //resets state vars for graph data
@@ -115,35 +109,15 @@ const ProjectShow = (props) => {
         
     }
 
-    let layout = {
-        height: 350,
-        width: 320,
-        showlegend: true,
-        paper_bgcolor:'transparent',
-        }
-
+    //renders piechart component
     if (statusValues.length>0) {
-        statusChartData = [{
-            values: statusValues,
-            labels: statusLabels,
-            name: 'Status Overview of Issues',
-            hoverinfo: 'label+value',
-            hole: 0.8,
-            type: 'pie'
-          }]
-        priorityChartData = [{
-            values: priorityValues,
-            labels: priorityLabels,
-            name: 'Priority Overview of Issues',
-            hoverinfo: 'label+value',
-            hole: 0.8,
-            type: 'pie'
-          }]
-        statusChart = <Plot data={statusChartData} layout={layout} />
-        priorityChart= <Plot data={priorityChartData} layout={layout}/>
+        pieCharts=<IssuePlots
+        priorityValues={priorityValues}
+        priorityLabels={priorityLabels}
+        statusValues={statusValues}
+        statusLabels={statusLabels}
+        />
     }
-
-
 
 	return (
 		<>
@@ -159,8 +133,7 @@ const ProjectShow = (props) => {
 
             </div>
             <div className="project-body">
-                {statusChart}
-                {priorityChart}
+                {pieCharts}
                 <p>
                     {description}
                 </p>
