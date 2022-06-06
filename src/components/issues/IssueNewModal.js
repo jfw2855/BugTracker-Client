@@ -5,7 +5,7 @@ import { createIssue } from '../../api/issue'
 
 const IssueNewModal = (props) => {
 
-  const { show, user, handleClose, refreshIssues, options, msgAlert } = props
+  const { show, user, handleClose, refreshIssues, options, projectSelected, msgAlert } = props
   const [issue,setIssue] = useState('')
   const [projId,setProjId] = useState('')
 
@@ -27,12 +27,17 @@ const IssueNewModal = (props) => {
 
   const handleProjectId = (e) => {
     e.persist()
-    setProjId(e.target.value)
+    setProjId(e.target.value) 
+    
   }
   //creates new issue in the db
   const handleSubmit = async (e) => {
     e.preventDefault()
-    await createIssue(issue,projId,user)
+    //checks to see if project is preselected (from project show page)
+    projectSelected?
+    await createIssue(issue,projectSelected,user)
+    :await createIssue(issue,projId,user)
+
     refreshIssues()
     handleClose()
   }
@@ -67,18 +72,28 @@ const IssueNewModal = (props) => {
                 />
               </Col>
             </Row>
-              <Form.Group controlId="formBasicSelect">
-                <Form.Label>Project</Form.Label>
-                  <Form.Select
-                  onChange={handleProjectId}
-                  name="projectId"
-                  type="string"
-                  >
-                    <option>select project</option>
-                    {options}
-      
-                    </Form.Select>
-              </Form.Group>
+            {projectSelected?
+            <Form.Control
+            name="projectId"
+            type="string"
+            hidden
+            readOnly
+            value={projectSelected}
+            />
+            :
+            <Form.Group controlId="formBasicSelect">
+              <Form.Label>Project</Form.Label>
+                <Form.Select
+                onChange={handleProjectId}
+                name="projectId"
+                type="string"
+                >
+                  <option>select project</option>
+                  {options}
+    
+                </Form.Select>
+            </Form.Group>
+            }
               <Form.Group controlId="formBasicSelect">
                 <Form.Label>Priority</Form.Label>
                   <Form.Select
