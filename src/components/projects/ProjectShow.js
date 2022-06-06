@@ -3,6 +3,7 @@ import { Button,ListGroup,ListGroupItem,Row,Col, Spinner } from "react-bootstrap
 import { useEffect,useState } from "react"
 import { showProjectIssues } from "../../api/issue"
 import IssuePlots from "../issues/IssuePlots"
+import IssueDetails from "../issues/IssueDetails"
 
 
 const ProjectShow = (props) => {
@@ -79,34 +80,7 @@ const ProjectShow = (props) => {
         
     //maps issues to create list group items of issues
     } else {
-        issueDetails = issues.map((issue,index)=>{
-            return(
-            <ListGroupItem key={`issueKey${issue._id}`}>
-                <Row>
-                    <Col
-                    className="issue-details"
-                    style={{backgroundColor: issue.status==='open'?'lightgreen':'lightgrey'}}
-                    >
-                        {issue.status}
-                    </Col>
-                    <Col
-                    className="issue-details"
-                    style = {{
-                        'backgroundColor': issue.priority === 'low' ?
-                        'lightyellow' : issue.priority === 'medium' ?
-                        'yellow' : issue.priority === 'high'? 'orange':'red'
-                    }}
-                    >
-                        {issue.priority}
-                    </Col>
-                    <Col className="issue-details">{issue.title}</Col>
-                    <Col className="issue-details">{issue.comments.length}</Col>
-                </Row>
-            </ListGroupItem>
-            )
-
-        })
-        
+        issueDetails = <IssueDetails issues={issues}/>  
     }
 
     //renders piechart component
@@ -121,7 +95,6 @@ const ProjectShow = (props) => {
 
 	return (
 		<>
-        
             <div className="project-header">
                 <h1>{`Project: ${title}`}</h1>
                 <Button variant='warning'>
@@ -130,7 +103,6 @@ const ProjectShow = (props) => {
                 <Button variant='danger'>
                     Remove Project
                 </Button>
-
             </div>
             <div className="project-body">
                 {pieCharts}
@@ -151,7 +123,6 @@ const ProjectShow = (props) => {
                     {issueDetails}
                 </ListGroup>
             </div>
-            
 		</>
 	)
 }
