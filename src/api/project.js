@@ -34,4 +34,16 @@ export const showProjects = (user) => {
 
 // update project
 
-// delete project
+// DELETE -> removes project from DB
+export const removeProject = (user,projectId) => {
+
+  const config = {
+    method: 'DELETE',
+    url: `${apiUrl}/project/${projectId}`,
+    headers: {
+        Authorization: `Token token=${user.token}`
+    }
+  }
+  return axios(config)
+}
+
