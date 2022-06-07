@@ -48,3 +48,16 @@ export const showMyIssues = (user) => {
 
 // delete issue
 
+//DELETE ALL -> removes all issues from a project
+export const removeAllIssues = (user,projectId) => {
+
+  const config = {
+    method: 'DELETE',
+    url: `${apiUrl}/issue/project/${projectId}`,
+    headers: {
+      Authorization: `Token token=${user.token}`
+    }
+  }
+  return axios(config)
+}
+
