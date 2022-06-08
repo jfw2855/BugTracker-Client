@@ -1,7 +1,8 @@
-import { useLocation,useParams } from "react-router-dom"
+import { useLocation,useParams,useNavigate } from "react-router-dom"
 import { Button,ListGroup,ListGroupItem,Row,Col, Spinner } from "react-bootstrap"
 import { useEffect,useState } from "react"
-import { showProjectIssues } from "../../api/issue"
+import { showProjectIssues,removeAllIssues } from "../../api/issue"
+import { removeProject } from "../../api/project"
 import IssuePlots from "../issues/IssuePlots"
 import IssueDetails from "../issues/IssueDetails"
 import IssueNewModal from "../issues/IssueNewModal"
@@ -14,6 +15,7 @@ const ProjectShow = (props) => {
     const {title,description,owner} = location.state
     const params = useParams()
     const {projId} = params
+    const navigate = useNavigate()
     const [issues,setIssues]=useState(null)
     const [issueOpen,setIssueOpen] = useState(false)
     const [issueRefresh,setIssueRefresh] = useState(false)
@@ -97,6 +99,15 @@ const ProjectShow = (props) => {
         />
     }
 
+    // handle delete function that will remove project from db
+    const handleDelete = async (e) => {
+        e.preventDefault()
+        await removeAllIssues(user,projId)
+        await removeProject(user,projId)
+        //returns back to home page after removing project
+        navigate('/')
+    }
+
     //rerenders issues index once a new issue is created
 	const refreshIssues = () => {
 		setIssueRefresh(true)
@@ -114,7 +125,7 @@ const ProjectShow = (props) => {
                 <Button variant='warning'>
                     Edit
                 </Button>
-                <Button variant='danger'>
+                <Button variant='danger' onClick={handleDelete}>
                     Remove Project
                 </Button>
             </div>
