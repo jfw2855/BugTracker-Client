@@ -30,6 +30,20 @@ export const showProjects = (user) => {
     return axios(config)
   }
 
+//GET one -> gets single project
+export const getProject = (user,projectId) => {
+
+  const config = {
+    method: 'GET',
+    url: `${apiUrl}/project/${projectId}`,
+    headers: {
+        Authorization: `Token token=${user.token}`
+    }
+  }
+  return axios(config)
+}
+
+
 // PATCH -> updates project info
 export const updateProject = (user,project,projectId) => {
 
