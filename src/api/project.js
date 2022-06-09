@@ -48,7 +48,7 @@ export const getProject = (user,projectId) => {
 export const updateProject = (user,project,projectId) => {
 
   const config = {
-    method: 'POST',
+    method: 'PATCH',
     url: `${apiUrl}/project/${projectId}`,
     headers: {
       Authorization: `Token token=${user.token}`
