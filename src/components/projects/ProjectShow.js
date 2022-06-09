@@ -2,23 +2,24 @@ import { useLocation,useParams,useNavigate } from "react-router-dom"
 import { Button,ListGroup,ListGroupItem,Row,Col, Spinner } from "react-bootstrap"
 import { useEffect,useState } from "react"
 import { showProjectIssues,removeAllIssues } from "../../api/issue"
-import { removeProject } from "../../api/project"
+import { removeProject, getProject } from "../../api/project"
 import IssuePlots from "../issues/IssuePlots"
 import IssueDetails from "../issues/IssueDetails"
 import IssueNewModal from "../issues/IssueNewModal"
+import ProjectEditModal from "./ProjectEditModal"
 
 
 const ProjectShow = (props) => {
 
     const {user,msgAlert} = props
-    const location = useLocation()
-    const {title,description,owner} = location.state
+    const [project,setProject]=useState(null)
     const params = useParams()
     const {projId} = params
     const navigate = useNavigate()
     const [issues,setIssues]=useState(null)
     const [issueOpen,setIssueOpen] = useState(false)
     const [issueRefresh,setIssueRefresh] = useState(false)
+    const [editOpen,setEditOpen] = useState(false)
     const [priorityLabels,setPriorityLabels] = useState([])
     const [priorityValues,setPriorityValues] = useState([])
     const [ statusLabels, setStatusLabels] = useState([])
@@ -36,14 +37,20 @@ const ProjectShow = (props) => {
         setPriorityValues([])
         setStatusLabels([])
         setStatusValues([])
+        fetchProject()
         fetchIssues()
     },[issueRefresh])
     
+    //function used in useEffect to fetch project info
+    const fetchProject = async () => {
+        let apiResp = await getProject(user,projId)
+        setProject(apiResp.data.project)
+    }
+
     //function used in useEffect to fetch all project issues from db
     const fetchIssues =  async () => {
         let apiResp = await showProjectIssues(user,projId)
         setIssues(apiResp.data.issues)
-        console.log('this is issues from apiResp!!!!',apiResp.data.issues)
         createGData(apiResp.data.issues)  
     }
     
@@ -75,7 +82,6 @@ const ProjectShow = (props) => {
             setStatusLabels(prevVal=>[...prevVal,key])
             setStatusValues(prevVal=>[...prevVal,statusData[key]])
         }
-        console.log('this is status labels',statusLabels,statusValues)
     }
 
     //shows spinner while awaiting for api resp
@@ -121,7 +127,7 @@ const ProjectShow = (props) => {
 	return (
 		<>
             <div className="project-header">
-                <h1>{`Project: ${title}`}</h1>
+                <h1>{`Project: ${project.title}`}</h1>
                 <Button variant='warning'>
                     Edit
                 </Button>
@@ -132,7 +138,7 @@ const ProjectShow = (props) => {
             <div className="project-body">
                 {pieCharts}
                 <p>
-                    {description}
+                    {project.description}
                 </p>
             </div>
             <div className="project-footer">
@@ -161,6 +167,16 @@ const ProjectShow = (props) => {
 					setIssueOpen(false)
 				}}
 			/>
+            {/* <ProjectEditModal
+				show={editOpen}
+				user={user}
+				msgAlert={msgAlert}
+				projectSelected={projId}
+				refreshIssues={refreshIssues}
+				handleClose={() => {
+					setEditOpen(false)
+				}}
+			/> */}
 		</>
 	)
 }
