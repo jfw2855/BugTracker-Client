@@ -19,6 +19,7 @@ const ProjectShow = (props) => {
     const [issues,setIssues]=useState(null)
     const [issueOpen,setIssueOpen] = useState(false)
     const [issueRefresh,setIssueRefresh] = useState(false)
+    const [projectRefresh,setProjectRefresh] = useState(false)
     const [editOpen,setEditOpen] = useState(false)
     const [priorityLabels,setPriorityLabels] = useState([])
     const [priorityValues,setPriorityValues] = useState([])
@@ -33,13 +34,14 @@ const ProjectShow = (props) => {
     useEffect(()=>{
         //resets state vars for graph data
         setIssueRefresh(false)
+        setProjectRefresh(false)
         setPriorityLabels([])
         setPriorityValues([])
         setStatusLabels([])
         setStatusValues([])
         fetchProject()
         fetchIssues()
-    },[issueRefresh])
+    },[issueRefresh,projectRefresh])
     
     //function used in useEffect to fetch project info
     const fetchProject = async () => {
@@ -124,11 +126,16 @@ const ProjectShow = (props) => {
 		setIssueOpen(true)
 	}
 
+    //rerenders project index once a new project is created
+	const refreshProject = () => {
+		setProjectRefresh(true)
+	}
+
 	return (
 		<>
             <div className="project-header">
                 <h1>{`Project: ${project.title}`}</h1>
-                <Button variant='warning'>
+                <Button variant='warning' onClick={()=>setEditOpen(true)}>
                     Edit
                 </Button>
                 <Button variant='danger' onClick={handleDelete}>
@@ -167,16 +174,16 @@ const ProjectShow = (props) => {
 					setIssueOpen(false)
 				}}
 			/>
-            {/* <ProjectEditModal
+            <ProjectEditModal
 				show={editOpen}
 				user={user}
 				msgAlert={msgAlert}
-				projectSelected={projId}
-				refreshIssues={refreshIssues}
+				projectId={projId}
+				refreshProject={refreshProject}
 				handleClose={() => {
 					setEditOpen(false)
 				}}
-			/> */}
+			/>
 		</>
 	)
 }
