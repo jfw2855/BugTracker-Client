@@ -30,9 +30,20 @@ export const showProjects = (user) => {
     return axios(config)
   }
 
-// show project
+// PATCH -> updates project info
+export const updateProject = (user,project,projectId) => {
 
-// update project
+  const config = {
+    method: 'POST',
+    url: `${apiUrl}/project/${projectId}`,
+    headers: {
+      Authorization: `Token token=${user.token}`
+    },
+    data: {project}
+  }
+  return axios(config)
+}
+
 
 // DELETE -> removes project from DB
 export const removeProject = (user,projectId) => {
