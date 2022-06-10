@@ -42,7 +42,18 @@ export const showMyIssues = (user) => {
   return axios(config)
 }
 
-// show individual issue
+// GET single issue -> shows individual issue
+export const getIssue = (user,issueId) => {
+
+  const config = {
+    method: 'GET',
+    url: `${apiUrl}/issue/${issueId}`,
+    headers: {
+      Authorization: `Token token=${user.token}`
+    }
+  }
+  return axios(config)
+}
 
 // update issue
 
