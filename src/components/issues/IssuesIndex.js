@@ -1,6 +1,7 @@
 import { useEffect,useState } from "react"
 import { Spinner, ListGroup, Row, Col } from 'react-bootstrap'
 import { showMyIssues } from "../../api/issue"
+import { Link } from "react-router-dom"
 
 
 
@@ -32,9 +33,11 @@ const IssuesIndex = (props) => {
     else {
         issueDetails = issues.map((item,index) => {
             return (
-                <ListGroup.Item key={`issues${index}`}>
-                    {item.title}
-                </ListGroup.Item>
+                <Link to={`/issue/${item._id}`}>
+                    <ListGroup.Item key={`lg-${index}`}>
+                        {item.title}
+                    </ListGroup.Item>
+                </Link>
             )
 
         })
