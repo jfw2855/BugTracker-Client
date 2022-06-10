@@ -76,6 +76,13 @@ const App = () => {
 							<ProjectShow msgAlert={msgAlert} user={user} />
 						</RequireAuth>}
 					/>
+					<Route
+						path='/issue/:issueId'
+						element={
+						<RequireAuth user={user}>
+							<IssueShow msgAlert={msgAlert} user={user} />
+						</RequireAuth>}
+					/>
 				</Routes>
 				{msgAlerts.map((msgAlert) => (
 					<AutoDismissAlert
