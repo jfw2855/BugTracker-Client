@@ -2,6 +2,7 @@ import { useEffect,useState } from "react"
 import { useLocation,useParams,useNavigate } from "react-router-dom"
 import { Button,ListGroup,ListGroupItem,Row,Col, Spinner } from "react-bootstrap"
 import { getIssue } from "../../api/issue"
+import AddCommentModal from "../comment/AddCommentModal"
 
 const IssueShow = (props) => {
 
@@ -9,11 +10,14 @@ const IssueShow = (props) => {
     const params = useParams()
     const {issueId} = params
     const [issue,setIssue] = useState(null)
+    const [modalOpen,setModalOpen] = useState(false)
+    const [refresh,setRefresh] = useState(false)
 
     useEffect(()=> {
+        setRefresh(false)
         fetchIssue()
         
-    },[])
+    },[refresh])
 
     //function used in useEffect to fetch issue info
     const fetchIssue = async () => {
@@ -72,9 +76,21 @@ const IssueShow = (props) => {
             <p>{issue.description}</p>
             <div>
                 <h5>Comments: </h5>
-                <Button>Add Comment</Button>
+                <Button onClick={()=>setModalOpen(true)}>
+                    Add Comment
+                </Button>
             </div>
         </div>
+        <AddCommentModal
+				show={modalOpen}
+				user={user}
+				msgAlert={msgAlert}
+				issueId={issueId}
+				refresh={refresh}
+				handleClose={() => {
+					setModalOpen(false)
+				}}
+			/>
 
         </>
 	)
