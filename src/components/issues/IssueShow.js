@@ -86,7 +86,7 @@ const IssueShow = (props) => {
 				user={user}
 				msgAlert={msgAlert}
 				issueId={issueId}
-				refresh={refresh}
+				refreshComments={()=> setRefresh(true)}
 				handleClose={() => {
 					setModalOpen(false)
 				}}
