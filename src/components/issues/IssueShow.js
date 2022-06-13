@@ -3,6 +3,7 @@ import { useLocation,useParams,useNavigate } from "react-router-dom"
 import { Button,ListGroup,ListGroupItem,Row,Col, Spinner } from "react-bootstrap"
 import { getIssue } from "../../api/issue"
 import AddCommentModal from "../comment/AddCommentModal"
+import CommentDetails from "../comment/CommentDetails"
 
 const IssueShow = (props) => {
 
@@ -12,6 +13,7 @@ const IssueShow = (props) => {
     const [issue,setIssue] = useState(null)
     const [modalOpen,setModalOpen] = useState(false)
     const [refresh,setRefresh] = useState(false)
+    const [comments,setComments] = useState(null)
 
     useEffect(()=> {
         setRefresh(false)
@@ -23,6 +25,7 @@ const IssueShow = (props) => {
     const fetchIssue = async () => {
         let apiResp = await getIssue(user,issueId)
         setIssue(apiResp.data.issue)
+        setComments(apiResp.data.issue.comments)
         console.log('apiresp',apiResp.data.issue)
         // {
         //     "_id": "629137e4a0d8708476672030",
@@ -53,7 +56,7 @@ const IssueShow = (props) => {
         // }
     }
 
-    if (!issue) {
+    if (!comments) {
         return (
             <p>Loading..</p>
         )
@@ -76,6 +79,10 @@ const IssueShow = (props) => {
             <p>{issue.description}</p>
             <div>
                 <h5>Comments: </h5>
+                <ListGroup>
+
+                    <CommentDetails comments={comments}/>
+                </ListGroup>
                 <Button onClick={()=>setModalOpen(true)}>
                     Add Comment
                 </Button>
