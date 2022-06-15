@@ -1,13 +1,17 @@
 import { ListGroup, Row, Col } from "react-bootstrap"
+import TimeAgo from "javascript-time-ago"
 import ReactTimeAgo from "react-time-ago"
+import React from "react"
+import en from 'javascript-time-ago/locale/en.json'
+
 
 
 
 
 const CommentDetails = (props) => {
-    
-    
    
+    TimeAgo.addLocale(en)
+
     const {comments} = props
 
     
@@ -31,9 +35,9 @@ const CommentDetails = (props) => {
                         , {comment.owner.role}
                     </Col>
                     <Col>{comment.createdAt===comment.updatedAt?
-                        <ReactTimeAgo date={comment.createdAt} local="en-US"/>
+                        <ReactTimeAgo date={new Date(comment.createdAt)} local="en-US"/>
                         :
-                        <ReactTimeAgo date={comment.updatedAt} local="en-US"/>
+                        <ReactTimeAgo date={new Date(comment.updatedAt)} local="en-US"/>
                         }
                         {comment.createdAt===comment.updatedAt?
                         "":" (Edited)"
