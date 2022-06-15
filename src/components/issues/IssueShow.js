@@ -4,6 +4,7 @@ import { Button,ListGroup,ListGroupItem,Row,Col, Spinner } from "react-bootstrap
 import { getIssue } from "../../api/issue"
 import AddCommentModal from "../comment/AddCommentModal"
 import CommentDetails from "../comment/CommentDetails"
+import EditIssueModal from "./EditIssueModal"
 
 const IssueShow = (props) => {
 
@@ -14,6 +15,9 @@ const IssueShow = (props) => {
     const [modalOpen,setModalOpen] = useState(false)
     const [refresh,setRefresh] = useState(false)
     const [comments,setComments] = useState(null)
+    const [openDate,setOpenDate] = useState(null)
+    const [closeDate,setCloseDate] = useState(null)
+    const [issueOpen,setIssueOpen] = useState(false)
 
     useEffect(()=> {
         setRefresh(false)
@@ -25,6 +29,10 @@ const IssueShow = (props) => {
     const fetchIssue = async () => {
         let apiResp = await getIssue(user,issueId)
         setIssue(apiResp.data.issue)
+        let created = new Date (apiResp.data.issue.createdAt)
+        let updated = new Date (apiResp.data.issue.updatedAt)
+        setOpenDate(created.toDateString())
+        setCloseDate(updated.toDateString())
         setComments(apiResp.data.issue.comments)
         console.log('apiresp',apiResp.data.issue)
     }
@@ -46,7 +54,7 @@ const IssueShow = (props) => {
 	return (
         <>
         <h1>Project: {issue.project.title}</h1>
-        <Button>Update Issue</Button>
+        <Button onClick={()=>setIssueOpen(true)}>Update Issue</Button>
         <Button variant="danger">Delete</Button>
         <div className="issueinfo-container">
             <div className="status-container">
@@ -65,7 +73,9 @@ const IssueShow = (props) => {
                         {issue.priority}
                     </span>
                 </h4>
-                <h4>Created: {issue.createdAt}</h4>
+                <h4>Opened: {openDate}</h4>
+                {issue.status==="open"?
+                <></>:<h4>Closed: {closeDate}</h4>}
             </div>
             <div className="team-container">
                 <h4>Opened by: {issue.owner.firstName} {issue.owner.lastName}</h4>
@@ -96,6 +106,16 @@ const IssueShow = (props) => {
 					setModalOpen(false)
 				}}
 			/>
+        <EditIssueModal
+            show={issueOpen}
+            user={user}
+            msgAlert={msgAlert}
+            projId={issue.project._id}
+            refreshIssues={refresh}
+            handleClose={() => {
+                setIssueOpen(false)
+            }}
+        />
 
         </>
 	)
