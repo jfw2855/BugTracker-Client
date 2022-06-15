@@ -27,52 +27,51 @@ const IssueShow = (props) => {
         setIssue(apiResp.data.issue)
         setComments(apiResp.data.issue.comments)
         console.log('apiresp',apiResp.data.issue)
-        // {
-        //     "_id": "629137e4a0d8708476672030",
-        //     "title": "issue with issueee",
-        //     "priority": "major",
-        //     "status": "open",
-        //     "team": [
-        //         {
-        //             "_id": "628c44b5a99f9e4e7bb59d6c",
-        //             "email": "z@z.z",
-        //             "hashedPassword": "$2b$10$F32mBIzuVzMaakY0/44vu.s8y6e/zLNw.WEGmZp.pDxTwBLrwcqTC",
-        //             "organization": "demo",
-        //             "firstName": "Justin",
-        //             "lastName": "Waddle",
-        //             "role": "fsdev",
-        //             "createdAt": "2022-05-24T02:36:37.904Z",
-        //             "updatedAt": "2022-05-27T20:42:16.321Z",
-        //             "__v": 0,
-        //             "token": "d36b4f766348a285a36cf135bcd86b59"
-        //         }
-        //     ],
-        //     "project": "628fc14ea8ca671a8af549b5",
-        //     "owner": "628c44b5a99f9e4e7bb59d6c",
-        //     "comments": [],
-        //     "createdAt": "2022-05-27T20:43:16.223Z",
-        //     "updatedAt": "2022-05-27T20:43:16.231Z",
-        //     "__v": 1
-        // }
     }
 
+    //awaits for apiresponse beforing rendering
     if (!comments) {
         return (
             <p>Loading..</p>
         )
     }
 
+    // {{
+    //     'backgroundColor': issue.priority === 'low' ?
+    //     'lightyellow' : issue.priority === 'medium' ?
+    //     'yellow' : issue.priority === 'high'? 'orange':'red'
+    // }}
+
 
 	return (
         <>
         <h1>Project: {issue.project.title}</h1>
+        <Button>Update Issue</Button>
+        <Button variant="danger">Delete</Button>
         <div className="issueinfo-container">
-            <h4>Status: {issue.status}</h4>
-            <h4>Priority: {issue.priority}</h4>
-            <h4>Created: {issue.createdAt}</h4>
-            <h4>Owner: {issue.owner.firstName} {issue.owner.lastName}</h4>
-            <h4>Team: </h4>
-            <Button>Update Issue</Button>
+            <div className="status-container">
+                <h4>Status:&nbsp;
+                    <span
+                    className={issue.status==="open"?"open":"closed"}
+                    >
+                        {issue.status}
+                    </span>
+                </h4>
+                <h4>Priority:&nbsp;
+                    <span
+                    className={issue.priority=="low"?"low":issue.priority=="medium"?
+                    "medium":issue.priority=="high"?"high":"critical"}
+                    >
+                        {issue.priority}
+                    </span>
+                </h4>
+                <h4>Created: {issue.createdAt}</h4>
+            </div>
+            <div className="team-container">
+                <h4>Opened by: {issue.owner.firstName} {issue.owner.lastName}</h4>
+                <h4>Team: </h4>
+
+            </div>
         </div>
         <div className="issuedescr-container">
             <h4>Issue Description:</h4>
@@ -80,7 +79,6 @@ const IssueShow = (props) => {
             <div>
                 <h5>Comments: </h5>
                 <ListGroup>
-
                     <CommentDetails comments={comments}/>
                 </ListGroup>
                 <Button onClick={()=>setModalOpen(true)}>
