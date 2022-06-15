@@ -69,3 +69,38 @@
   align-items: center;
 
 }
+
+.issueinfo-container {
+  display: flex;
+  border: 2px solid red;
+  justify-content: space-around;
+}
+
+.low {
+  background-color: rgba(238, 238, 166, 0.809);
+}
+
+.medium {
+  background-color: rgba(238, 192, 42, 0.828);
+}
+
+.high {
+  background-color: rgba(238, 83, 32, 0.828);
+}
+
+.critical {
+  background-color: rgba(239, 38, 51, 0.891);
+}
+
+.medium,.low,.high,.critical,.open,.closed {
+  padding: 3px;
+  border-radius: 5px;
+}
+
+.closed {
+  background-color: rgba(154, 139, 240, 0.835);
+}
+
+.open {
+  background-color: rgba(150, 241, 143, 0.835);
+}
