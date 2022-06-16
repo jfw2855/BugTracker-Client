@@ -100,10 +100,10 @@ const SignUp = (props) => {
                             type="string"
                         >
                             <option value="">Select Role</option>
-                            <option value="fsdev">Back End Engineer</option>
+                            <option value="be">Back End Engineer</option>
                             <option value="ds">Data Scientist</option>
-                            <option value="fedev">Front End Engineer</option>
-                            <option value="fsdev">Full Stack Engineer</option>
+                            <option value="fe">Front End Engineer</option>
+                            <option value="fs">Full Stack Engineer</option>
                             <option value="intern">Intern</option>
                             <option value="pm">Product Manager</option>
                             <option value="tl">Tech Lead</option>
