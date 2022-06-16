@@ -5,6 +5,7 @@ import React from "react"
 import en from 'javascript-time-ago/locale/en.json'
 import { FiEdit3 } from "react-icons/fi"
 import {RiDeleteBack2Fill} from "react-icons/ri"
+import { deleteComment } from "../../api/comment"
 
 
 
@@ -14,7 +15,7 @@ const CommentDetails = (props) => {
    
     TimeAgo.addLocale(en)
 
-    const {comments,user} = props
+    const {comments,user,issueId,refresh} = props
 
     
     // body: "comment on issue test"
@@ -25,7 +26,13 @@ const CommentDetails = (props) => {
 
     if (comments.length === 0 ) {
         return <ListGroup.Item>No Comments</ListGroup.Item>
-        
+    }
+
+    //handle delete function to remove commnet
+    const handleDelete = async (e,commId) => {
+        e.preventDefault()
+        await deleteComment(user,issueId,commId)
+        refresh()
     }
 
     let commentDetails = comments.map((comment)=> {
@@ -52,8 +59,8 @@ const CommentDetails = (props) => {
                     <Col>
                     {comment.owner._id===user._id?
                     <>
-                        <FiEdit3 />
-                        <RiDeleteBack2Fill/>
+                        <FiEdit3  />
+                        <RiDeleteBack2Fill onClick={(e)=>handleDelete(e,comment._id)}/>
                     </>
                     :<></>}
                     </Col>
