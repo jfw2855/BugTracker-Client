@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import {Modal, Container, Form, Button, Col, Row } from 'react-bootstrap'
+import { updateIssue } from '../../api/issue'
 
 
 const EditIssueModal = (props) => {
 
-    const { show, user, handleClose, refreshIssues, options, projId, msgAlert } = props
+    const { show, user, handleClose, refreshIssues, options, issueId, msgAlert } = props
     const [issue,setIssue] = useState('')
   
   
@@ -23,12 +24,10 @@ const EditIssueModal = (props) => {
         })
     }
 
-    //creates new issue in the db
+    //updates issue on submit and closes modal
     const handleSubmit = async (e) => {
         e.preventDefault()
-        //checks to see if project is preselected (from project show page)
-
-
+        updateIssue(user,issueId,issue)
         refreshIssues()
         handleClose()
     }
