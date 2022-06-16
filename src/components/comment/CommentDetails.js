@@ -1,8 +1,10 @@
-import { ListGroup, Row, Col } from "react-bootstrap"
+import { ListGroup, Row, Col, Button } from "react-bootstrap"
 import TimeAgo from "javascript-time-ago"
 import ReactTimeAgo from "react-time-ago"
 import React from "react"
 import en from 'javascript-time-ago/locale/en.json'
+import { FiEdit3 } from "react-icons/fi"
+import {RiDeleteBack2Fill} from "react-icons/ri"
 
 
 
@@ -12,7 +14,7 @@ const CommentDetails = (props) => {
    
     TimeAgo.addLocale(en)
 
-    const {comments} = props
+    const {comments,user} = props
 
     
     // body: "comment on issue test"
@@ -43,8 +45,16 @@ const CommentDetails = (props) => {
                         "":" (Edited)"
                         }
                     </Col>
+                    <Col>
+                    {comment.owner._id===user._id?
+                    <>
+                        <FiEdit3 />
+                        <RiDeleteBack2Fill/>
+                    </>
+                    :<></>}
+                    </Col>
                 </Row>
-                {comment.body}
+  
                 <Row>
 
                 </Row>
