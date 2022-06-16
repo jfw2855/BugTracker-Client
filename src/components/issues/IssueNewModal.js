@@ -58,6 +58,7 @@ const IssueNewModal = (props) => {
                 <Form.Control
                   name="title"
                   type="string"
+                  maxLength={55}
                   onChange={handleChange}
                 />
               </Col>
