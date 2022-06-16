@@ -86,7 +86,8 @@ const IssueShow = (props) => {
             </div>
         </div>
         <div className="issuedescr-container">
-            <h4>Issue Description:</h4>
+            <h4>Issue: {issue.title}</h4>
+            <h4>Description:</h4>
             <p>{issue.description}</p>
             <div>
                 <h5>Comments: </h5>
@@ -112,8 +113,8 @@ const IssueShow = (props) => {
             show={issueOpen}
             user={user}
             msgAlert={msgAlert}
-            projId={issue.project._id}
-            refreshIssues={refresh}
+            issueId={issueId}
+            refreshIssues={()=>setRefresh(true)}
             handleClose={() => {
                 setIssueOpen(false)
             }}
