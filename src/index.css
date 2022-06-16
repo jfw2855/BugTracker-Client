@@ -104,3 +104,19 @@
 .open {
   background-color: rgba(150, 241, 143, 0.835);
 }
+
+.issue-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.5%;
+}
+
+.issuedescr-container {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-self: center;
+  margin: 2% 3% 0.5% 3%;
+  border: solid purple 3px;
+}
