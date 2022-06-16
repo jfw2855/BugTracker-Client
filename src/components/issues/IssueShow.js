@@ -95,7 +95,12 @@ const IssueShow = (props) => {
             <div>
                 <h5>Comments: </h5>
                 <ListGroup>
-                    <CommentDetails comments={comments} user={user}/>
+                    <CommentDetails
+                    comments={comments} 
+                    user={user}
+                    issueId={issueId}
+                    refresh={()=>setRefresh(true)}
+                    />
                 </ListGroup>
                 <Button onClick={()=>setModalOpen(true)}>
                     Add Comment
