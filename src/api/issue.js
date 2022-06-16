@@ -55,7 +55,18 @@ export const getIssue = (user,issueId) => {
   return axios(config)
 }
 
-// update issue
+// PATCH -> updates issue
+export const updateIssue = (user,issueId,issue) => {
+  const config = {
+    method: 'PATCH',
+    url: `${apiUrl}/issue/${issueId}`,
+    headers: {
+      Authorization: `Token token=${user.token}`
+    },
+    data:{issue}
+  }
+  return axios(config)
+}
 
 // delete issue
 
