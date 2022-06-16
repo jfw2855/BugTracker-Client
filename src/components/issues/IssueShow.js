@@ -1,6 +1,6 @@
 import { useEffect,useState } from "react"
 import { useLocation,useParams,useNavigate } from "react-router-dom"
-import { Button,ListGroup,ListGroupItem,Row,Col, Spinner } from "react-bootstrap"
+import { Button,ListGroup,ListGroupItem,Row,Col, Spinner, ButtonGroup } from "react-bootstrap"
 import { getIssue } from "../../api/issue"
 import AddCommentModal from "../comment/AddCommentModal"
 import CommentDetails from "../comment/CommentDetails"
@@ -53,9 +53,13 @@ const IssueShow = (props) => {
 
 	return (
         <>
-        <h1>Project: {issue.project.title}</h1>
-        <Button onClick={()=>setIssueOpen(true)}>Update Issue</Button>
-        <Button variant="danger">Delete</Button>
+        <div className="issue-header">
+            <h1>Project: {issue.project.title}</h1>
+            <ButtonGroup>
+                <Button onClick={()=>setIssueOpen(true)}>Update Issue</Button>
+                <Button variant="danger">Delete</Button>
+            </ButtonGroup>
+        </div>
         <div className="issueinfo-container">
             <div className="status-container">
                 <h4>Status:&nbsp;
@@ -73,14 +77,12 @@ const IssueShow = (props) => {
                         {issue.priority}
                     </span>
                 </h4>
-                <h4>Opened: {openDate}</h4>
-                {issue.status==="open"?
-                <></>:<h4>Closed: {closeDate}</h4>}
             </div>
             <div className="team-container">
                 <h4>Opened by: {issue.owner.firstName} {issue.owner.lastName}</h4>
-                <h4>Team: </h4>
-
+                <h4>Opened: {openDate}</h4>
+                {issue.status==="open"?
+                <></>:<h4>Closed: {closeDate}</h4>}
             </div>
         </div>
         <div className="issuedescr-container">
