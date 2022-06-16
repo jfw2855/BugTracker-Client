@@ -18,4 +18,16 @@ export const createComment = (user,issueId,comment) => {
 
 
 //PATCH
-//DELETE
+
+//DELETE -> removes comment from issue
+export const deleteComment = (user,issueId,commentId) => {
+
+  const config = {
+    method: 'DELETE',
+    url: `${apiUrl}/comment/${issueId}/${commentId}`,
+    headers: {
+      Authorization: `Token token=${user.token}`
+    }
+  }
+  return axios(config)
+}
