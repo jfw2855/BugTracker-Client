@@ -1,7 +1,7 @@
 import { useEffect,useState } from "react"
 import { useLocation,useParams,useNavigate } from "react-router-dom"
 import { Button,ListGroup,ListGroupItem,Row,Col, Spinner, ButtonGroup } from "react-bootstrap"
-import { getIssue } from "../../api/issue"
+import { getIssue, removeIssue } from "../../api/issue"
 import AddCommentModal from "../comment/AddCommentModal"
 import CommentDetails from "../comment/CommentDetails"
 import EditIssueModal from "./EditIssueModal"
@@ -11,6 +11,7 @@ const IssueShow = (props) => {
     const {user,msgAlert} = props
     const params = useParams()
     const {issueId} = params
+    const navigate = useNavigate()
     const [issue,setIssue] = useState(null)
     const [modalOpen,setModalOpen] = useState(false)
     const [refresh,setRefresh] = useState(false)
@@ -44,11 +45,13 @@ const IssueShow = (props) => {
         )
     }
 
-    // {{
-    //     'backgroundColor': issue.priority === 'low' ?
-    //     'lightyellow' : issue.priority === 'medium' ?
-    //     'yellow' : issue.priority === 'high'? 'orange':'red'
-    // }}
+    // handle delete function that will remove issue from db
+    const handleDelete = async (e) => {
+        e.preventDefault()
+        await removeIssue(user,issueId)
+        //returns back to home page after removing issue
+        navigate('/')
+    }
 
 
 	return (
@@ -57,7 +60,7 @@ const IssueShow = (props) => {
             <h1>Project: {issue.project.title}</h1>
             <ButtonGroup>
                 <Button onClick={()=>setIssueOpen(true)}>Update Issue</Button>
-                <Button variant="danger">Delete</Button>
+                <Button variant="danger" onClick={handleDelete}>Delete</Button>
             </ButtonGroup>
         </div>
         <div className="issueinfo-container">
