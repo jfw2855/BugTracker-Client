@@ -17,7 +17,20 @@ export const createComment = (user,issueId,comment) => {
   }
 
 
-//PATCH
+//PATCH -> updates comment from issue
+export const updateComment = (user,issueId,commentId,comment) => {
+
+  const config = {
+    method: 'PATCH',
+    url: `${apiUrl}/comment/${issueId}/${commentId}`,
+    headers: {
+      Authorization: `Token token=${user.token}`
+    },
+    data:{comment}
+  }
+  return axios(config)
+}
+
 
 //DELETE -> removes comment from issue
 export const deleteComment = (user,issueId,commentId) => {
