@@ -1,14 +1,12 @@
-import { ListGroup, Row, Col, Button } from "react-bootstrap"
+import { ListGroup, Row, Col } from "react-bootstrap"
 import TimeAgo from "javascript-time-ago"
 import ReactTimeAgo from "react-time-ago"
-import React from "react"
+import {React,useState} from "react"
 import en from 'javascript-time-ago/locale/en.json'
 import { FiEdit3 } from "react-icons/fi"
 import {RiDeleteBack2Fill} from "react-icons/ri"
 import { deleteComment } from "../../api/comment"
-
-
-
+import EditCommentModal from "./EditCommentModal"
 
 
 const CommentDetails = (props) => {
@@ -16,14 +14,11 @@ const CommentDetails = (props) => {
     TimeAgo.addLocale(en)
 
     const {comments,user,issueId,refresh} = props
+    const [editOpen,setEditOpen] = useState(false)
+    const [commentId,setCommentId] = useState(null)
+    const [body,setBody] = useState(null)
 
-    
-    // body: "comment on issue test"
-    // createdAt: "2022-06-11T19:07:31.197Z"
-    // owner: {_id: '628c44b5a99f9e4e7bb59d6c', email: 'z@z.z', hashedPassword: '$2b$10$F32mBIzuVzMaakY0/44vu.s8y6e/zLNw.WEGmZp.pDxTwBLrwcqTC', organization: 'demo', firstName: 'Justin', …}
-    // updatedAt: "2022-06-11T19:07:31.197Z"
-    // _id: "62a4e7f3b6c89d2e07471367"
-
+    //renders if no comments exist
     if (comments.length === 0 ) {
         return <ListGroup.Item>No Comments</ListGroup.Item>
     }
@@ -34,7 +29,8 @@ const CommentDetails = (props) => {
         await deleteComment(user,issueId,commId)
         refresh()
     }
-
+    
+    //renders all comments into list groups
     let commentDetails = comments.map((comment)=> {
         return(
             <ListGroup.Item key={`comId-${comment._id}`}>
@@ -59,7 +55,11 @@ const CommentDetails = (props) => {
                     <Col>
                     {comment.owner._id===user._id?
                     <>
-                        <FiEdit3  />
+                        <FiEdit3 onClick={(e)=>{
+                            setCommentId(comment._id)
+                            setBody(comment.body)
+                            setEditOpen(true)
+                        }}/>
                         <RiDeleteBack2Fill onClick={(e)=>handleDelete(e,comment._id)}/>
                     </>
                     :<></>}
@@ -73,12 +73,20 @@ const CommentDetails = (props) => {
         )
     })
 
-
-
 	return (
         <>
             {commentDetails}
-
+            <EditCommentModal
+				show={editOpen}
+				user={user}
+				issueId={issueId}
+                commentId={commentId}
+				refreshComments={refresh}
+                body={body}
+				handleClose={() => {
+					setEditOpen(false)
+				}}
+			/>
         </>
 	)
 }
