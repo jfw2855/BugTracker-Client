@@ -120,3 +120,14 @@
   margin: 2% 3% 0.5% 3%;
   border: solid purple 3px;
 }
+
+.icon-nav {
+  margin-left: 1%;
+  background-color: rgb(63, 147, 8);
+  padding: 0.5%;
+  border-radius: 4px;
+}
+
+.icon-nav:hover {
+  background-color: rgb(56, 121, 12);
+}
