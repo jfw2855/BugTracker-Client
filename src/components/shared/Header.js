@@ -2,6 +2,8 @@ import React, { Fragment } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import { Link } from 'react-router-dom'
+import {BiBug} from 'react-icons/bi'
+
 const linkStyle = {
     color: 'white',
     textDecoration: 'none'
@@ -32,30 +34,18 @@ const unauthenticatedOptions = (
 	</>
 )
 
-const alwaysOptions = (
-	<>
-		<Nav.Link>
-			<Link to='/' style={linkStyle}>
-				Home
-			</Link>
-		</Nav.Link>
-	</>
-)
+
 
 const Header = ({ user }) => (
 	<Navbar bg='dark' >
-		<Navbar.Brand>
-            <Link to='/' style={linkStyle}>
-                Bug Tracker
+		<Navbar.Brand className='icon-nav'>
+            <Link to='/' style={linkStyle} >
+                Bug Tracker <BiBug/>
             </Link>
         </Navbar.Brand>
 		<Navbar.Toggle aria-controls='basic-navbar-nav' />
 		<Navbar.Collapse id='basic-navbar-nav'>
 			<Nav className='me-auto'>
-				{user && (
-					<span className='navbar-text mr-2'>Welcome {user.firstName}</span>
-				)}
-				{alwaysOptions}
 				{user ? authenticatedOptions : unauthenticatedOptions}
 			</Nav>
 		</Navbar.Collapse>
