@@ -55,6 +55,19 @@ export const getIssue = (user,issueId) => {
   return axios(config)
 }
 
+//GET org issues -> shows all organization issues
+export const getOrgIssues = (user) => {
+
+  const config = {
+    method: 'GET',
+    url: `${apiUrl}/issues/org`,
+    headers: {
+      Authorization: `Token token=${user.token}`
+    }
+  }
+  return axios(config)
+}
+
 // PATCH -> updates issue
 export const updateIssue = (user,issueId,issue) => {
   const config = {
