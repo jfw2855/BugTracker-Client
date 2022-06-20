@@ -4,8 +4,8 @@ import { Button, ButtonGroup, ListGroup,Spinner } from "react-bootstrap"
 import { useEffect, useState } from "react"
 import ProjectNewModal from "./projects/ProjectNewModal"
 import IssueNewModal from "./issues/IssueNewModal"
-import { createProject } from "../api/project"
-import { showProjects } from "../api/project"
+import { createProject,showProjects } from "../api/project"
+import { getOrgIssues } from "../api/issue"
 
 const Home = (props) => {
 	const { msgAlert, user } = props
@@ -20,7 +20,7 @@ const Home = (props) => {
 		setIssueRefresh(false)
 		setProjectRefresh(false)
 		fetchProj()
-
+		fetchOrgIssues()
 	},[projectRefresh,issueRefresh])
 
 	//fetches project name & ids to render as options for new issue modal
@@ -32,6 +32,12 @@ const Home = (props) => {
 				)
 			})
 		setProjOptions(temp)
+	}
+
+	//fetch org issues
+	const fetchOrgIssues = async() => {
+		let apiResp = await getOrgIssues(user)
+		console.log('this is org issues-----',apiResp.data.issues)
 	}
 
 	//renders spinner until api responds
