@@ -7,6 +7,7 @@ import IssueNewModal from "./issues/IssueNewModal"
 import { createProject,showProjects } from "../api/project"
 import { getOrgIssues } from "../api/issue"
 import OrgIssuePlot from "./issues/OrgIssuePlot"
+import StatData from "./shared/StatData"
 
 const Home = (props) => {
 	const { msgAlert, user } = props
@@ -16,6 +17,7 @@ const Home = (props) => {
 	const [issueRefresh,setIssueRefresh] = useState(false)
 	const [projOptions,setProjOptions] = useState(null)
 	const [issuesData,setIssuesData] = useState(null)
+	const [projects,setProjects] = useState(null)
 
 	//resets the refresh state variable & calls for proj info
 	useEffect(() => {
@@ -28,6 +30,7 @@ const Home = (props) => {
 	//fetches project name & ids to render as options for new issue modal
 	const fetchProj = async () => {
 		let apiResp = await showProjects(user)
+		setProjects(apiResp.data.projects)
 		let temp = apiResp.data.projects.map((item)=> {
 			return (
 				<option key={`pOpt${item._id}`} value={item._id}>{item.title}</option>
@@ -73,6 +76,7 @@ const Home = (props) => {
 	return (
 		<>
 			<OrgIssuePlot data={issuesData}/>
+			<StatData issuesData={issuesData} projects={projects} user={user}/>
 			<h2 >Home Page</h2>
 			<div className="home-container">
 				<div className="home-details">
