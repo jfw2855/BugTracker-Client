@@ -6,6 +6,7 @@ import ProjectNewModal from "./projects/ProjectNewModal"
 import IssueNewModal from "./issues/IssueNewModal"
 import { createProject,showProjects } from "../api/project"
 import { getOrgIssues } from "../api/issue"
+import OrgIssuePlot from "./issues/OrgIssuePlot"
 
 const Home = (props) => {
 	const { msgAlert, user } = props
@@ -14,6 +15,7 @@ const Home = (props) => {
 	const [projectRefresh,setProjectRefresh] = useState(false)
 	const [issueRefresh,setIssueRefresh] = useState(false)
 	const [projOptions,setProjOptions] = useState(null)
+	const [issuesData,setIssuesData] = useState(null)
 
 	//resets the refresh state variable & calls for proj info
 	useEffect(() => {
@@ -34,10 +36,10 @@ const Home = (props) => {
 		setProjOptions(temp)
 	}
 
-	//fetch org issues
+	//fetch org issues and assigns array to issueData
 	const fetchOrgIssues = async() => {
 		let apiResp = await getOrgIssues(user)
-		console.log('this is org issues-----',apiResp.data.issues)
+		setIssuesData(apiResp.data.issues)
 	}
 
 	//renders spinner until api responds
@@ -70,6 +72,7 @@ const Home = (props) => {
 
 	return (
 		<>
+			<OrgIssuePlot data={issuesData}/>
 			<h2 >Home Page</h2>
 			<div className="home-container">
 				<div className="home-details">
