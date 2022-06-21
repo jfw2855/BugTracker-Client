@@ -38,9 +38,9 @@ const CommentDetails = (props) => {
                     <Col>
                         {comment.owner.firstName} {comment.owner.lastName}
                         , {
-                            comment.owner.role=="be"?"Backend Engineer":comment.owner.role=="ds"?
-                            "Data Scientist":comment.owner.role=="fe"?"Frontend Engineer":comment.owner.role=="intern"?
-                            "Intern":comment.owner.role=="pm"?"Project Manger":comment.owner.role=="tl"?"Tech Lead":"Fullstack Engineer"
+                            comment.owner.role=="be"?"Backend Engineer":comment.owner.role==="ds"?
+                            "Data Scientist":comment.owner.role==="fe"?"Frontend Engineer":comment.owner.role==="intern"?
+                            "Intern":comment.owner.role==="pm"?"Project Manger":comment.owner.role==="tl"?"Tech Lead":"Fullstack Engineer"
                         }
                     </Col>
                     <Col>{comment.createdAt===comment.updatedAt?
