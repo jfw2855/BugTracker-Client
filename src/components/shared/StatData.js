@@ -12,13 +12,13 @@ const StatData = (props) => {
     console.log('from statdata',issuesData,projects)
 
 	return (
-		<>  
-            <h3>Total {user.organization.toUpperCase()} Projects: {projects.length}</h3>
-            <h3>Open Issues: {open}</h3>
-            <h3>Closed Issues: {closed}</h3>
-        
-
-		</>
+		<div className="stat-container"> 
+            <div className="stat-project">Total {user.organization.toUpperCase()} Projects: {projects.length}</div>
+            <div className="stat-issue-container">
+                <div className="stat-detail open-stat">Open Issues: {open}</div>
+                <div className="stat-detail close-stat">Closed Issues: {closed}</div>
+            </div>
+		</div>
 	)
 }
 
