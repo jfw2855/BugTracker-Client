@@ -26,6 +26,13 @@
   height: 70vh;
 }
 
+.home-header {
+  display: flex;
+  justify-content: center;
+
+}
+
+
 .home-details {
   border: 3px dashed pink;
   width: 30%;
@@ -37,6 +44,57 @@
 .home-btn {
   margin: 10px;
 }
+
+.stat-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+}
+
+.stat-detail {
+  border: 1px solid yellowgreen;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: white;
+  border-radius: 5px;
+  margin: 0.5%;
+}
+
+.open-stat {
+  background-color: rgba(216, 129, 30, 0.921);
+}
+
+.close-stat {
+  background-color: rgba(20, 171, 20, 0.855);
+}
+
+.stat-project {
+  width: 100%;
+  height: 40%;
+  border: 1px solid plum;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(58, 40, 189, 0.623);
+  font-size: 1.5em;
+  font-weight: bold;
+  color: white;
+  border-radius: 5px;
+  margin: 1%;
+}
+
+.stat-issue-container {
+  display: flex;
+  width: 100%;
+  height: 40%;
+}
+
 
 .issue-details {
   text-align: center;
