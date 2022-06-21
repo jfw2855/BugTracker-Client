@@ -33,6 +33,8 @@ const OrgIssuePlot = (props) => {
 
     let layout = {
         title: 'Current Open Issues',
+        height: 350,
+        width: 550,
     }  
 
 
