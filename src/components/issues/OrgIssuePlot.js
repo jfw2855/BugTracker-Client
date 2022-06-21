@@ -27,22 +27,31 @@ const OrgIssuePlot = (props) => {
 
             ]
             },
-          type: 'bar'
+          type: 'bar',
         }
       ]
 
     let layout = {
         title: 'Current Open Issues',
-        height: 350,
-        width: 550,
-    }  
+        yaxis: {
+          color:'black',
+          autotick:false,
+          tick0:0,
+          dtick:1,
+        },
+    }
+
+    let config = {
+      displayModeBar: false,
+      staticPlot: true
+    }
 
 
 
 	return (
-        <>
-        <Plot data={plotData} layout={layout} />
-        </>
+        <div className='plotdata-container'>
+        <Plot data={plotData} layout={layout} config={config}/>
+        </div>
 	)
 }
 
