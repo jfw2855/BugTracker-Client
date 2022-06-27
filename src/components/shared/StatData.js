@@ -1,3 +1,5 @@
+import {GoIssueOpened} from 'react-icons/go'
+import {FaCheck} from 'react-icons/fa'
 
 const StatData = (props) => {
 
@@ -15,8 +17,14 @@ const StatData = (props) => {
 		<div className="stat-container"> 
             <div className="stat-project">Total {user.organization.toUpperCase()} Projects: {projects.length}</div>
             <div className="stat-issue-container">
-                <div className="stat-detail open-stat">Open Issues: {open}</div>
-                <div className="stat-detail close-stat">Closed Issues: {closed}</div>
+                <div className="stat-detail open-stat">
+                    <GoIssueOpened className="issue-icon"/>
+                    Open Issues: {open}
+                    </div>
+                <div className="stat-detail close-stat">
+                    <FaCheck className="issue-icon"/>
+                    Closed Issues: {closed}
+                    </div>
             </div>
 		</div>
 	)

@@ -54,7 +54,6 @@
 }
 
 .stat-detail {
-  border: 1px solid yellowgreen;
   width: 50%;
   display: flex;
   align-items: center;
@@ -67,17 +66,25 @@
 }
 
 .open-stat {
-  background-color: rgba(216, 129, 30, 0.921);
+  background-color: rgba(224, 139, 19, 0.921);
+  display: flex;
+  flex-direction: column;
 }
 
 .close-stat {
   background-color: rgba(20, 171, 20, 0.855);
+  display: flex;
+  flex-direction: column;
+}
+
+.issue-icon {
+  margin-bottom: 7%;
+  font-size: 2em;
 }
 
 .stat-project {
   width: 60%;
-  height: 40%;
-  border: 1px solid plum;
+  height: 25%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -92,7 +99,7 @@
 .stat-issue-container {
   display: flex;
   width: 60%;
-  height: 40%;
+  height: 35%;
 }
 
 
