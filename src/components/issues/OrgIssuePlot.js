@@ -2,6 +2,8 @@ import Plot from 'react-plotly.js'
 
 const OrgIssuePlot = (props) => {
     
+
+
     const {data} = props
     let [low,medium,high,critical] = Array(4).fill(0)
 
@@ -24,7 +26,6 @@ const OrgIssuePlot = (props) => {
               'rgba(238, 192, 42, 0.828)',
               'rgba(238, 83, 32, 0.828)',
               'rgba(239, 38, 51, 0.891)'
-
             ]
             },
           type: 'bar',
@@ -33,14 +34,17 @@ const OrgIssuePlot = (props) => {
 
     let layout = {
         title: 'Current Open Issues',
+        autosize: true,
         titlefont: {
           size: 25
         },
+
         yaxis: {
           color:'black',
           autotick:false,
           tick0:0,
           dtick:1,
+          autorange: true,
           tickfont: {
             size: 18,
             family: 'Arial, sans-serif',
@@ -49,7 +53,8 @@ const OrgIssuePlot = (props) => {
         xaxis: {
           tickfont: {
             size: 18,
-            family: 'Arial, sans-serif'
+            family: 'Arial, sans-serif',
+            autorange: true
           }
         }
     }
