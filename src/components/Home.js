@@ -80,7 +80,7 @@ const Home = (props) => {
 			<StatData issuesData={issuesData} projects={projects} user={user}/>
 		</div>
 			<div className="home-container">
-				<div className="home-details">
+				<div className="project-details">
 					<h4>{user.organization.toUpperCase()} Projects</h4>
 					<ListGroup className="scroll-show">
 						<ProjectsIndex user={user} refresh={projectRefresh} className="scroll-show"/>
