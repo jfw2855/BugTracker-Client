@@ -1,7 +1,7 @@
 import { useEffect,useState } from "react"
 import { useLocation,useParams,useNavigate } from "react-router-dom"
 import { Button,ListGroup,ListGroupItem,Row,Col, Spinner, ButtonGroup } from "react-bootstrap"
-import { getIssue, removeIssue } from "../../api/issue"
+import { getIssue, removeIssue, updateIssue } from "../../api/issue"
 import AddCommentModal from "../comment/AddCommentModal"
 import CommentDetails from "../comment/CommentDetails"
 import EditIssueModal from "./EditIssueModal"
@@ -53,6 +53,15 @@ const IssueShow = (props) => {
         navigate('/')
     }
 
+    const handleStatus = async(e) => {
+        e.preventDefault()
+        console.log('clickeeddd')
+        let newIssue = issue
+        newIssue.status = issue.status==="open"?"closed":"open"
+        await updateIssue(user,issueId,newIssue)
+        setRefresh(true)
+    }
+
 
 	return (
         <>
@@ -66,11 +75,12 @@ const IssueShow = (props) => {
         <div className="issueinfo-container">
             <div className="status-container">
                 <h4>Status:&nbsp;
-                    <span
+                    <button
                     className={issue.status==="open"?"open":"closed"}
+                    onClick={handleStatus}
                     >
                         {issue.status}
-                    </span>
+                    </button>
                 </h4>
                 <h4>Priority:&nbsp;
                     <span
