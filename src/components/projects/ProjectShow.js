@@ -145,7 +145,7 @@ const ProjectShow = (props) => {
                         </Button>
                         <Button variant='danger' onClick={handleDelete}>
                             <RiDeleteBack2Fill/>
-                        </Button>`
+                        </Button>
 
                     </ButtonGroup>:<></>
                 }
