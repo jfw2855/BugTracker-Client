@@ -74,29 +74,29 @@ const Home = (props) => {
 	}
 
 	return (
-		<>
+		<div className="home-body">
 		<div className="home-header">
 			<OrgIssuePlot data={issuesData}/>
 			<StatData issuesData={issuesData} projects={projects} user={user}/>
 		</div>
 			<div className="home-container">
 				<div className="home-details">
-					<h4>Projects</h4>
+					<h4>{user.organization.toUpperCase()} Projects</h4>
 					<ListGroup className="scroll-show">
 						<ProjectsIndex user={user} refresh={projectRefresh} className="scroll-show"/>
 					</ListGroup>
-					<Button onClick={handleNewProject} className="home-btn">
+					<button onClick={handleNewProject} className="home-btn">
 						Create New Project
-					</Button>
+					</button>
 				</div>
 				<div className="home-details">
-					<h4>My Issues</h4>
+					<h4>My Created Issues</h4>
 					<ListGroup className="scroll-show">
 						<IssuesIndex user={user} refresh={issueRefresh}/>
 					</ListGroup>
-					<Button onClick={handleNewIssue} className="home-btn">
+					<button onClick={handleNewIssue} className="home-btn dd">
 						Create New Issue
-					</Button>
+					</button>
 				</div>
 			</div>
 			<ProjectNewModal
@@ -119,7 +119,7 @@ const Home = (props) => {
 					setIssueOpen(false)
 				}}
 			/>
-		</>
+		</div>
 	)
 }
 
