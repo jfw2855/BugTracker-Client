@@ -33,12 +33,25 @@ const OrgIssuePlot = (props) => {
 
     let layout = {
         title: 'Current Open Issues',
+        titlefont: {
+          size: 25
+        },
         yaxis: {
           color:'black',
           autotick:false,
           tick0:0,
           dtick:1,
+          tickfont: {
+            size: 18,
+            family: 'Arial, sans-serif',
+          }
         },
+        xaxis: {
+          tickfont: {
+            size: 18,
+            family: 'Arial, sans-serif'
+          }
+        }
     }
 
     let config = {
