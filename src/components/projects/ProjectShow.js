@@ -1,5 +1,5 @@
 import { useLocation,useParams,useNavigate } from "react-router-dom"
-import { Button,ListGroup,ListGroupItem,Row,Col, Spinner } from "react-bootstrap"
+import { Button,ListGroup,ListGroupItem,Row,Col, Spinner, ButtonGroup } from "react-bootstrap"
 import { useEffect,useState } from "react"
 import { showProjectIssues,removeAllIssues } from "../../api/issue"
 import { removeProject, getProject } from "../../api/project"
@@ -7,6 +7,8 @@ import IssuePlots from "../issues/IssuePlots"
 import IssueDetails from "../issues/IssueDetails"
 import IssueNewModal from "../issues/IssueNewModal"
 import ProjectEditModal from "./ProjectEditModal"
+import { FiEdit3 } from "react-icons/fi"
+import {RiDeleteBack2Fill} from "react-icons/ri"
 
 
 const ProjectShow = (props) => {
@@ -87,7 +89,7 @@ const ProjectShow = (props) => {
     }
 
     //shows spinner while awaiting for api resp
-    if (!issues) {
+    if (!issues || !project) {
         return<Spinner animation="border" role="status">
         <span className="visually-hidden">Loading</span>
         </Spinner>
@@ -134,13 +136,19 @@ const ProjectShow = (props) => {
 	return (
 		<>
             <div className="project-header">
-                <h1>{`Project: ${project.title}`}</h1>
-                <Button variant='warning' onClick={()=>setEditOpen(true)}>
-                    Edit
-                </Button>
-                <Button variant='danger' onClick={handleDelete}>
-                    Remove Project
-                </Button>
+                <h1 style={{marginRight:'2%'}}>{`Project: ${project.title}`}</h1>
+                {
+                    project.owner === user._id?
+                    <ButtonGroup>
+                        <Button variant='warning' onClick={()=>setEditOpen(true)}>
+                            <FiEdit3/>
+                        </Button>
+                        <Button variant='danger' onClick={handleDelete}>
+                            <RiDeleteBack2Fill/>
+                        </Button>`
+
+                    </ButtonGroup>:<></>
+                }
             </div>
             <div className="project-body">
                 {pieCharts}
