@@ -12,15 +12,16 @@
 }
 
 .scroll-show {
-  border: 5px solid rgb(126, 67, 33);
+  border: 2px solid rgb(210, 206, 204);
   width: 100%;
   margin: 2%;
   overflow-y:auto;
-  height: 75%;
+  height: 53%;
+  background-color: rgba(69, 68, 68, 0.773);
 }
 
 .home-container {
-  border: 2px solid rgb(181, 102, 164);
+  /* border: 2px solid rgb(181, 102, 164); */
   display: flex;
   justify-content: space-around;
   height: 70vh;
@@ -29,12 +30,13 @@
 .home-header {
   display: flex;
   justify-content: space-around;
-  margin: 1% 0 2% 0;
+  margin: 0 0 2% 0;
+  padding-top: 1%;
 }
 
 
 .home-details {
-  border: 3px dashed pink;
+  /* border: 3px dashed pink; */
   width: 30%;
   display: flex;
   flex-direction: column;
@@ -43,6 +45,14 @@
 
 .home-btn {
   margin: 10px;
+  background-color: rgb(79, 79, 221);
+  color: white;
+  border-radius: 5px;
+  padding: 6px;
+}
+
+.home-btn:hover {
+  background-color: rgb(52, 52, 222);
 }
 
 .stat-container {
@@ -201,4 +211,10 @@
   width: 30%;
 
   border-radius: 10px;
+}
+
+.home-body {
+  background-color: rgba(174, 174, 174, 0.367);
+  height: 100%;
+  width: 100%;
 }
