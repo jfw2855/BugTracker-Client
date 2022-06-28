@@ -182,10 +182,12 @@
 
 .closed {
   background-color: rgba(154, 139, 240, 0.835);
+  border: none;
 }
 
 .open {
   background-color: rgba(150, 241, 143, 0.835);
+  border: none;
 }
 
 .issue-header {
