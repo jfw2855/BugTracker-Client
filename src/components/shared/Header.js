@@ -39,9 +39,17 @@ const unauthenticatedOptions = (
 const Header = ({ user }) => (
 	<Navbar bg='dark' >
 		<Navbar.Brand className='icon-nav'>
-            <Link to='/' style={linkStyle} >
-                Bug Tracker <BiBug/>
-            </Link>
+			{
+				user?
+					<Link to='/' style={linkStyle} >
+						Bug Tracker <BiBug/>
+					</Link>
+					:
+					<Link to='/sign-in' style={linkStyle} >
+					Bug Tracker <BiBug/>
+					</Link>
+
+			}
         </Navbar.Brand>
 		<Navbar.Toggle aria-controls='basic-navbar-nav' />
 		<Navbar.Collapse id='basic-navbar-nav'>
