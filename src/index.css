@@ -227,3 +227,14 @@
   height: 100%;
   width: 100%;
 }
+
+.link-style {
+  text-decoration: none;
+}
+
+.item-hover:hover {
+  background-color: rgba(58, 40, 189, 0.623);
+  color: white;
+  font-weight: 600;
+  transition: 0.1s;
+}
