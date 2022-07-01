@@ -33,10 +33,13 @@ const ProjectsIndex = (props) => {
         projectDetails = project.map((item,index) => {
             return (
                 <Link
+                    className="link-style"
                     to={`/project/${item._id}`}
                     state={{title:`${item.title}`,description:`${item.description}`,owner:`${item.owner}`}}
                 >
-                    <ListGroup.Item key={`project${index}`}>
+                    <ListGroup.Item 
+                        className="item-hover"
+                        key={`project${index}`}>
                         {item.title}
                     </ListGroup.Item>
                 </Link>
