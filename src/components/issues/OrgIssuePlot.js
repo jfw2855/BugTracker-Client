@@ -2,8 +2,6 @@ import Plot from 'react-plotly.js'
 
 const OrgIssuePlot = (props) => {
     
-
-
     const {data} = props
     let [low,medium,high,critical] = Array(4).fill(0)
 
@@ -38,7 +36,6 @@ const OrgIssuePlot = (props) => {
         titlefont: {
           size: 25
         },
-
         yaxis: {
           color:'black',
           autotick:false,
