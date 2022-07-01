@@ -33,8 +33,12 @@ const IssuesIndex = (props) => {
     else {
         issueDetails = issues.map((item,index) => {
             return (
-                <Link to={`/issue/${item._id}`}>
-                    <ListGroup.Item key={`lg-${index}`}>
+                <Link
+                    className="link-style"
+                    to={`/issue/${item._id}`}>
+                    <ListGroup.Item
+                        className="item-hover"
+                        key={`lg-${index}`}>
                         {item.title}
                     </ListGroup.Item>
                 </Link>
