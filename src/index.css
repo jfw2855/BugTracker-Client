@@ -29,9 +29,10 @@
 
 .home-header {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   margin: 0 0 2% 0;
   padding-top: 1%;
+  height: 52vh;
 }
 
 
@@ -219,7 +220,10 @@
 
 .plotdata-container {
   width: 40%;
-  border-radius: 10px;
+  border: 4px solid rgba(190, 187, 190, 0.576);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .home-body {
@@ -237,4 +241,16 @@
   color: white;
   font-weight: 600;
   transition: 0.1s;
+}
+
+.no-issue-msg {
+  background-color: rgba(156, 238, 156, 0.628);
+  font-size: 2em;
+  font-weight: 700;
+  padding: 3%;
+
+}
+
+.blurr {
+  background-color: rgb(147, 162, 129);
 }
