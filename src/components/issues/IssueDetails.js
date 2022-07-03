@@ -9,7 +9,9 @@ const IssueDetails = (props) => {
     let items = issues.map((issue)=>{
         return(
         <>
-        <Link to={`/issue/${issue._id}`}>
+        <Link
+            className="link-style"
+            to={`/issue/${issue._id}`}>
             <ListGroupItem key={`issueKey${issue._id}`}>
                 <Row>
                     <Col
