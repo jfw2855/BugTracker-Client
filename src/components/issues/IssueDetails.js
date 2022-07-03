@@ -47,9 +47,3 @@ const IssueDetails = (props) => {
 }
 
 export default IssueDetails
-
-{/* <Link to={`/issue/${item._id}`}>
-<ListGroup.Item key={`lg-${index}`}>
-    {item.title}
-</ListGroup.Item>
-</Link> */}
