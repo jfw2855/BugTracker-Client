@@ -3,7 +3,7 @@ import Plot from 'react-plotly.js'
 const OrgIssuePlot = (props) => {
     
     const {data} = props
-    let [low,medium,high,critical] = Array(4).fill(0)
+    let [low,medium,high,critical,open] = Array(5).fill(0)
 
     //loops through to create current open issue chart
     for (let i in data) {
@@ -11,6 +11,8 @@ const OrgIssuePlot = (props) => {
         data[i].priority == "low"?low+=1:
         data[i].priority == "medium"?medium+=1:
         data[i].priority == "high"?high+=1:critical+=1
+
+        open+=1
     }
 
     //plots bar chart of priority issue data
@@ -61,12 +63,32 @@ const OrgIssuePlot = (props) => {
       staticPlot: true
     }
 
+    console.log('open~~~~~~~',open)
 
 
 	return (
-        <div className='plotdata-container'>
-        <Plot data={plotData} layout={layout} config={config}/>
-        </div>
+      <>
+        {
+          open > 0?
+          <div className='plotdata-container'>
+            <Plot
+              data={plotData}
+              layout={layout}
+              config={config}
+              style={{width:"100%",height:"100%"}}
+              useResizeHandler={true}/>
+          </div>
+          :
+          <div className='plotdata-container blurr'>
+            <span className='no-issue-msg'>
+              No Open Issues
+            </span>
+
+          </div>
+          
+
+        }
+      </>
 	)
 }
 
