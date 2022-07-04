@@ -1,10 +1,12 @@
 import { useEffect,useState } from "react"
 import { useLocation,useParams,useNavigate } from "react-router-dom"
-import { Button,ListGroup,ListGroupItem,Row,Col, Spinner, ButtonGroup } from "react-bootstrap"
+import { Button,ListGroup,ListGroupItem,Row,Col, Spinner, ButtonGroup, Card } from "react-bootstrap"
 import { getIssue, removeIssue, updateIssue } from "../../api/issue"
 import AddCommentModal from "../comment/AddCommentModal"
 import CommentDetails from "../comment/CommentDetails"
 import EditIssueModal from "./EditIssueModal"
+import { FiEdit3 } from "react-icons/fi"
+import {RiDeleteBack2Fill} from "react-icons/ri"
 
 const IssueShow = (props) => {
 
@@ -64,13 +66,44 @@ const IssueShow = (props) => {
 
 
 	return (
-        <>
+        <div className="issueshow-container">
         <div className="issue-header">
-            <h1>Project: {issue.project.title}</h1>
-            <ButtonGroup>
-                <Button onClick={()=>setIssueOpen(true)}>Update Issue</Button>
-                <Button variant="danger" onClick={handleDelete}>Delete</Button>
-            </ButtonGroup>
+            <Card >
+                <Card.Header>
+                    Project: {issue.project.title}
+                    <ButtonGroup>
+                        <Button onClick={()=>setIssueOpen(true)}>
+                            <FiEdit3/>
+                        </Button>
+                        <Button variant="danger" onClick={handleDelete}>
+                            <RiDeleteBack2Fill/>
+                        </Button>
+                    </ButtonGroup>
+                </Card.Header>
+                <Card.Body>
+                    <h4>Description:</h4>
+                    <p>{issue.description}</p>
+                    <hr/>
+
+                </Card.Body>
+            </Card>
+            <Card className="issuedescr-container">
+                <h4>Issue: {issue.title}</h4>
+                <div>
+                    <h5>Comments: </h5>
+                    <ListGroup>
+                        <CommentDetails
+                        comments={comments} 
+                        user={user}
+                        issueId={issueId}
+                        refresh={()=>setRefresh(true)}
+                        />
+                    </ListGroup>
+                    <Button onClick={()=>setModalOpen(true)}>
+                        Add Comment
+                    </Button>
+                </div>
+            </Card>
         </div>
         <div className="issueinfo-container">
             <div className="status-container">
@@ -98,25 +131,6 @@ const IssueShow = (props) => {
                 <></>:<h4>Closed: {closeDate}</h4>}
             </div>
         </div>
-        <div className="issuedescr-container">
-            <h4>Issue: {issue.title}</h4>
-            <h4>Description:</h4>
-            <p>{issue.description}</p>
-            <div>
-                <h5>Comments: </h5>
-                <ListGroup>
-                    <CommentDetails
-                    comments={comments} 
-                    user={user}
-                    issueId={issueId}
-                    refresh={()=>setRefresh(true)}
-                    />
-                </ListGroup>
-                <Button onClick={()=>setModalOpen(true)}>
-                    Add Comment
-                </Button>
-            </div>
-        </div>
         <AddCommentModal
 				show={modalOpen}
 				user={user}
@@ -138,7 +152,7 @@ const IssueShow = (props) => {
             }}
         />
 
-        </>
+        </div>
 	)
 }
 
