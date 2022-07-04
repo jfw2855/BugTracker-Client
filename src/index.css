@@ -191,11 +191,19 @@
   border: none;
 }
 
+.issueshow-container {
+  display: flex;
+  justify-content: center;
+  
+}
+
 .issue-header {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   margin-top: 1.5%;
+  width: 65%;
 }
 
 .issuedescr-container {
@@ -204,7 +212,7 @@
   align-self: center;
   justify-self: center;
   margin: 2% 3% 0.5% 3%;
-  border: solid purple 3px;
+  width: 72%;
 }
 
 .icon-nav {
