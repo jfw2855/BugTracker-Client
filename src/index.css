@@ -205,7 +205,8 @@
   align-items: center;
   justify-content: center;
   margin-top: 0.5%;
-  width: 65%;
+  margin-left: 2%;
+  width: 75%;
 }
 
 .issuedescr-container {
@@ -275,7 +276,7 @@ i {
 }
 
 .btn {
-  border: none;
+  border: none
 }
 
 .delete:hover {
@@ -290,4 +291,12 @@ i {
 
 html, body, #root, .App {
   height: 100%;
+}
+
+.add:hover {
+  color: rgb(36, 125, 94);
+}
+
+.add,.edit,.delete {
+  font-size: 1.2em;
 }
