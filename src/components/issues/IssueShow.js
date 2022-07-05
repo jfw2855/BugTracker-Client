@@ -68,29 +68,40 @@ const IssueShow = (props) => {
 	return (
         <div className="issueshow-container">
         <div className="issue-header">
-            <Card >
-                <Card.Header>
-                    Project: {issue.project.title}
+            <Card className="issuedescr-container">
+                <Card.Header className="issuecard-header">
+                    <h4>{issue.title}</h4>
                     <ButtonGroup>
-                        <Button onClick={()=>setIssueOpen(true)}>
-                            <FiEdit3/>
-                        </Button>
-                        <Button variant="danger" onClick={handleDelete}>
-                            <RiDeleteBack2Fill/>
-                        </Button>
+                        <button
+                        className="btn edit"
+                        onClick={()=>setIssueOpen(true)}>
+                            <FiEdit3
+                                className="edit"
+                            />
+                        </button>
+                        <button
+                        className="btn"
+                        onClick={handleDelete}>
+                            <RiDeleteBack2Fill
+                                className="delete"
+                            />
+                        </button>
                     </ButtonGroup>
                 </Card.Header>
                 <Card.Body>
-                    <h4>Description:</h4>
-                    <p>{issue.description}</p>
+                    <h5>Issue</h5>
                     <hr/>
+                    <p>{issue.description}</p>
 
                 </Card.Body>
+                <Card.Footer>
+                    <i>Created By: {issue.owner.firstName} {issue.owner.lastName} on {openDate}</i>
+                </Card.Footer>
             </Card>
             <Card className="issuedescr-container">
-                <h4>Issue: {issue.title}</h4>
-                <div>
-                    <h5>Comments: </h5>
+                
+                <Card.Body>
+                    <h5>Activity </h5>
                     <ListGroup>
                         <CommentDetails
                         comments={comments} 
@@ -102,11 +113,11 @@ const IssueShow = (props) => {
                     <Button onClick={()=>setModalOpen(true)}>
                         Add Comment
                     </Button>
-                </div>
+                </Card.Body>
             </Card>
         </div>
-        <div className="issueinfo-container">
-            <div className="status-container">
+        <Card className="issueinfo-container">
+            <Card.Header className="stat-container">
                 <h4>Status:&nbsp;
                     <button
                     className={issue.status==="open"?"open":"closed"}
@@ -123,14 +134,20 @@ const IssueShow = (props) => {
                         {issue.priority}
                     </span>
                 </h4>
-            </div>
-            <div className="team-container">
-                <h4>Opened by: {issue.owner.firstName} {issue.owner.lastName}</h4>
-                <h4>Opened: {openDate}</h4>
+            </Card.Header>
+            <Card.Body className="team-container">
+                <h5>Project: {issue.project.title}</h5>
+                <hr/>
+                <i>Created:</i>
+                <h6>{openDate} by {issue.owner.firstName} {issue.owner.lastName}</h6>
                 {issue.status==="open"?
-                <></>:<h4>Closed: {closeDate}</h4>}
-            </div>
-        </div>
+                <></>:
+                <>
+                <i>Closed:</i>
+                <h6>{closeDate}</h6>
+                </>}
+            </Card.Body>
+        </Card>
         <AddCommentModal
 				show={modalOpen}
 				user={user}
