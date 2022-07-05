@@ -7,6 +7,7 @@ import CommentDetails from "../comment/CommentDetails"
 import EditIssueModal from "./EditIssueModal"
 import { FiEdit3 } from "react-icons/fi"
 import {RiDeleteBack2Fill} from "react-icons/ri"
+import {BiCommentAdd} from "react-icons/bi"
 
 const IssueShow = (props) => {
 
@@ -99,9 +100,17 @@ const IssueShow = (props) => {
                 </Card.Footer>
             </Card>
             <Card className="issuedescr-container">
+                <Card.Header className="issuecard-header">
+                    <h5>Activity </h5>
+                    <button
+                    className="btn"
+                    onClick={()=>setModalOpen(true)}>
+                        <BiCommentAdd className="add"/>
+                    </button>
+
+                </Card.Header>
                 
                 <Card.Body>
-                    <h5>Activity </h5>
                     <ListGroup>
                         <CommentDetails
                         comments={comments} 
@@ -110,9 +119,6 @@ const IssueShow = (props) => {
                         refresh={()=>setRefresh(true)}
                         />
                     </ListGroup>
-                    <Button onClick={()=>setModalOpen(true)}>
-                        Add Comment
-                    </Button>
                 </Card.Body>
             </Card>
         </div>
