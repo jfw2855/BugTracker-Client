@@ -39,6 +39,15 @@ const IssuesIndex = (props) => {
                     <ListGroup.Item
                         className="item-hover"
                         key={`lg-${index}`}>
+                        <span
+                            className={item.status==="open"?"open":"closed"}
+                        >
+                            {item.status}</span>&nbsp;&nbsp;
+                        <span
+                            className={item.priority=="low"?"low":item.priority=="medium"?
+                            "medium":item.priority=="high"?"high":"critical"}
+                        >
+                            {item.priority}</span>&nbsp;&nbsp;
                         {item.title}
                     </ListGroup.Item>
                 </Link>
