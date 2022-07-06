@@ -70,6 +70,13 @@
   align-items: center;
 }
 
+.stat-metrics {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 35%;
+}
+
 .stat-detail {
   width: 50%;
   display: flex;
@@ -300,3 +307,4 @@ html, body, #root, .App {
 .add,.edit,.delete {
   font-size: 1.2em;
 }
+
