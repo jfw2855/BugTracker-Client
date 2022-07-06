@@ -14,7 +14,7 @@ const StatData = (props) => {
     console.log('from statdata',issuesData,projects)
 
 	return (
-		<div className="stat-container"> 
+		<div className="stat-metrics"> 
             <div className="stat-project">Total {user.organization.toUpperCase()} Projects: {projects.length}</div>
             <div className="stat-issue-container">
                 <div className="stat-detail open-stat">
