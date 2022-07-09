@@ -33,17 +33,17 @@ const CommentDetails = (props) => {
     //renders all comments into list groups
     let commentDetails = comments.map((comment)=> {
         return(
-            <ListGroup.Item key={`comId-${comment._id}`}>
-                <Row>
-                    <Col>
+            <ListGroup.Item  key={`comId-${comment._id}`}>
+                <Row className="comment-owner-details">
+                    <Col style={{color:'rgb(61, 89, 120)'}}>
                         {comment.owner.firstName} {comment.owner.lastName}
                         , {
                             comment.owner.role=="be"?"Backend Engineer":comment.owner.role==="ds"?
                             "Data Scientist":comment.owner.role==="fe"?"Frontend Engineer":comment.owner.role==="intern"?
                             "Intern":comment.owner.role==="pm"?"Project Manger":comment.owner.role==="tl"?"Tech Lead":"Fullstack Engineer"
                         }
-                    </Col>
-                    <Col>{comment.createdAt===comment.updatedAt?
+                        &nbsp;&nbsp;&nbsp;
+                        {comment.createdAt===comment.updatedAt?
                         <ReactTimeAgo date={new Date(comment.createdAt)} local="en-US"/>
                         :
                         <ReactTimeAgo date={new Date(comment.updatedAt)} local="en-US"/>
@@ -52,22 +52,30 @@ const CommentDetails = (props) => {
                         "":" (Edited)"
                         }
                     </Col>
-                    <Col>
+                    <Col lg={1}>
                     {comment.owner._id===user._id?
                     <>
-                        <FiEdit3 onClick={(e)=>{
+                        <FiEdit3
+                            type="button"
+                            className="edit"
+                            onClick={(e)=>{
                             setCommentId(comment._id)
                             setBody(comment.body)
                             setEditOpen(true)
                         }}/>
-                        <RiDeleteBack2Fill onClick={(e)=>handleDelete(e,comment._id)}/>
+                        <RiDeleteBack2Fill
+                            type="button"
+                            className="delete"
+                            onClick={(e)=>handleDelete(e,comment._id)}/>
                     </>
                     :<></>}
                     </Col>
                 </Row>
   
                 <Row>
-                    {comment.body}
+                    <Col>
+                        {comment.body}
+                    </Col>
                 </Row>
             </ListGroup.Item>
         )
