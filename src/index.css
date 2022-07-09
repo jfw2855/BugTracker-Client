@@ -306,5 +306,9 @@ html, body, #root, .App {
 
 .add,.edit,.delete {
   font-size: 1.2em;
+  margin-left: 10%;
 }
 
+.comment-owner-details {
+  margin-bottom: 1.5%;
+}
