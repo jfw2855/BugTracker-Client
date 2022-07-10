@@ -249,7 +249,7 @@
 
 }
 
-.link-style {
+.link-style,.navv-link {
   text-decoration: none;
 }
 
@@ -308,4 +308,21 @@ i {
 
 .comment-owner-details {
   margin-bottom: 1.5%;
+}
+
+#dropdown-style {
+  background-color: rgba(93, 123, 91, 0.484);
+  border: 2px solid rgb(101, 149, 101);
+  border-radius: 5px;
+  color: white;
+  font-weight: 400;
+  margin-right: 30px;
+}
+
+.navv-link {
+  color: rgb(45, 118, 45);
+}
+
+#dropdown-style:hover {
+  background-color: rgb(81, 138, 92);
 }
