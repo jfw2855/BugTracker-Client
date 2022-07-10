@@ -63,8 +63,6 @@ const OrgIssuePlot = (props) => {
       staticPlot: true
     }
 
-    console.log('open~~~~~~~',open)
-
 
 	return (
       <>
@@ -80,7 +78,7 @@ const OrgIssuePlot = (props) => {
           </div>
           :
           <div className='plotdata-container blurr'>
-            <span className='no-issue-msg'>
+            <span className='no-issue-msg noselect'>
               No Open Issues
             </span>
 
