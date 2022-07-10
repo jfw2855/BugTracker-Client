@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react'
-import Nav from 'react-bootstrap/Nav'
-import Navbar from 'react-bootstrap/Navbar'
+import {Nav,NavDropdown,Navbar} from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import {BiBug} from 'react-icons/bi'
 
@@ -9,18 +8,14 @@ const linkStyle = {
     textDecoration: 'none'
 }
 const authenticatedOptions = (
-	<>
-		<Nav.Link>
-			<Link to='change-password' style={linkStyle}>
-				Change Password
-			</Link>
-		</Nav.Link>
-		<Nav.Link>
-			<Link to='sign-out' style={linkStyle}>
-				Sign Out
-			</Link>
-		</Nav.Link>
-	</>
+	<NavDropdown title="My Account&nbsp;&nbsp;&nbsp;"  id="dropdown-style">
+		<NavDropdown.Item className="navv-link">
+			<Link to='change-password' className="navv-link">Change Password</Link>
+		</NavDropdown.Item>
+		<NavDropdown.Item className="navv-link" >
+			<Link to='sign-out' className="navv-link">Sign Out</Link>
+		</NavDropdown.Item>
+	</NavDropdown>
 )
 
 const unauthenticatedOptions = (
@@ -52,8 +47,8 @@ const Header = ({ user }) => (
 			}
         </Navbar.Brand>
 		<Navbar.Toggle aria-controls='basic-navbar-nav' />
-		<Navbar.Collapse id='basic-navbar-nav'>
-			<Nav className='me-auto'>
+		<Navbar.Collapse id='basic-navbar-nav' className="justify-content-end">
+			<Nav className='ml-auto'>
 				{user ? authenticatedOptions : unauthenticatedOptions}
 			</Nav>
 		</Navbar.Collapse>
