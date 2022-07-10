@@ -296,9 +296,6 @@ i {
   transition: 0.15s;
 }
 
-html, body, #root, .App {
-  height: 100%;
-}
 
 .add:hover {
   color: rgb(36, 125, 94);
