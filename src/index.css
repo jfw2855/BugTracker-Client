@@ -70,6 +70,15 @@
   align-items: center;
 }
 
+@media screen and (max-width:990px) {
+  .stat-container {
+    display: flex;
+    flex-direction: column;
+  }
+}
+  
+
+
 .stat-metrics {
   display: flex;
   flex-direction: column;
@@ -161,11 +170,12 @@
 
 .issueinfo-container {
   display: flex;
-  border: 2px solid red;
   justify-content: space-around;
   width: 35%;
   margin: 1% 3% 0.5% 3%;
 }
+
+
 
 .low {
   background-color: rgba(238, 238, 166, 0.809);
@@ -204,6 +214,7 @@
   align-items: flex-start;
   height: 100%;
   background-color: rgba(200, 195, 195, 0.726);
+  padding-bottom: 4%;
 }
 
 .issue-header {
@@ -221,7 +232,7 @@
   flex-direction: column;
   align-self: center;
   justify-self: center;
-  margin: 1% 3% 0.5% 3%;
+  margin: 1% 3% 2% 3%;
   width: 98%;
 }
 
@@ -335,4 +346,10 @@ i {
         -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
+}
+
+.overflow {
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
 }
