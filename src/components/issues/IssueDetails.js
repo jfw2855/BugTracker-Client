@@ -30,7 +30,7 @@ const IssueDetails = (props) => {
                     >
                         {issue.priority}
                     </Col>
-                    <Col className="issue-details">{issue.title}</Col>
+                    <Col className="issue-details overflow">{issue.title}</Col>
                     <Col className="issue-details">{issue.comments.length}</Col>
                 </Row>
             </ListGroupItem>
