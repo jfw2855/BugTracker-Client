@@ -141,7 +141,7 @@ const IssueShow = (props) => {
                     </span>
                 </h4>
             </Card.Header>
-            <Card.Body className="team-container">
+            <Card.Body>
                 <h5>Project: {issue.project.title}</h5>
                 <hr/>
                 <i>Created:</i>
