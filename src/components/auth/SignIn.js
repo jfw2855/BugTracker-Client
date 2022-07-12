@@ -46,9 +46,13 @@ const SignIn = (props) => {
     return (
         <div className='credentials-container'>
             <div className='signin'>
-                <h3>Sign In</h3>
-                <Form onSubmit={onSignIn}>
-                    <Form.Group controlId='email'>
+                <h3 className='auth-header'>Sign In</h3>
+                <p className='new-user'>
+                    New User?&nbsp; 
+                    <Link to='/sign-up'>Sign Up</Link>
+                </p>
+                <Form onSubmit={onSignIn} className="signin-form">
+                    <Form.Group controlId='email' className='form-group'>
                         <Form.Label>Email address</Form.Label>
                         <Form.Control
                             required
@@ -70,14 +74,10 @@ const SignIn = (props) => {
                             onChange={e => setPassword(e.target.value)}
                         />
                     </Form.Group>
-                    <Button variant='primary' type='submit'>
-                        Submit
-                    </Button>
+                    <button type='submit' className='auth-button'>
+                        Log In
+                    </button>
                 </Form>
-                <div>
-                    New User?
-                    <Link to='/sign-up'>Sign Up Here</Link>
-                </div>
             </div>
         </div>
     )
