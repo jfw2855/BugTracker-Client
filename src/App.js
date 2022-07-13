@@ -7,7 +7,6 @@ import RequireAuth from './components/shared/RequireAuth'
 import Home from './components/Home'
 import SignUp from './components/auth/SignUp'
 import SignIn from './components/auth/SignIn'
-import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
 import ProjectShow from './components/projects/ProjectShow'
 import IssueShow from './components/issues/IssueShow'
@@ -41,7 +40,7 @@ const App = () => {
 
 		return (
 			<Fragment>
-				<Header user={user} />
+				<Header user={user} clearUser={clearUser} msgAlert={msgAlert}/>
 				<Routes>
 					<Route 
 						path='/'
@@ -58,14 +57,6 @@ const App = () => {
 					<Route
 						path='/sign-in'
 						element={<SignIn msgAlert={msgAlert} setUser={setUser} />}
-					/>
-					<Route
-						path='/sign-out'
-						element={
-						<RequireAuth user={user}>
-							<SignOut msgAlert={msgAlert} clearUser={clearUser} user={user} />
-						</RequireAuth>
-						}
 					/>
 					<Route
 						path='/change-password'
