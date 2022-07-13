@@ -33,6 +33,18 @@
   box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
 }
 
+.signup {
+  width: 40%;
+  margin-top: 5%;
+  margin-bottom: 10%;
+  height: 80%;
+  background-color: rgba(185, 209, 187, 0.235);
+  padding: 2%;
+  border-radius: 10px;
+  box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+  
+}
+
 .form-group {
   margin-bottom: 4%;
 }
