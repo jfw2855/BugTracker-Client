@@ -8,14 +8,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
 const ChangePassword = (props) => {
-	// constructor(props) {
-	// 	super(props)
 
-	// 	this.state = {
-	// 		oldPassword: '',
-	// 		newPassword: '',
-	// 	}
-	// }
     const [oldPassword, setOldPassword] = useState('')
     const [newPassword, setNewPassword] = useState('')
 
@@ -25,7 +18,6 @@ const ChangePassword = (props) => {
 		event.preventDefault()
 
 		const { msgAlert, user } = props
-        console.log('the user', user)
         
 
         const passwords = {oldPassword, newPassword}
@@ -53,11 +45,11 @@ const ChangePassword = (props) => {
 
 
     return (
-        <div className='row'>
-            <div className='col-sm-10 col-md-8 mx-auto mt-5'>
-                <h3>Change Password</h3>
+        <div className='credentials-container'>
+            <div className='signin'>
+                <h3 className='auth-header'>Change Password</h3>
                 <Form onSubmit={onChangePassword}>
-                    <Form.Group controlId='oldPassword'>
+                    <Form.Group controlId='oldPassword' className='form-group'>
                         <Form.Label>Old password</Form.Label>
                         <Form.Control
                             required
@@ -68,7 +60,7 @@ const ChangePassword = (props) => {
                             onChange={e => setOldPassword(e.target.value)}
                         />
                     </Form.Group>
-                    <Form.Group controlId='newPassword'>
+                    <Form.Group controlId='newPassword' className='form-group'>
                         <Form.Label>New Password</Form.Label>
                         <Form.Control
                             required
@@ -79,9 +71,9 @@ const ChangePassword = (props) => {
                             onChange={e => setNewPassword(e.target.value)}
                         />
                     </Form.Group>
-                    <Button variant='primary' type='submit'>
+                    <button className='auth-button' type='submit'>
                         Submit
-                    </Button>
+                    </button>
                 </Form>
             </div>
         </div>
