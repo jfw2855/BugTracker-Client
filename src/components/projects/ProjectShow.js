@@ -184,17 +184,7 @@ const ProjectShow = (props) => {
                 </div>
             </div>
             <div className="project-footer">
-                <ListGroupItem style={{width:'70%'}}>
-                    <Row>
-                        <Col className="issue-details">Status</Col>
-                        <Col className="issue-details">Priority</Col>
-                        <Col className="issue-details">Issue</Col>
-                        <Col className="issue-details">Comments</Col>
-                    </Row>
-                </ListGroupItem>
-                <ListGroup className="issues-listgroup">
-                    {issueDetails}
-                </ListGroup>
+                {issueDetails}
                 <Button onClick={handleNewIssue} className="home-btn">
 						Create New Issue
 				</Button>
