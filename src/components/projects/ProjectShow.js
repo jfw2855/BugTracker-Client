@@ -27,6 +27,7 @@ const ProjectShow = (props) => {
     const [priorityValues,setPriorityValues] = useState([])
     const [ statusLabels, setStatusLabels] = useState([])
     const [ statusValues, setStatusValues] = useState([])
+    const [projectCreated,setProjectCreated] = useState(null)
 
     let issueDetails
     let priorityData = {}
@@ -45,11 +46,11 @@ const ProjectShow = (props) => {
         fetchIssues()
     },[issueRefresh,projectRefresh])
     
-    //function used in useEffect to fetch project info
+    //function used in useEffect to fetch project info and set project date created
     const fetchProject = async () => {
         let apiResp = await getProject(user,projId)
-        console.log('this is project',apiResp.data.project)
         setProject(apiResp.data.project)
+        setProjectCreated(new Date(apiResp.data.project.createdAt).toDateString())
     }
 
     //function used in useEffect to fetch all project issues from db
@@ -90,7 +91,7 @@ const ProjectShow = (props) => {
     }
 
     //shows spinner while awaiting for api resp
-    if (!issues || !project) {
+    if (!issues || !project || !projectCreated) {
         return<Spinner animation="border" role="status">
         <span className="visually-hidden">Loading</span>
         </Spinner>
@@ -168,9 +169,12 @@ const ProjectShow = (props) => {
                         </p>
 
                     </Card.Body>
-                    <Card.Footer>
+                    <Card.Footer className="project-card-footer">
                         <i>
                             Created By: {project.owner.firstName} {project.owner.lastName}
+                        </i>
+                        <i>
+                            Created: {projectCreated}
                         </i>
                     </Card.Footer>
                 </Card>
