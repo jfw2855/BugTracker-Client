@@ -140,13 +140,18 @@ const ProjectShow = (props) => {
                 {
                     project.owner === user._id?
                     <ButtonGroup>
-                        <Button variant='warning' onClick={()=>setEditOpen(true)}>
-                            <FiEdit3/>
-                        </Button>
-                        <Button variant='danger' onClick={handleDelete}>
-                            <RiDeleteBack2Fill/>
-                        </Button>
-
+                        <FiEdit3
+                            size={25}
+                            type="button"
+                            className="edit"
+                            onClick={()=>setEditOpen(true)}
+                        />
+                        <RiDeleteBack2Fill
+                            size={25}
+                            type="button"
+                            className="delete"
+                            onClick={handleDelete}
+                        />
                     </ButtonGroup>:<></>
                 }
             </div>
