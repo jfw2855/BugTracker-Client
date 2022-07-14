@@ -73,7 +73,7 @@ const IssueDetails = (props) => {
 
 	return (
         <>
-        <ListGroupItem style={{width:'70%'}}>
+        <ListGroupItem style={{width:'98%'}}>
             <Row>
                 <Col className="issue-details"
                 onClick={()=>{
