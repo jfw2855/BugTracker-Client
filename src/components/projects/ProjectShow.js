@@ -1,5 +1,5 @@
 import { useLocation,useParams,useNavigate } from "react-router-dom"
-import { Button,ListGroup,ListGroupItem,Row,Col, Spinner, ButtonGroup } from "react-bootstrap"
+import { Button,ListGroup,ListGroupItem,Row,Col, Spinner, ButtonGroup, Card } from "react-bootstrap"
 import { useEffect,useState } from "react"
 import { showProjectIssues,removeAllIssues } from "../../api/issue"
 import { removeProject, getProject } from "../../api/project"
@@ -48,6 +48,7 @@ const ProjectShow = (props) => {
     //function used in useEffect to fetch project info
     const fetchProject = async () => {
         let apiResp = await getProject(user,projId)
+        console.log('this is project',apiResp.data.project)
         setProject(apiResp.data.project)
     }
 
@@ -136,30 +137,47 @@ const ProjectShow = (props) => {
 	return (
 		<>
             <div className="project-header">
-                <h1 style={{marginRight:'2%'}}>{`Project: ${project.title}`}</h1>
-                {
-                    project.owner === user._id?
-                    <ButtonGroup>
-                        <FiEdit3
-                            size={25}
-                            type="button"
-                            className="edit"
-                            onClick={()=>setEditOpen(true)}
-                        />
-                        <RiDeleteBack2Fill
-                            size={25}
-                            type="button"
-                            className="delete"
-                            onClick={handleDelete}
-                        />
-                    </ButtonGroup>:<></>
-                }
-            </div>
-            <div className="project-body">
-                {pieCharts}
-                <p>
-                    {project.description}
-                </p>
+                <Card className="project-card">
+                    <Card.Header className="project-card-header">
+                        <span
+                        className="project-card-title">
+                            {`${project.title}`}</span>
+                        {
+                            project.owner._id === user._id?
+                            <ButtonGroup>
+                                <FiEdit3
+                                    size={25}
+                                    type="button"
+                                    className="edit"
+                                    onClick={()=>setEditOpen(true)}
+                                />
+                                <RiDeleteBack2Fill
+                                    size={25}
+                                    type="button"
+                                    className="delete"
+                                    onClick={handleDelete}
+                                />
+                            </ButtonGroup>:<></>
+                        }
+                    </Card.Header>
+                    <Card.Body>
+                        <h6>Project Overview</h6>
+                        <hr/>
+                        <p>
+                            {project.description}
+                        </p>
+
+                    </Card.Body>
+                    <Card.Footer>
+                        <i>
+                            Created By: {project.owner.firstName} {project.owner.lastName}
+                        </i>
+                    </Card.Footer>
+                </Card>
+                
+                <div >
+                    {pieCharts}
+                </div>
             </div>
             <div className="project-footer">
                 <ListGroupItem style={{width:'70%'}}>
