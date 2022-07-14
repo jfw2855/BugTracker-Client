@@ -1,6 +1,6 @@
 import { useEffect,useState } from "react"
-import { useLocation,useParams,useNavigate } from "react-router-dom"
-import { Button,ListGroup,ListGroupItem,Row,Col, Spinner, ButtonGroup, Card } from "react-bootstrap"
+import { useParams,useNavigate } from "react-router-dom"
+import { ListGroup, ButtonGroup, Card } from "react-bootstrap"
 import { getIssue, removeIssue, updateIssue } from "../../api/issue"
 import AddCommentModal from "../comment/AddCommentModal"
 import CommentDetails from "../comment/CommentDetails"
@@ -8,6 +8,7 @@ import EditIssueModal from "./EditIssueModal"
 import { FiEdit3 } from "react-icons/fi"
 import {RiDeleteBack2Fill} from "react-icons/ri"
 import {BiCommentAdd} from "react-icons/bi"
+import {AiOutlineProject} from "react-icons/ai"
 
 const IssueShow = (props) => {
 
@@ -142,7 +143,14 @@ const IssueShow = (props) => {
                 </h4>
             </Card.Header>
             <Card.Body>
-                <h5>Project: {issue.project.title}</h5>
+                <div className="project">
+                    <span >Project: {issue.project.title}</span>
+                    <AiOutlineProject
+                        className="project-icon"
+                        type="button"
+                        onClick={()=>navigate(`/project/${issue.project._id}`)} 
+                    />
+                </div>
                 <hr/>
                 <i>Created:</i>
                 <h6>{openDate} by {issue.owner.firstName} {issue.owner.lastName}</h6>
