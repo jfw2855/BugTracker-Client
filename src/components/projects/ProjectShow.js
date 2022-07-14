@@ -9,6 +9,7 @@ import IssueNewModal from "../issues/IssueNewModal"
 import ProjectEditModal from "./ProjectEditModal"
 import { FiEdit3 } from "react-icons/fi"
 import {RiDeleteBack2Fill} from "react-icons/ri"
+import {GoIssueOpened} from 'react-icons/go'
 
 
 const ProjectShow = (props) => {
@@ -160,34 +161,34 @@ const ProjectShow = (props) => {
                                 />
                             </ButtonGroup>:<></>
                         }
-                    </Card.Header>
-                    <Card.Body>
-                        <h6>Project Overview</h6>
-                        <hr/>
-                        <p>
-                            {project.description}
-                        </p>
-
-                    </Card.Body>
-                    <Card.Footer className="project-card-footer">
+                    </Card.Header >
+                    <Card.Header className="project-card-subheader">
                         <i>
                             Created By: {project.owner.firstName} {project.owner.lastName}
                         </i>
                         <i>
                             Created: {projectCreated}
                         </i>
-                    </Card.Footer>
+                    </Card.Header>
+                    <Card.Body>
+                        <p style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+                            <h4>Project Overview</h4>
+                            <button onClick={handleNewIssue} className="home-btn">
+                                Open Issue <GoIssueOpened/>
+                            </button>
+                        </p>
+                        <hr/>
+                        <p>
+                            {project.description}
+                        </p>
+
+                    </Card.Body>
+                    <div className="project-footer">
+                        {issueDetails}
+
+                    </div>
+                    <Card.Footer ></Card.Footer>
                 </Card>
-                
-                <div >
-                    {pieCharts}
-                </div>
-            </div>
-            <div className="project-footer">
-                {issueDetails}
-                <Button onClick={handleNewIssue} className="home-btn">
-						Create New Issue
-				</Button>
             </div>
             <IssueNewModal
 				show={issueOpen}
