@@ -217,11 +217,27 @@
   color: blue;
 }
 
-.project-header {
-  height: 10vh;
+.project-card-header {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  background-color: rgba(175, 236, 213, 0.451) !important;
+}
+
+.project-card-title {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.project-card {
+  width: 45%;
+}
+
+.project-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border: 1px solid red;
 
 }
 .project-footer {
