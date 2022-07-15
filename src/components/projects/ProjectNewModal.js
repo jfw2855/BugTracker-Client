@@ -33,17 +33,27 @@ const ProjectNewModal = (props) => {
 
   return (
     <>
-    <Modal show={show} onHide={handleClose} style={{ color: 'black' }}>
-      <Modal.Header closeButton style={{ color: 'black' }}>
+    <Modal
+    size='lg'
+    show={show}
+    onHide={handleClose}
+    className='modal'>
+      <Modal.Header
+      closeButton
+      className='modal-header'
+      >
         Create Project
       </Modal.Header>
       <Modal.Body>
         <Container className="justify-content-center">
-          <Form onSubmit={handleSubmit}>
+          <Form
+          className='modal-form'
+          onSubmit={handleSubmit}>
             <Row>
               <Col>
                 <Form.Label>Title</Form.Label>
                 <Form.Control
+                  className='modal-field'
                   name="title"
                   type="string"
                   onChange={handleChange}
@@ -54,15 +64,17 @@ const ProjectNewModal = (props) => {
               <Col>
                 <Form.Label>Description</Form.Label>
                 <Form.Control
+                  as="textarea"
+                  rows={7}
                   name="description"
                   type="string"
                   onChange={handleChange}
                 />
               </Col>
             </Row>
-            <Button className="new-transaction-btn" type="submit">
+            <button className="modal-btn" type="submit">
               Add Project
-            </Button>
+            </button>
           </Form>
         </Container>
       </Modal.Body>
