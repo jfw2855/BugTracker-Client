@@ -45,17 +45,22 @@ const IssueNewModal = (props) => {
 
   return (
     <>
-    <Modal show={show} onHide={handleClose} style={{ color: 'black' }}>
-      <Modal.Header closeButton style={{ color: 'black' }}>
-        Create Issue
+    <Modal
+    size="lg"
+    show={show}
+    onHide={handleClose}
+    className="modal">
+      <Modal.Header className='modal-header'>
+        Open Issue
       </Modal.Header>
       <Modal.Body>
         <Container className="justify-content-center">
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit} className="modal-form">
             <Row>
               <Col>
                 <Form.Label>Title</Form.Label>
                 <Form.Control
+                  className='modal-field'
                   name="title"
                   type="string"
                   maxLength={55}
@@ -65,37 +70,45 @@ const IssueNewModal = (props) => {
             </Row>
             <Row>
               <Col>
-                <Form.Label>Description</Form.Label>
+                <Form.Label>Description of Issue</Form.Label>
                 <Form.Control
+                  as="textarea"
+                  rows={6}
+                  className='modal-field'
                   name="description"
                   type="string"
                   onChange={handleChange}
                 />
               </Col>
             </Row>
-            {projectSelected?
-            <Form.Control
-            name="projectId"
-            type="string"
-            hidden
-            readOnly
-            value={projectSelected}
-            />
-            :
-            <Form.Group controlId="formBasicSelect">
-              <Form.Label>Project</Form.Label>
-                <Form.Select
-                onChange={handleProjectId}
+            <Row>
+              <Col>
+                {projectSelected?
+                <Form.Control
+                className='modal-field'
                 name="projectId"
                 type="string"
-                >
-                  <option>select project</option>
-                  {options}
-    
-                </Form.Select>
-            </Form.Group>
-            }
-              <Form.Group controlId="formBasicSelect">
+                hidden
+                readOnly
+                value={projectSelected}
+                />
+                :
+                <Form.Group controlId="formBasicSelect" className='modal-field'>
+                  <Form.Label>Project</Form.Label>
+                    <Form.Select
+                    onChange={handleProjectId}
+                    name="projectId"
+                    type="string"
+                    >
+                      <option>select project</option>
+                      {options}
+        
+                    </Form.Select>
+                </Form.Group>
+                }
+              </Col>
+              <Col>
+              <Form.Group controlId="formBasicSelect" className='modal-field'>
                 <Form.Label>Priority</Form.Label>
                   <Form.Select
                   onChange={handleChange}
@@ -109,9 +122,12 @@ const IssueNewModal = (props) => {
                     <option value={'critical'}>4 critical</option>
                     </Form.Select>
               </Form.Group>
-            <Button className="new-issue-btn" type="submit">
+              
+              </Col>
+            </Row>
+            <button className="modal-btn" type="submit">
               Add Issue
-            </Button>
+            </button>
           </Form>
         </Container>
       </Modal.Body>
