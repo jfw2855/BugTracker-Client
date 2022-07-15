@@ -450,3 +450,40 @@ i {
   overflow: hidden;
   text-overflow: ellipsis; 
 }
+
+.modal {
+  backdrop-filter: blur(2px);
+  display: flex;
+}
+
+.modal-header {
+  background-color: rgba(165, 210, 205, 0.727);
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.modal-btn {
+  background-color: rgba(153, 225, 200, 0.831);
+  align-self: center;
+  margin: 4%;
+  width:  35%;
+  border: none;
+  border-radius: 5px;
+  padding: 7px;
+  font-weight: 400;
+}
+
+.modal-btn:hover {
+  background-color: rgb(83, 121, 108);
+  color: white;
+  font-weight: 600;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-field {
+  margin-bottom: 2%;
+}
