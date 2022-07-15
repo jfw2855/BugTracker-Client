@@ -31,21 +31,26 @@ const AddCommentModal = (props) => {
 
 	return (
         <>
-        <Modal show={show} onHide={handleClose} style={{ color: 'black' }}>
-            <Modal.Header closeButton style={{color:'black'}}>
-                Add Comment
+        <Modal
+        size="lg"
+        show={show}
+        onHide={handleClose}
+        className="modal">
+            <Modal.Header closeButton className='modal-header'>
+                Comment
             </Modal.Header>
             <Modal.Body>
-                <Form onSubmit={handleSubmit}>
+                <Form onSubmit={handleSubmit} className="modal-form">
                     <Form.Control
+                    as='textarea'
+                    rows={8}
                     name="body"
                     type="string"
                     onChange={handleChange}
-                    style={{height:'200px'}}
                     />
-                <Button className="new-issue-btn" type="submit">
+                <button className="modal-btn" type="submit">
                 Add Comment
-                </Button>
+                </button>
                 </Form>
             </Modal.Body>
         </Modal>
