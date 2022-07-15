@@ -310,6 +310,10 @@
   padding-bottom: 4%;
 }
 
+html {
+  background-color: rgba(200, 195, 195, 0.726);
+}
+
 .issue-header {
   display: flex;
   flex-direction: column;
