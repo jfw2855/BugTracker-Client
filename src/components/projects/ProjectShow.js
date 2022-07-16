@@ -164,17 +164,17 @@ const ProjectShow = (props) => {
                     </Card.Header >
                     <Card.Header className="project-card-subheader">
                         <i>
-                            Created By: {project.owner.firstName} {project.owner.lastName}
+                            Project Owner: {project.owner.firstName} {project.owner.lastName}
                         </i>
                         <i>
                             Created: {projectCreated}
                         </i>
                     </Card.Header>
-                    <Card.Body>
+                    <Card.Body style={{marginBottom:'2%'}}>
                         <p style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
                             <h4>Project Overview</h4>
                             <button onClick={handleNewIssue} className="home-btn">
-                                Open Issue <GoIssueOpened/>
+                                Open Issue <GoIssueOpened size={21}/>
                             </button>
                         </p>
                         <hr/>
@@ -184,6 +184,7 @@ const ProjectShow = (props) => {
 
                     </Card.Body>
                     <div className="project-footer">
+                        <h5>Project Issues</h5>
                         {issueDetails}
 
                     </div>
