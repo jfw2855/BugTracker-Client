@@ -75,19 +75,19 @@ const IssueDetails = (props) => {
         <>
         <ListGroupItem style={{width:'98%'}}>
             <Row>
-                <Col className="issue-details"
+                <Col className="issue-details issuedet-header"
                 onClick={()=>{
                     setSortState('status')
                     setSort(true)
                 }}>Status</Col>
-                <Col className="issue-details"
+                <Col className="issue-details issuedet-header"
                 onClick={()=>{
                     setSortState('priority')
                     setSort(true)
                 }}
                     >Priority</Col>
-                <Col className="issue-details">Issue</Col>
-                <Col className="issue-details">Comments</Col>
+                <Col className="issue-details issuedet-header">Issue</Col>
+                <Col className="issue-details issuedet-header">Comments</Col>
             </Row>
         </ListGroupItem>
         <ListGroup className="issues-listgroup">
