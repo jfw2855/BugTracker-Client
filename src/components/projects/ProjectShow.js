@@ -10,6 +10,7 @@ import ProjectEditModal from "./ProjectEditModal"
 import { FiEdit3 } from "react-icons/fi"
 import {RiDeleteBack2Fill} from "react-icons/ri"
 import {GoIssueOpened} from 'react-icons/go'
+import DeleteModal from "../shared/DeleteModal"
 
 
 const ProjectShow = (props) => {
@@ -24,6 +25,7 @@ const ProjectShow = (props) => {
     const [issueRefresh,setIssueRefresh] = useState(false)
     const [projectRefresh,setProjectRefresh] = useState(false)
     const [editOpen,setEditOpen] = useState(false)
+    const [deleteOpen,setDeleteOpen] = useState(false)
     const [priorityLabels,setPriorityLabels] = useState([])
     const [priorityValues,setPriorityValues] = useState([])
     const [ statusLabels, setStatusLabels] = useState([])
@@ -114,11 +116,13 @@ const ProjectShow = (props) => {
 
     // handle delete function that will remove project from db
     const handleDelete = async (e) => {
-        e.preventDefault()
-        await removeAllIssues(user,projId)
-        await removeProject(user,projId)
-        //returns back to home page after removing project
-        navigate('/')
+        setDeleteOpen(true)
+        console.log('delte thisss clicckkk')
+        // e.preventDefault()
+        // await removeAllIssues(user,projId)
+        // await removeProject(user,projId)
+        // //returns back to home page after removing project
+        // navigate('/')
     }
 
     //rerenders issues index once a new issue is created
@@ -211,6 +215,14 @@ const ProjectShow = (props) => {
 					setEditOpen(false)
 				}}
 			/>
+            <DeleteModal
+                show={deleteOpen}
+                projId={projId}
+                user={user}
+                handleClose={() => {
+                    setDeleteOpen(false)
+                }}
+            />
 		</>
 	)
 }
