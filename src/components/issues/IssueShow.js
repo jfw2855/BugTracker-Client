@@ -1,7 +1,7 @@
 import { useEffect,useState } from "react"
 import { useParams,useNavigate } from "react-router-dom"
 import { ListGroup, ButtonGroup, Card } from "react-bootstrap"
-import { getIssue, removeIssue, updateIssue } from "../../api/issue"
+import { getIssue, updateIssue } from "../../api/issue"
 import AddCommentModal from "../comment/AddCommentModal"
 import CommentDetails from "../comment/CommentDetails"
 import EditIssueModal from "./EditIssueModal"
@@ -9,6 +9,7 @@ import { FiEdit3 } from "react-icons/fi"
 import {RiDeleteBack2Fill} from "react-icons/ri"
 import {BiCommentAdd} from "react-icons/bi"
 import {AiOutlineProject} from "react-icons/ai"
+import DeleteModal from "../shared/DeleteModal"
 
 const IssueShow = (props) => {
 
@@ -23,6 +24,7 @@ const IssueShow = (props) => {
     const [openDate,setOpenDate] = useState(null)
     const [closeDate,setCloseDate] = useState(null)
     const [issueOpen,setIssueOpen] = useState(false)
+    const [deleteOpen,setDeleteOpen] = useState(false)
 
     useEffect(()=> {
         setRefresh(false)
@@ -49,17 +51,14 @@ const IssueShow = (props) => {
         )
     }
 
-    // handle delete function that will remove issue from db
-    const handleDelete = async (e) => {
-        e.preventDefault()
-        await removeIssue(user,issueId)
-        //returns back to home page after removing issue
-        navigate('/')
+    // opens delete modal
+    const handleDelete = () => {
+        setDeleteOpen(true)
     }
 
+    // handle status function that changes the issue status
     const handleStatus = async(e) => {
         e.preventDefault()
-        console.log('clickeeddd')
         let newIssue = issue
         newIssue.status = issue.status==="open"?"closed":"open"
         await updateIssue(user,issueId,newIssue)
@@ -182,7 +181,15 @@ const IssueShow = (props) => {
                 setIssueOpen(false)
             }}
         />
-
+        <DeleteModal
+            show={deleteOpen}
+            issueId={issueId}
+            user={user}
+            projectNavId={issue.project._id}
+            handleClose={() => {
+                setDeleteOpen(false)
+            }}
+        />
         </div>
 	)
 }
