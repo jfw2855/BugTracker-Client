@@ -42,12 +42,11 @@ const CommentDetails = (props) => {
                             "Data Scientist":comment.owner.role==="fe"?"Frontend Engineer":comment.owner.role==="intern"?
                             "Intern":comment.owner.role==="pm"?"Project Manger":comment.owner.role==="tl"?"Tech Lead":"Fullstack Engineer"
                         }
-                        &nbsp;&nbsp;&nbsp;
-                        {comment.createdAt===comment.updatedAt?
+                        {comment.owner._id===user._id?" (me)":""}
+                        &nbsp;
+                        &bull;
+                        &nbsp;
                         <ReactTimeAgo date={new Date(comment.createdAt)} local="en-US"/>
-                        :
-                        <ReactTimeAgo date={new Date(comment.updatedAt)} local="en-US"/>
-                        }
                         {comment.createdAt===comment.updatedAt?
                         "":" (Edited)"
                         }
