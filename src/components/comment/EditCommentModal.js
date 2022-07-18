@@ -39,8 +39,9 @@ const EditCommentModal = (props) => {
                 Edit Comment
             </Modal.Header>
             <Modal.Body>
-                <Form onSubmit={handleSubmit}>
+                <Form onSubmit={handleSubmit} className="modal-form">
                     <Form.Control
+                    as="textarea"
                     name="body"
                     type="string"
                     defaultValue={body}
@@ -48,9 +49,9 @@ const EditCommentModal = (props) => {
                     onChange={handleChange}
                     style={{height:'200px'}}
                     />
-                <Button className="new-issue-btn" type="submit">
-                Update
-                </Button>
+                <button className="modal-btn" type="submit">
+                Update Comment
+                </button>
                 </Form>
             </Modal.Body>
         </Modal>
