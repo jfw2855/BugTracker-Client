@@ -35,19 +35,20 @@ const ProjectEditModal = (props) => {
 
   return (
     <>
-        <Modal show={show} onHide={handleClose} style={{ color: 'black' }}>
+        <Modal show={show} onHide={handleClose} size='lg'>
       <Modal.Header closeButton style={{ color: 'black' }}>
         Update Project
       </Modal.Header>
       <Modal.Body>
         <Container className="justify-content-center">
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit} className="modal-form">
             <Row>
               <Col>
                 <Form.Label>Title</Form.Label>
                 <Form.Control
                   name="title"
                   type="string"
+                  className='modal-field'
                   onChange={handleChange}
                 />
               </Col>
@@ -56,15 +57,17 @@ const ProjectEditModal = (props) => {
               <Col>
                 <Form.Label>Description</Form.Label>
                 <Form.Control
+                  as="textarea"
+                  rows={6}
                   name="description"
                   type="string"
                   onChange={handleChange}
                 />
               </Col>
             </Row>
-            <Button className="new-transaction-btn" type="submit">
+            <button className="modal-btn" type="submit">
               Update
-            </Button>
+            </button>
           </Form>
         </Container>
       </Modal.Body>
