@@ -204,7 +204,7 @@
 }
 
 .issues-listgroup {
-  width: 98%;
+  width: 60%;
   overflow-y:auto;
   height: 33vh;
 
@@ -336,6 +336,10 @@ html {
   justify-self: center;
   margin: 1% 3% 2% 3%;
   width: 98%;
+}
+
+.issue-item:hover {
+  background-color: rgb(230, 239, 243) !important;
 }
 
 .icon-nav {
