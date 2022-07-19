@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {Modal, Container, Form, Button, Col, Row } from 'react-bootstrap'
+import {Modal, Container, Form, Col, Row } from 'react-bootstrap'
 import { updateIssue } from '../../api/issue'
 
 
@@ -35,17 +35,22 @@ const EditIssueModal = (props) => {
 
 	return (
         <>
-        <Modal show={show} onHide={handleClose} style={{ color: 'black' }}>
+        <Modal
+        show={show}
+        onHide={handleClose}
+        size="lg"
+        >
         <Modal.Header closeButton style={{ color: 'black' }}>
             Update Issue
         </Modal.Header>
         <Modal.Body>
             <Container className="justify-content-center">
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} className="modal-form">
                 <Row>
                 <Col>
                     <Form.Label>Title</Form.Label>
                     <Form.Control
+                    className='modal-field'
                     name="title"
                     type="string"
                     onChange={handleChange}
@@ -56,41 +61,50 @@ const EditIssueModal = (props) => {
                 <Col>
                     <Form.Label>Description</Form.Label>
                     <Form.Control
+                    className='modal-field'
                     name="description"
                     type="string"
+                    as="textarea"
+                    rows={6}
                     onChange={handleChange}
                     />
                 </Col>
                 </Row>
-                <Form.Group controlId="formBasicSelect">
-                    <Form.Label>Status</Form.Label>
-                    <Form.Select
-                    onChange={handleChange}
-                    name="status"
-                    type="string"
-                    >
-                        <option>select status</option>
-                        <option value={'open'}>Open</option>
-                        <option value={'closed'}>Closed</option>
-                        </Form.Select>
-                </Form.Group>
-                <Form.Group controlId="formBasicSelect">
-                    <Form.Label>Priority</Form.Label>
-                    <Form.Select
-                    onChange={handleChange}
-                    name="priority"
-                    type="string"
-                    >
-                        <option>select priority</option>
-                        <option value={'low'}>1 low</option>
-                        <option value={'medium'}>2 medium</option>
-                        <option value={'high'}>3 high</option>
-                        <option value={'critical'}>4 critical</option>
-                        </Form.Select>
-                </Form.Group>
-                <Button className="new-issue-btn" type="submit">
+                <Row>
+                    <Col>
+                        <Form.Group controlId="formBasicSelect" className='modal-field'>
+                            <Form.Label>Status</Form.Label>
+                            <Form.Select
+                            onChange={handleChange}
+                            name="status"
+                            type="string"
+                            >
+                                <option>select status</option>
+                                <option value={'open'}>Open</option>
+                                <option value={'closed'}>Closed</option>
+                                </Form.Select>
+                        </Form.Group>
+                    </Col>
+                    <Col>
+                        <Form.Group controlId="formBasicSelect" className='modal-field'>
+                            <Form.Label>Priority</Form.Label>
+                            <Form.Select
+                            onChange={handleChange}
+                            name="priority"
+                            type="string"
+                            >
+                                <option>select priority</option>
+                                <option value={'low'}>1 low</option>
+                                <option value={'medium'}>2 medium</option>
+                                <option value={'high'}>3 high</option>
+                                <option value={'critical'}>4 critical</option>
+                                </Form.Select>
+                        </Form.Group>
+                    </Col>
+                </Row>
+                <button className="modal-btn" type="submit">
                 Add Issue
-                </Button>
+                </button>
             </Form>
             </Container>
         </Modal.Body>
