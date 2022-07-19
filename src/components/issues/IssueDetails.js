@@ -1,26 +1,21 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { ListGroupItem, Row, Col, ListGroup } from "react-bootstrap"
 import { Link } from "react-router-dom"
 
-const IssueDetails = (props) => {
+const IssueDetails = ({issues}) => {
 
-    const {issues} = props
-    const [sortState,setSortState] = useState("status")
-    const [sort,setSort] = useState(false)
+    const [sortState,setSortState] = useState("open")
     let items
 
-    useEffect(()=> {
-        sortIssues()
-        setSort(false)
-    },[sort])
-
+    //sorts issues based on if they are open or closed
     const sortIssues = () => {
-        if (sortState==="status") {
+        if (sortState==="open") {
             issues.sort(function(a,b){
                 if (a.status > b.status) return -1
                 else if (b.status > a.status) return 1
                 else return 0
             })
+            setSortState("closed")
         }
         else {
             issues.sort(function(a,b){
@@ -28,14 +23,12 @@ const IssueDetails = (props) => {
                 else if (b.status > a.status) return -1
                 else return 0
             })
+            setSortState("open")
         }
 
     }
 
     
-
-    
-    sortIssues()
     //maps issues to create list group items of issues
     if (issues.length>0) {
         items = issues.map((issue)=>{
@@ -71,6 +64,7 @@ const IssueDetails = (props) => {
             )
         })
     }
+    //renders if no issues exist
     else {
         items =
         <ListGroupItem>
@@ -81,7 +75,6 @@ const IssueDetails = (props) => {
     }
 
 
-
 	return (
         <>
         <ListGroupItem style={{width:'60%'}}>
@@ -90,25 +83,25 @@ const IssueDetails = (props) => {
                 sm={2}
                 className="issue-details issuedet-header"
                 onClick={()=>{
-                    setSortState('status')
-                    setSort(true)
+                    sortIssues()
                 }}>Status</Col>
                 <Col
                 sm={2}
                 className="issue-details issuedet-header"
                 onClick={()=>{
-                    setSortState('priority')
-                    setSort(true)
+                    sortIssues()
                 }}
                     >Priority</Col>
                 <Col className="issue-details issuedet-header" md={6}>Issue Description</Col>
+                &nbsp;
                 <Col className="issue-details issuedet-header">Comments</Col>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                
             </Row>
         </ListGroupItem>
         <ListGroup className="issues-listgroup">
             {items}
         </ListGroup>
+        {sortIssues}
         </>
 	)
 }
