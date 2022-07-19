@@ -44,25 +44,25 @@ const IssueDetails = (props) => {
             <Link
                 className="link-style"
                 to={`/issue/${issue._id}`}>
-                <ListGroupItem key={`issueKey${issue._id}`}>
+                <ListGroupItem key={`issueKey${issue._id}`} className="issue-item">
                     <Row>
                         <Col
                         className="issue-details"
-                        style={{backgroundColor: issue.status==='open'?'lightgreen':'lightgrey'}}
+                        sm={2}
                         >
-                            {issue.status}
+                            <span className={issue.status}>
+                                {issue.status}
+                            </span>
                         </Col>
                         <Col
                         className="issue-details"
-                        style = {{
-                            'backgroundColor': issue.priority === 'low' ?
-                            'lightyellow' : issue.priority === 'medium' ?
-                            'yellow' : issue.priority === 'high'? 'orange':'red'
-                        }}
+                        sm={2}
                         >
-                            {issue.priority}
+                            <span className={issue.priority}>
+                                {issue.priority}
+                            </span>
                         </Col>
-                        <Col className="issue-details overflow">{issue.title}</Col>
+                        <Col className="issue-details overflow" md={6}>{issue.title}</Col>
                         <Col className="issue-details">{issue.comments.length}</Col>
                     </Row>
                 </ListGroupItem>
@@ -84,21 +84,26 @@ const IssueDetails = (props) => {
 
 	return (
         <>
-        <ListGroupItem style={{width:'98%'}}>
+        <ListGroupItem style={{width:'60%'}}>
             <Row>
-                <Col className="issue-details issuedet-header"
+                <Col
+                sm={2}
+                className="issue-details issuedet-header"
                 onClick={()=>{
                     setSortState('status')
                     setSort(true)
                 }}>Status</Col>
-                <Col className="issue-details issuedet-header"
+                <Col
+                sm={2}
+                className="issue-details issuedet-header"
                 onClick={()=>{
                     setSortState('priority')
                     setSort(true)
                 }}
                     >Priority</Col>
-                <Col className="issue-details issuedet-header">Issue</Col>
+                <Col className="issue-details issuedet-header" md={6}>Issue Description</Col>
                 <Col className="issue-details issuedet-header">Comments</Col>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </Row>
         </ListGroupItem>
         <ListGroup className="issues-listgroup">
