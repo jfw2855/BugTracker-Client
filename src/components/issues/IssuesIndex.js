@@ -20,7 +20,6 @@ const IssuesIndex = (props) => {
     const fetchData = async () => {
         let issuesResp = await showMyIssues(user)
         setIssues(issuesResp.data.issues)
-        console.log('this is the issue resp!!',issuesResp.data.issues)
     }
     
     //shows spinner while awaiting for api resp
@@ -39,16 +38,25 @@ const IssuesIndex = (props) => {
                     <ListGroup.Item
                         className="item-hover"
                         key={`lg-${index}`}>
-                        <span
-                            className={item.status==="open"?"open":"closed"}
-                        >
-                            {item.status}</span>&nbsp;&nbsp;
-                        <span
-                            className={item.priority=="low"?"low":item.priority=="medium"?
-                            "medium":item.priority=="high"?"high":"critical"}
-                        >
-                            {item.priority}</span>&nbsp;&nbsp;
-                        {item.title}
+                            <Row>
+
+                                <Col sm={2}>
+                                    <span
+                                        className={item.status==="open"?"open":"closed"}
+                                    >
+                                        {item.status}</span>&nbsp;&nbsp;
+                                </Col>
+                                <Col sm={2}>
+                                    <span
+                                        className={item.priority=="low"?"low":item.priority=="medium"?
+                                        "medium":item.priority=="high"?"high":"critical"}
+                                    >
+                                        {item.priority}</span>&nbsp;&nbsp;
+                                </Col>
+                                <Col>
+                                    {item.title}
+                                </Col>
+                            </Row>
                     </ListGroup.Item>
                 </Link>
             )
