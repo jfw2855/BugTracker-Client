@@ -8,7 +8,7 @@ const StatData = (props) => {
     let [open,closed] = Array(2).fill(0)
 
     for (let i in issuesData) {
-        issuesData[i].status=="open"?open+=1:closed+=1
+        issuesData[i].status==="open"?open+=1:closed+=1
     }
 
     console.log('from statdata',issuesData,projects)

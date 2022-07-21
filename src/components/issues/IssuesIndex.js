@@ -48,8 +48,8 @@ const IssuesIndex = (props) => {
                                 </Col>
                                 <Col sm={2}>
                                     <span
-                                        className={item.priority=="low"?"low":item.priority=="medium"?
-                                        "medium":item.priority=="high"?"high":"critical"}
+                                        className={item.priority==="low"?"low":item.priority==="medium"?
+                                        "medium":item.priority==="high"?"high":"critical"}
                                     >
                                         {item.priority}</span>&nbsp;&nbsp;
                                 </Col>

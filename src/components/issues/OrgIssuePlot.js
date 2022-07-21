@@ -7,10 +7,10 @@ const OrgIssuePlot = (props) => {
 
     //loops through to create current open issue chart
     for (let i in data) {
-        if (data[i].status == "closed") continue
-        data[i].priority == "low"?low+=1:
-        data[i].priority == "medium"?medium+=1:
-        data[i].priority == "high"?high+=1:critical+=1
+        if (data[i].status === "closed") continue
+        data[i].priority === "low"?low+=1:
+        data[i].priority === "medium"?medium+=1:
+        data[i].priority === "high"?high+=1:critical+=1
 
         open+=1
     }
