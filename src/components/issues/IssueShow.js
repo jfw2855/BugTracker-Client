@@ -41,7 +41,6 @@ const IssueShow = (props) => {
         setOpenDate(created.toDateString())
         setCloseDate(updated.toDateString())
         setComments(apiResp.data.issue.comments)
-        console.log('apiresp',apiResp.data.issue)
     }
 
     //awaits for apiresponse beforing rendering
@@ -126,7 +125,7 @@ const IssueShow = (props) => {
             <Card.Header className="stat-container">
                 <h4>Status:&nbsp;
                     <button
-                    className={issue.status==="open"?"open":"closed"}
+                    className={issue.status}
                     onClick={handleStatus}
                     >
                         {issue.status}
@@ -134,8 +133,7 @@ const IssueShow = (props) => {
                 </h4>
                 <h4>Priority:&nbsp;
                     <span
-                    className={issue.priority=="low"?"low":issue.priority=="medium"?
-                    "medium":issue.priority=="high"?"high":"critical"}
+                    className={issue.priority}
                     >
                         {issue.priority}
                     </span>
