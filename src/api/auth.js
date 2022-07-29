@@ -58,3 +58,13 @@ export const changePassword = (passwords, user) => {
 		},
 	})
 }
+
+export const getOrgUsers = (user) => {
+	return axios({
+		url: `${apiUrl}/users`,
+		method: 'GET',
+		headers: {
+			Authorization: `Token token=${user.token}`,
+		}
+	})
+}
