@@ -120,7 +120,7 @@ const IssueShow = (props) => {
                 </Card.Body>
             </Card>
         </div>
-        <IssueStatInfo issue={issue} closeDate={closeDate} openDate={openDate}/>
+        <IssueStatInfo issue={issue} closeDate={closeDate} openDate={openDate} handleStatus={handleStatus}/>
         <AddCommentModal
 				show={modalOpen}
 				user={user}
