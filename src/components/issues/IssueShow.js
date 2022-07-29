@@ -1,5 +1,5 @@
 import { useEffect,useState } from "react"
-import { useParams,useNavigate } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { ListGroup, ButtonGroup, Card } from "react-bootstrap"
 import { getIssue, updateIssue } from "../../api/issue"
 import AddCommentModal from "../comment/AddCommentModal"
@@ -8,15 +8,14 @@ import EditIssueModal from "./EditIssueModal"
 import { FiEdit3 } from "react-icons/fi"
 import {RiDeleteBack2Fill} from "react-icons/ri"
 import {BiCommentAdd} from "react-icons/bi"
-import {AiOutlineProject} from "react-icons/ai"
 import DeleteModal from "../shared/DeleteModal"
+import IssueStatInfo from "./IssueStatInfo"
 
 const IssueShow = (props) => {
 
     const {user,msgAlert} = props
     const params = useParams()
     const {issueId} = params
-    const navigate = useNavigate()
     const [issue,setIssue] = useState(null)
     const [modalOpen,setModalOpen] = useState(false)
     const [refresh,setRefresh] = useState(false)
@@ -121,44 +120,7 @@ const IssueShow = (props) => {
                 </Card.Body>
             </Card>
         </div>
-        <Card className="issueinfo-container">
-            <Card.Header className="stat-container">
-                <h4>Status:&nbsp;
-                    <button
-                    className={issue.status}
-                    onClick={handleStatus}
-                    >
-                        {issue.status}
-                    </button>
-                </h4>
-                <h4>Priority:&nbsp;
-                    <span
-                    className={issue.priority}
-                    >
-                        {issue.priority}
-                    </span>
-                </h4>
-            </Card.Header>
-            <Card.Body>
-                <div className="project">
-                    <span >Project: {issue.project.title}</span>
-                    <AiOutlineProject
-                        className="project-icon"
-                        type="button"
-                        onClick={()=>navigate(`/project/${issue.project._id}`)} 
-                    />
-                </div>
-                <hr/>
-                <i>Created:</i>
-                <h6>{openDate} by {issue.owner.firstName} {issue.owner.lastName}</h6>
-                {issue.status==="open"?
-                <></>:
-                <>
-                <i>Closed:</i>
-                <h6>{closeDate}</h6>
-                </>}
-            </Card.Body>
-        </Card>
+        <IssueStatInfo issue={issue} closeDate={closeDate} openDate={openDate}/>
         <AddCommentModal
 				show={modalOpen}
 				user={user}
