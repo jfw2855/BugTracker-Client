@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { ListGroupItem, Row, Col, ListGroup } from "react-bootstrap"
+import { BsPrefixComponent } from 'react-bootstrap/esm/helpers'
 import { Link } from "react-router-dom"
 
 const IssueDetails = ({issues}) => {
@@ -10,7 +11,7 @@ const IssueDetails = ({issues}) => {
     //sorts issues based on if they are open or closed
     const sortIssues = () => {
         if (sortState==="open") {
-            issues.sort(function(a,b){
+            issues.sort((a, b) => {
                 if (a.status > b.status) return -1
                 else if (b.status > a.status) return 1
                 else return 0
@@ -18,7 +19,7 @@ const IssueDetails = ({issues}) => {
             setSortState("closed")
         }
         else {
-            issues.sort(function(a,b){
+            issues.sort((a, b) => {
                 if (a.status > b.status) return 1
                 else if (b.status > a.status) return -1
                 else return 0
