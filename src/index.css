@@ -496,3 +496,17 @@ i {
 .modal-field {
   margin-bottom: 2%;
 }
+
+.hide {
+  display: none;
+}
+.add-team-btn {
+  background-color: rgba(207, 229, 238, 0.672);
+  border: none;
+  border-radius: 5px;
+  margin-top: 5%;
+}
+
+.add-team-btn:hover {
+  background-color: rgba(161, 186, 196, 0.672);
+}
