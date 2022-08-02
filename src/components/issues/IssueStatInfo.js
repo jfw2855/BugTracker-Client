@@ -9,13 +9,17 @@ import AddTeamContainer from "../shared/AddTeamContainer"
 const IssueStatInfo = ({user,issue,openDate,closeDate,handleStatus,refresh}) => {
 
     const navigate = useNavigate()
+    const [addTeamOpen,setAddTeamOpen] = useState("hide")
 
-    const [addTeamOpen,setAddTeamOpen] = useState(false)
 
-    issue.team.shift()
+    //maps over issue team to render members
     let issueTeam = issue.team.map((person => {
-        return <h6>{`${person.firstName} ${person.lastName}`}</h6>
+        return <h6 className={person._id===issue.owner._id?"hide":""}>{`${person.firstName} ${person.lastName}`}</h6>
     }))
+
+    const handleClick = () => {
+        addTeamOpen==="hide"?setAddTeamOpen("show"):setAddTeamOpen("hide")
+    }
 
 	return (
         <>
@@ -61,13 +65,17 @@ const IssueStatInfo = ({user,issue,openDate,closeDate,handleStatus,refresh}) => 
                     <MdPersonAddAlt1
                     className="project-icon"
                     type="button"
-                    onClick={()=>setAddTeamOpen(true)}
-                
+                    onClick={handleClick}
                 />
                 </h5>
                 <h6>{issue.owner.firstName} {issue.owner.lastName}</h6>
                 {issueTeam}
-                <AddTeamContainer issue={issue} user={user}/>
+                <AddTeamContainer
+                    issue={issue}
+                    user={user}
+                    show={addTeamOpen}
+                    hide={()=>setAddTeamOpen("hide")}
+                />
 
             </Card.Body>
         </Card>
