@@ -1,12 +1,24 @@
 import { useNavigate } from "react-router-dom"
+import { useState, useEffect } from "react"
 import { Card } from "react-bootstrap"
 import {AiOutlineProject} from "react-icons/ai"
+import {MdPersonAddAlt1} from "react-icons/md"
+import { getOrgUsers } from "../../api/auth"
+import AddTeamContainer from "../shared/AddTeamContainer"
 
-const IssueStatInfo = ({issue,openDate,closeDate,handleStatus}) => {
+const IssueStatInfo = ({user,issue,openDate,closeDate,handleStatus,refresh}) => {
 
     const navigate = useNavigate()
 
+    const [addTeamOpen,setAddTeamOpen] = useState(false)
+
+
+    let issueTeam = issue.team.map((person => {
+        return <h6></h6>
+    }))
+
 	return (
+        <>
         <Card className="issueinfo-container">
             <Card.Header className="stat-container">
                 <h4>Status:&nbsp;
@@ -44,7 +56,22 @@ const IssueStatInfo = ({issue,openDate,closeDate,handleStatus}) => {
                 <h6>{closeDate}</h6>
                 </>}
             </Card.Body>
+            <Card.Body>
+                <h5>Issue Team: &nbsp;
+                    <MdPersonAddAlt1
+                    className="project-icon"
+                    type="button"
+                    onClick={()=>setAddTeamOpen(true)}
+                
+                />
+                </h5>
+                <h6>{issue.owner.firstName} {issue.owner.lastName}</h6>
+                {issueTeam}
+                <AddTeamContainer issue={issue} user={user}/>
+
+            </Card.Body>
         </Card>
+        </>
 
 	)
 }
