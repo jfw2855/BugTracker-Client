@@ -5,7 +5,7 @@ import { getOrgUsers } from '../../api/auth';
 import { updateIssue } from '../../api/issue';
 
 
-const AddTeamContainer = ({issue,user}) => {
+const AddTeamContainer = ({issue,user,show,hide}) => {
     console.log('this is issue!',issue)
     const [options,setOptions] = useState('none')
     // const [allUsers,setAllUsers] = useState(null)
@@ -46,7 +46,7 @@ const AddTeamContainer = ({issue,user}) => {
 
 
     if (options==="none") {
-        return "Loading..."
+        return <span className={show}>Loading...</span>
     }
     
     const handleSubmit = async (e) => {
@@ -55,6 +55,7 @@ const AddTeamContainer = ({issue,user}) => {
             issue.team.push(selectedTeam[i].value)
         }
         updateIssue(user,issue._id,issue)
+        hide()
         
 
     }
@@ -66,14 +67,14 @@ const AddTeamContainer = ({issue,user}) => {
 
 
 
-	return (<>
-        <form>
-        <Select options={options} onChange={handleChange} isMulti/>
-        <button type="submit" onClick={handleSubmit}>
+	return (
+        
+        <form className={show}>
+        <Select options={options} onChange={handleChange} isMulti className='select-team'/>
+        <button type="submit" onClick={handleSubmit} className="add-team-btn">
             Add Members
         </button>
         </form>
-        </>
 	)
 }
 
