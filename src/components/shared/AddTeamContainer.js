@@ -2,12 +2,14 @@ import React from 'react';
 import Select from 'react-select'
 import { useEffect,useState } from 'react';
 import { getOrgUsers } from '../../api/auth';
+import { updateIssue } from '../../api/issue';
 
 
 const AddTeamContainer = ({issue,user}) => {
     console.log('this is issue!',issue)
     const [options,setOptions] = useState('none')
     // const [allUsers,setAllUsers] = useState(null)
+    const [selectedTeam,setSelectedTeam] = useState(null)
 
     let selectOptions = []
 
@@ -44,7 +46,21 @@ const AddTeamContainer = ({issue,user}) => {
 
 
     if (options==="none") {
-        return "loading"
+        return "Loading..."
+    }
+    
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        for (let i in selectedTeam) {
+            issue.team.push(selectedTeam[i].value)
+        }
+        updateIssue(user,issue._id,issue)
+        
+
+    }
+
+    const handleChange = (selectedTeam) => {
+        setSelectedTeam(selectedTeam)
     }
 
 
@@ -52,8 +68,8 @@ const AddTeamContainer = ({issue,user}) => {
 
 	return (<>
         <form>
-        <Select options={options} isMulti/>
-        <button type="submit">
+        <Select options={options} onChange={handleChange} isMulti/>
+        <button type="submit" onClick={handleSubmit}>
             Add Members
         </button>
         </form>
