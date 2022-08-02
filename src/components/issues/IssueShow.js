@@ -120,7 +120,14 @@ const IssueShow = (props) => {
                 </Card.Body>
             </Card>
         </div>
-        <IssueStatInfo issue={issue} closeDate={closeDate} openDate={openDate} handleStatus={handleStatus}/>
+        <IssueStatInfo 
+            user={user}
+            issue={issue}
+            closeDate={closeDate}
+            openDate={openDate}
+            handleStatus={handleStatus}
+            refresh={()=>setRefresh(true)}
+        />
         <AddCommentModal
 				show={modalOpen}
 				user={user}
@@ -130,7 +137,7 @@ const IssueShow = (props) => {
 				handleClose={() => {
 					setModalOpen(false)
 				}}
-			/>
+		/>
         <EditIssueModal
             show={issueOpen}
             user={user}
