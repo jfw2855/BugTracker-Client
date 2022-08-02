@@ -12,9 +12,9 @@ const IssueStatInfo = ({user,issue,openDate,closeDate,handleStatus,refresh}) => 
 
     const [addTeamOpen,setAddTeamOpen] = useState(false)
 
-
+    issue.team.shift()
     let issueTeam = issue.team.map((person => {
-        return <h6></h6>
+        return <h6>{`${person.firstName} ${person.lastName}`}</h6>
     }))
 
 	return (
