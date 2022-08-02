@@ -1,9 +1,8 @@
-import { useLocation,useParams,useNavigate } from "react-router-dom"
-import { Button,ListGroup,ListGroupItem,Row,Col, Spinner, ButtonGroup, Card } from "react-bootstrap"
+import { useParams } from "react-router-dom"
+import { Spinner, ButtonGroup, Card } from "react-bootstrap"
 import { useEffect,useState } from "react"
-import { showProjectIssues,removeAllIssues } from "../../api/issue"
-import { removeProject, getProject } from "../../api/project"
-import IssuePlots from "../issues/IssuePlots"
+import { showProjectIssues } from "../../api/issue"
+import { getProject } from "../../api/project"
 import IssueDetails from "../issues/IssueDetails"
 import IssueNewModal from "../issues/IssueNewModal"
 import ProjectEditModal from "./ProjectEditModal"
@@ -19,32 +18,20 @@ const ProjectShow = (props) => {
     const [project,setProject]=useState(null)
     const params = useParams()
     const {projId} = params
-    const navigate = useNavigate()
     const [issues,setIssues]=useState(null)
     const [issueOpen,setIssueOpen] = useState(false)
     const [issueRefresh,setIssueRefresh] = useState(false)
     const [projectRefresh,setProjectRefresh] = useState(false)
     const [editOpen,setEditOpen] = useState(false)
     const [deleteOpen,setDeleteOpen] = useState(false)
-    const [priorityLabels,setPriorityLabels] = useState([])
-    const [priorityValues,setPriorityValues] = useState([])
-    const [ statusLabels, setStatusLabels] = useState([])
-    const [ statusValues, setStatusValues] = useState([])
     const [projectCreated,setProjectCreated] = useState(null)
 
     let issueDetails
-    let priorityData = {}
-    let statusData = {}
-    let pieCharts
 
+    //resets state vars if a project is edited or new issue is opened
     useEffect(()=>{
-        //resets state vars for graph data
         setIssueRefresh(false)
         setProjectRefresh(false)
-        setPriorityLabels([])
-        setPriorityValues([])
-        setStatusLabels([])
-        setStatusValues([])
         fetchProject()
         fetchIssues()
     },[issueRefresh,projectRefresh])
@@ -60,37 +47,6 @@ const ProjectShow = (props) => {
     const fetchIssues =  async () => {
         let apiResp = await showProjectIssues(user,projId)
         setIssues(apiResp.data.issues)
-        createGData(apiResp.data.issues)  
-    }
-    
-    //function that loops through issues to create issue graphs
-    const createGData = (issues) => {
-        for (let i in issues) {
-            let priority = issues[i].priority
-            let status = issues[i].status
-            //checks if priority & status exists in objects
-            if (priority in priorityData) {
-                priorityData[`${priority}`]+=1
-            }
-            else {
-                priorityData[`${priority}`] = 1
-            }
-            if (status in statusData) {
-                statusData[`${status}`]+=1
-            }
-            else {
-                statusData[`${status}`] = 1
-            }
-        }
-        //pushes issue status and priority data to arrays
-        for (let key in priorityData) {
-            setPriorityLabels(prevVal => [...prevVal,key])
-            setPriorityValues(prevVal => [...prevVal,priorityData[key]])
-        }
-        for (let key in statusData) {
-            setStatusLabels(prevVal=>[...prevVal,key])
-            setStatusValues(prevVal=>[...prevVal,statusData[key]])
-        }
     }
 
     //shows spinner while awaiting for api resp
@@ -99,30 +55,15 @@ const ProjectShow = (props) => {
         <span className="visually-hidden">Loading</span>
         </Spinner>
         
+
     //maps issues to create list group items of issues
     } else {
         issueDetails = <IssueDetails issues={issues}/>  
     }
 
-    //renders piechart component
-    if (statusValues.length>0) {
-        pieCharts=<IssuePlots
-        priorityValues={priorityValues}
-        priorityLabels={priorityLabels}
-        statusValues={statusValues}
-        statusLabels={statusLabels}
-        />
-    }
-
-    // handle delete function that will remove project from db
-    const handleDelete = async (e) => {
+    // opens delete modal 
+    const handleDelete = () => {
         setDeleteOpen(true)
-        console.log('delte thisss clicckkk')
-        // e.preventDefault()
-        // await removeAllIssues(user,projId)
-        // await removeProject(user,projId)
-        // //returns back to home page after removing project
-        // navigate('/')
     }
 
     //rerenders issues index once a new issue is created
@@ -135,7 +76,7 @@ const ProjectShow = (props) => {
 		setIssueOpen(true)
 	}
 
-    //rerenders project index once a new project is created
+    //refreshes project info if edited
 	const refreshProject = () => {
 		setProjectRefresh(true)
 	}
