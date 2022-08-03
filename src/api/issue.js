@@ -107,3 +107,15 @@ export const removeAllIssues = (user,projectId) => {
   return axios(config)
 }
 
+//DELETE team member -> removes issue team member from issue team arr
+export const removeTeamMember = (user,issueId,userId) => {
+
+  const config = {
+    method: 'DELETE',
+    url: `${apiUrl}/issue/${issueId}/${userId}`,
+    headers: {
+      Authorization: `Token token=${user.token}`
+    }
+  }
+  return axios(config)
+}
