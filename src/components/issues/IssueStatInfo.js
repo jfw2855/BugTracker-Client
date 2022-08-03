@@ -1,25 +1,35 @@
 import { useNavigate } from "react-router-dom"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Card } from "react-bootstrap"
 import {AiOutlineProject} from "react-icons/ai"
 import {MdPersonAddAlt1} from "react-icons/md"
-import { getOrgUsers } from "../../api/auth"
 import AddTeamContainer from "../shared/AddTeamContainer"
+import { removeTeamMember } from "../../api/issue"
 
 const IssueStatInfo = ({user,issue,openDate,closeDate,handleStatus,refresh}) => {
 
     const navigate = useNavigate()
     const [addTeamOpen,setAddTeamOpen] = useState("hide")
 
-
-    //maps over issue team to render members
-    let issueTeam = issue.team.map((person => {
-        return <h6 className={person._id===issue.owner._id?"hide":""}>{`${person.firstName} ${person.lastName}`}</h6>
-    }))
-
+    //handle function to show select team dropdown
     const handleClick = () => {
         addTeamOpen==="hide"?setAddTeamOpen("show"):setAddTeamOpen("hide")
     }
+
+    //handle function to remove team member from db
+    const handleRemoval = async (userId) => {
+        await removeTeamMember(user,issue._id,userId)
+        refresh()
+    }
+
+    //maps over issue team to render members
+    let issueTeam = issue.team.map((person => {
+        return <h6
+        className={person._id===issue.owner._id?"hide":""}
+        onClick={()=>handleRemoval(person._id)}
+        >{`${person.firstName} ${person.lastName}`}</h6>
+    }))
+
 
 	return (
         <>
@@ -68,7 +78,7 @@ const IssueStatInfo = ({user,issue,openDate,closeDate,handleStatus,refresh}) => 
                     onClick={handleClick}
                 />
                 </h5>
-                <h6>{issue.owner.firstName} {issue.owner.lastName}</h6>
+                <h6>{issue.owner.firstName} {issue.owner.lastName} (owner)</h6>
                 {issueTeam}
                 <AddTeamContainer
                     issue={issue}
