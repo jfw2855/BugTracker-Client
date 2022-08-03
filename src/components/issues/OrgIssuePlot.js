@@ -22,22 +22,37 @@ const OrgIssuePlot = (props) => {
           y: [`${low}`,`${medium}`, `${high}`, `${critical}`],
           marker: {
               color: [
-              'rgba(238, 238, 166, 0.809)',
-              'rgba(238, 192, 42, 0.828)',
-              'rgba(238, 83, 32, 0.828)',
-              'rgba(239, 38, 51, 0.891)'
-            ]
+              'rgba(238, 238, 166, 0.7)',
+              'rgba(238, 192, 42, 0.7)',
+              'rgba(238, 83, 32, 0.7)',
+              'rgba(239, 38, 51, 0.7)'
+            ],
+            line: {
+                color: [
+                  'rgba(238, 238, 166, 1)',
+                  'rgba(238, 192, 42, 1)',
+                  'rgba(238, 83, 32, 1)',
+                  'rgba(239, 38, 51, 1)'
+                ],
+                width: 2
+              }
             },
           type: 'bar',
+          width: [0.5,0.5,0.5,0.5]
         }
       ]
 
     let layout = {
-        title: 'Current Open Issues',
-        autosize: true,
-        titlefont: {
-          size: 25
+        title: {
+          text:'Current Open Issues',
+          y: 0.95,
+          font: {
+            family:'Arial, sans-serif',
+            weight: 'bold',
+            size: 24
+          },
         },
+        autosize: true,
         yaxis: {
           color:'black',
           autotick:false,
@@ -45,16 +60,23 @@ const OrgIssuePlot = (props) => {
           dtick:1,
           autorange: true,
           tickfont: {
-            size: 18,
+            size: 16,
             family: 'Arial, sans-serif',
           }
         },
         xaxis: {
           tickfont: {
-            size: 18,
+            size: 16,
             family: 'Arial, sans-serif',
-            autorange: true
-          }
+            autorange: true,
+          },
+        },
+        margin: {
+          l: 50,
+          r: 50,
+          b: 60,
+          t: 50,
+          pad: 7
         }
     }
 
