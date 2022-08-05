@@ -3,6 +3,7 @@ import { useState } from "react"
 import { Card } from "react-bootstrap"
 import {AiOutlineProject} from "react-icons/ai"
 import {MdPersonAddAlt1} from "react-icons/md"
+import {TiUserDelete} from "react-icons/ti"
 import AddTeamContainer from "../shared/AddTeamContainer"
 import { removeTeamMember } from "../../api/issue"
 
@@ -24,10 +25,18 @@ const IssueStatInfo = ({user,issue,openDate,closeDate,handleStatus,refresh}) => 
 
     //maps over issue team to render members
     let issueTeam = issue.team.map((person => {
-        return <h6
+        return (
+        <>
+        <span
         className={person._id===issue.owner._id?"hide":""}
         onClick={()=>handleRemoval(person._id)}
-        >{`${person.firstName} ${person.lastName}`}</h6>
+        >{`${person.firstName} ${person.lastName}`} 
+        <TiUserDelete
+        className="hidez"/></span>
+   
+        </>
+        )
+
     }))
 
 
