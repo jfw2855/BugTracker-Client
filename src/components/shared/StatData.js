@@ -1,5 +1,6 @@
 import {GoIssueOpened} from 'react-icons/go'
 import {FaCheck} from 'react-icons/fa'
+import {BsFillFileEarmarkBarGraphFill} from 'react-icons/bs'
 
 const StatData = (props) => {
 
@@ -11,20 +12,24 @@ const StatData = (props) => {
         issuesData[i].status==="open"?open+=1:closed+=1
     }
 
-    console.log('from statdata',issuesData,projects)
 
 	return (
-		<div className="stat-metrics noselect"> 
-            <div className="stat-project">Total {user.organization.toUpperCase()} Projects: {projects.length}</div>
-            <div className="stat-issue-container">
-                <div className="stat-detail open-stat">
-                    <GoIssueOpened className="issue-icon"/>
-                    Open Issues: {open}
-                    </div>
-                <div className="stat-detail close-stat">
-                    <FaCheck className="issue-icon"/>
-                    Closed Issues: {closed}
-                    </div>
+		<div className="issue-stat-container"> 
+            <div className="stat-detail total-stat">
+                <BsFillFileEarmarkBarGraphFill className="issue-icon"/>
+                <span>Total Issues</span>
+                <span>{open+closed}</span>
+                
+            </div>
+            <div className="stat-detail open-stat">
+                <GoIssueOpened className="issue-icon"/>
+                <span>Open Issues</span>
+                <span>{open}</span>
+            </div>
+            <div className="stat-detail close-stat">
+                <FaCheck className="issue-icon"/>
+                <span>Closed Issues</span>
+                <span>{closed}</span>
             </div>
 		</div>
 	)
