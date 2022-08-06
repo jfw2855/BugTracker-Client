@@ -91,9 +91,7 @@ const Home = (props) => {
 				</div>
 				<div className="home-details">
 					<h4>My Created Issues</h4>
-					<ListGroup className="scroll-show">
-						<IssuesIndex user={user} refresh={issueRefresh}/>
-					</ListGroup>
+					<IssuesIndex user={user} refresh={issueRefresh}/>
 					<button onClick={handleNewIssue} className="home-btn dd">
 						Create New Issue
 					</button>
