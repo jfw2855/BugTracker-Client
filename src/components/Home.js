@@ -76,8 +76,8 @@ const Home = (props) => {
 	return (
 		<div className="home-body">
 		<div className="home-header">
-			<OrgIssuePlot data={issuesData}/>
 			<StatData issuesData={issuesData} projects={projects} user={user}/>
+			<OrgIssuePlot data={issuesData}/>
 		</div>
 			<div className="home-container">
 				<div className="project-details">
