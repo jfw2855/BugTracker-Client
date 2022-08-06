@@ -36,20 +36,18 @@ const IssuesIndex = (props) => {
                     className="link-style"
                     to={`/issue/${item._id}`}>
                     <ListGroup.Item
-                        className="item-hover"
+                        action
                         key={`lg-${index}`}>
                             <Row>
-
                                 <Col sm={2}>
                                     <span
-                                        className={item.status==="open"?"open":"closed"}
+                                        className={item.status}
                                     >
                                         {item.status}</span>&nbsp;&nbsp;
                                 </Col>
                                 <Col sm={2}>
                                     <span
-                                        className={item.priority==="low"?"low":item.priority==="medium"?
-                                        "medium":item.priority==="high"?"high":"critical"}
+                                        className={item.priority}
                                     >
                                         {item.priority}</span>&nbsp;&nbsp;
                                 </Col>
@@ -66,7 +64,22 @@ const IssuesIndex = (props) => {
 
 	return (
 		<>
-            {issueDetails}
+        	<ListGroup className="scroll-show">
+                <ListGroup.Item className='sticky' key={`issueHomeHeader`}>
+                    <Row>
+                        <Col sm={2}>
+                            <span>Status</span>&nbsp;&nbsp;
+                        </Col>
+                        <Col sm={2}>
+                            <span>Priority</span>&nbsp;&nbsp;
+                        </Col>
+                        <Col>
+                            Issue Description
+                        </Col>
+                    </Row>
+                    </ListGroup.Item>
+                {issueDetails}
+			</ListGroup>
 		</>
 	)
 }
