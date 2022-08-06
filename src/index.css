@@ -77,6 +77,12 @@
   background-color: rgba(69, 68, 68, 0.773);
 }
 
+.sticky {
+  position: sticky !important;
+  top: 0;
+  z-index: 999;
+}
+
 .home-container {
   /* border: 2px solid rgb(181, 102, 164); */
   display: flex;
@@ -186,11 +192,7 @@ margin-bottom: 1.5%;
   height: 35%;
 }
 
-.sticky {
-  position: sticky !important;
-  top: 0 !important;
-  background-color: blue !important; 
-}
+
 
 
 .issue-details {
