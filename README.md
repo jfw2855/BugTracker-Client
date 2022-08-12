@@ -34,6 +34,7 @@ A project management tool that tracks project related issues<br/>
 ## Planning & Design 
 <details>
 <summary>Overview</summary>
+
 ## Wireframes
 ![bugTracker](/media/bug-tracker%20wf1.png)
 ![bugTracker](/media/bug-tracker%20wf2.png)
