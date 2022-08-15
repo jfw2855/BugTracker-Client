@@ -38,7 +38,7 @@ const OrgIssuePlot = (props) => {
               }
             },
           type: 'bar',
-          width: [0.5,0.5,0.5,0.5]
+          width: [0.35,0.35,0.35,0.35]
         }
       ]
 
