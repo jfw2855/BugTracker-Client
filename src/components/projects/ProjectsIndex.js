@@ -1,6 +1,6 @@
 import { showProjects } from "../../api/project"
 import { useEffect,useState } from "react"
-import { Spinner, ListGroup, Row, Col } from 'react-bootstrap'
+import { Spinner, ListGroup } from 'react-bootstrap'
 import { Link } from "react-router-dom"
 
 
@@ -18,7 +18,6 @@ const ProjectsIndex = (props) => {
     //fetchData function -> fetches data from the db
     const fetchData = async () => {
         const response = await showProjects(user)
-        console.log('this is projects in fetchdata',response.data.projects)
         setProject(response.data.projects)
     }
 
@@ -37,9 +36,12 @@ const ProjectsIndex = (props) => {
                     to={`/project/${item._id}`}
                     state={{title:`${item.title}`,description:`${item.description}`,owner:`${item.owner}`}}
                 >
-                    <ListGroup.Item 
-                        className="item-hover"
-                        key={`project${index}`}>
+                    <ListGroup.Item
+                        action
+                        key={`project${index}`}
+                        style={{textAlign:'center'}}
+                        
+                        >
                         {item.title}
                     </ListGroup.Item>
                 </Link>
