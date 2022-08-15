@@ -1,13 +1,15 @@
 import ProjectsIndex from "./projects/ProjectsIndex"
 import IssuesIndex from "./issues/IssuesIndex"
-import { Button, ButtonGroup, ListGroup,Spinner } from "react-bootstrap"
+import {ListGroup,Spinner, Card } from "react-bootstrap"
 import { useEffect, useState } from "react"
 import ProjectNewModal from "./projects/ProjectNewModal"
 import IssueNewModal from "./issues/IssueNewModal"
 import { createProject,showProjects } from "../api/project"
-import { getOrgIssues } from "../api/issue"
+import { getOrgIssues, getCloseTime } from "../api/issue"
 import OrgIssuePlot from "./issues/OrgIssuePlot"
 import StatData from "./shared/StatData"
+import {GoReport} from 'react-icons/go'
+import {HiFolderAdd} from 'react-icons/hi'
 
 const Home = (props) => {
 	const { msgAlert, user } = props
@@ -18,6 +20,8 @@ const Home = (props) => {
 	const [projOptions,setProjOptions] = useState(null)
 	const [issuesData,setIssuesData] = useState(null)
 	const [projects,setProjects] = useState(null)
+	//avgICT === average issue close time
+	const [avgICT, setAvgICT] = useState(0)
 
 	//resets the refresh state variable & calls for proj info
 	useEffect(() => {
@@ -39,10 +43,12 @@ const Home = (props) => {
 		setProjOptions(temp)
 	}
 
-	//fetch org issues and assigns array to issueData
+	//fetches org issues and average issue close time
 	const fetchOrgIssues = async() => {
 		let apiResp = await getOrgIssues(user)
 		setIssuesData(apiResp.data.issues)
+		let timeResp = await getCloseTime(user)
+		setAvgICT(timeResp.data.avgCloseTime)
 	}
 
 	//renders spinner until api responds
@@ -74,27 +80,35 @@ const Home = (props) => {
 	}
 
 	return (
-		<div className="home-body">
-		<div className="home-header">
-			<StatData issuesData={issuesData} projects={projects} user={user}/>
-			<OrgIssuePlot data={issuesData}/>
-		</div>
-			<div className="home-container">
+		<Card className="home-body">
+			<Card.Header className="dashboard-header">
+				<i>{user.organization.toUpperCase()} Dashboard</i>
+				<i>User: {user.firstName} {user.lastName} </i>
+			</Card.Header>
+			<div className="home-top">
+				<div className="home-header">
+					<StatData issuesData={issuesData} projects={projects} user={user} avgICT={avgICT}/>
+					<OrgIssuePlot data={issuesData}/>
+				</div>
 				<div className="project-details">
-					<h4>{user.organization.toUpperCase()} Projects</h4>
+					<div className="home-btn-container">
+						<button onClick={handleNewIssue} className="openissue-btn">
+							Report Issue &nbsp;<GoReport/>
+						</button>
+						<button onClick={handleNewProject} className="home-btn">
+							Create Project &nbsp;<HiFolderAdd/>
+						</button>
+					</div>
+					<h4>View Projects</h4>
 					<ListGroup className="scroll-show">
 						<ProjectsIndex user={user} refresh={projectRefresh} className="scroll-show"/>
 					</ListGroup>
-					<button onClick={handleNewProject} className="home-btn">
-						Create New Project
-					</button>
 				</div>
+			</div>
+			<div className="home-container">
 				<div className="home-details">
 					<h4>My Created Issues</h4>
 					<IssuesIndex user={user} refresh={issueRefresh}/>
-					<button onClick={handleNewIssue} className="home-btn dd">
-						Create New Issue
-					</button>
 				</div>
 			</div>
 			<ProjectNewModal
@@ -117,7 +131,7 @@ const Home = (props) => {
 					setIssueOpen(false)
 				}}
 			/>
-		</div>
+		</Card>
 	)
 }
 
