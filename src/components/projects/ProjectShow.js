@@ -118,7 +118,7 @@ const ProjectShow = (props) => {
                     <Card.Body style={{marginBottom:'2%'}}>
                         <p style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
                             <h4>Project Overview</h4>
-                            <button onClick={handleNewIssue} className="home-btn">
+                            <button onClick={handleNewIssue} className="openissue-btn">
                                 Open Issue <GoIssueOpened size={21}/>
                             </button>
                         </p>
