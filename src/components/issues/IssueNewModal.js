@@ -50,7 +50,7 @@ const IssueNewModal = (props) => {
     show={show}
     onHide={handleClose}
     className="modal">
-      <Modal.Header className='modal-header'>
+      <Modal.Header closeButton className='modal-header'>
         Open Issue
       </Modal.Header>
       <Modal.Body>
