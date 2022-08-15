@@ -68,6 +68,19 @@ export const getOrgIssues = (user) => {
   return axios(config)
 }
 
+//GET avg close time -> calls for average issue close time
+export const getCloseTime = (user) => {
+
+  const config = {
+    method: 'GET',
+    url: `${apiUrl}/issues/org/closed`,
+    headers: {
+      Authorization: `Token token=${user.token}`
+    }
+  }
+  return axios(config)
+}
+
 // PATCH -> updates issue
 export const updateIssue = (user,issueId,issue) => {
   const config = {
