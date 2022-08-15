@@ -73,7 +73,7 @@
   width: 100%;
   margin: 2%;
   overflow-y:auto;
-  height: 53%;
+  height: 50vh;
   background-color: rgba(69, 68, 68, 0.773);
 }
 
@@ -84,7 +84,6 @@
 }
 
 .home-container {
-  border: 10px solid rgb(126, 42, 108);
   display: flex;
   flex-direction: column;
   align-self: center;
@@ -98,25 +97,30 @@
   display: flex;
   flex-direction: column;
   padding: 1%;
-  padding-top: 3%;
 }
 
+.home-btn-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20%;
+}
 
 .home-details {
-  width: 90%;
+  margin-top: 3%;
+  margin-bottom: 2%;
+  width: 97%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .project-details {
-  width: 30%;
+  width: 25%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  border: 2px solid red;
-  padding: 5%;
+  padding: 2%;
 }
 
 .home-top {
@@ -126,12 +130,25 @@
 }
 
 .home-btn {
-  margin: 10px;
+  margin: 5px;
   background-color: rgb(79, 79, 221);
   color: white;
   border-radius: 5px;
   padding: 10px;
   border: none;
+}
+
+.openissue-btn {
+  margin: 5px;
+  background-color: rgb(201, 73, 67);
+  color: white;
+  border-radius: 5px;
+  padding: 10px;
+  border: none;
+}
+
+.openissue-btn:hover {
+  background-color: rgb(171, 55, 49);
 }
 
 .home-btn:hover {
@@ -208,10 +225,7 @@ margin-bottom: 1.5%;
   display: flex;
   width: 100%;
   height: 35%;
-  border: 10px solid purple;
 }
-
-
 
 
 .issue-details {
@@ -375,7 +389,7 @@ html {
 
 .plotdata-container {
   width: 100%;
-  border: 4px solid rgba(190, 187, 190, 0.576);
+  border: 4px solid rgba(149, 173, 156, 0.576);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -391,12 +405,6 @@ html {
   text-decoration: none;
 }
 
-.item-hover:hover {
-  background-color: rgba(58, 40, 189, 0.623);
-  color: white;
-  font-weight: 600;
-  transition: 0.1s;
-}
 
 .no-issue-msg {
   background-color: rgba(156, 238, 156, 0.628);
@@ -535,4 +543,12 @@ i {
 
 .add-team-btn:hover {
   background-color: rgba(161, 186, 196, 0.672);
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+  background-color: rgba(205, 231, 239, 0.451) !important;
 }
