@@ -39,19 +39,25 @@ const IssuesIndex = (props) => {
                         action
                         key={`lg-${index}`}>
                             <Row>
-                                <Col sm={2}>
+                                <Col sm={2} style={{textAlign:'center'}}>
+                                    {item.project.title}
+                                </Col>
+                                <Col sm={3} style={{textAlign:'center'}}>
+                                    {item._id}
+                                </Col>
+                                <Col sm={1} style={{textAlign:'center'}}>
                                     <span
                                         className={item.status}
                                     >
-                                        {item.status}</span>&nbsp;&nbsp;
+                                        {item.status}</span>
                                 </Col>
-                                <Col sm={2}>
+                                <Col sm={1} style={{textAlign:'center'}}>
                                     <span
                                         className={item.priority}
                                     >
-                                        {item.priority}</span>&nbsp;&nbsp;
+                                        {item.priority}</span>
                                 </Col>
-                                <Col>
+                                <Col style={{textAlign:'center'}}>
                                     {item.title}
                                 </Col>
                             </Row>
@@ -67,13 +73,19 @@ const IssuesIndex = (props) => {
         	<ListGroup className="scroll-show">
                 <ListGroup.Item className='sticky' key={`issueHomeHeader`}>
                     <Row>
-                        <Col sm={2}>
-                            <span>Status</span>&nbsp;&nbsp;
+                        <Col sm={2} style={{textAlign:'center',fontWeight:'bold'}}>
+                            <span>Project</span>
                         </Col>
-                        <Col sm={2}>
-                            <span>Priority</span>&nbsp;&nbsp;
+                        <Col sm={3} style={{textAlign:'center', fontWeight:'bold'}}>
+                            Issue Id
                         </Col>
-                        <Col>
+                        <Col sm={1} style={{textAlign:'center',fontWeight:'bold'}}>
+                            <span>Status</span>
+                        </Col>
+                        <Col sm={1} style={{textAlign:'center',fontWeight:'bold'}}>
+                            <span>Priority</span>
+                        </Col>
+                        <Col style={{textAlign:'center',fontWeight:'bold'}}>
                             Issue Description
                         </Col>
                     </Row>
