@@ -26,7 +26,6 @@ const ProjectEditModal = (props) => {
     //creates new project in the db and refreshes ProjectsIndex component
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log('user,project,pid',user,project,projectId)
         await updateProject(user,project,projectId)
         refreshProject()
         handleClose()
