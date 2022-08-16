@@ -30,6 +30,26 @@ A project management tool that tracks project related issues<br/>
 - dashboard to render organizational issues and project stats
 - Loading spinners for fetching processes
 
+## App Screenshots
+![SignIn](/media/SignIn_BugTracker.png)
+
+![SignUp](/media/SignUp_BugTracker.png)
+
+![Dashboard](/media/Dashboard-HomePage_BugTracker.png)
+
+![CreateProjectModal](/media/CreateProjectModal_BugTracker.png)
+
+![OpenIssueModal](/media/NewIssueModal_BugTracker.png)
+
+![ProjectShowPage](/media/ProjectShowPage_BugTracker.png)
+
+![UpdateModal](/media/UpdateProjectModal_BugTracker.png)
+
+![DeleteModal](/media/DeleteModal_BugTracker.png)
+
+![IssueShowPage](/media/IssueShowPage_BugTracker.png)
+
+
 
 ## Planning & Design 
 <details>
