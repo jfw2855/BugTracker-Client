@@ -93,8 +93,9 @@ const IssueShow = (props) => {
                     <p>{issue.description}</p>
 
                 </Card.Body>
-                <Card.Footer>
+                <Card.Footer className="issue-footer">
                     <i>Created By: {issue.owner.firstName} {issue.owner.lastName} on {openDate}</i>
+                    <i>Issue Id: {issue._id}</i>
                 </Card.Footer>
             </Card>
             <Card className="issuedescr-container">
