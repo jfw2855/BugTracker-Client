@@ -244,6 +244,11 @@ margin-bottom: 1.5%;
 
 }
 
+.issue-footer {
+  display: flex !important;
+  justify-content: space-between !important;
+}
+
 .project {
   font-size: 25px;
   font-weight: 500;
