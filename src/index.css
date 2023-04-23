@@ -531,12 +531,22 @@ i {
   margin-bottom: 2%;
 }
 
-.hide,.hidez {
+.hide,.hidez,.remove-member {
   display: none;
 }
 
 .hide:hover {
   background-color: blue;
+}
+
+.team-member {
+  cursor: pointer;
+}
+
+.team-member:hover + .remove-member {
+  display: inline;
+  color: red;
+  font-weight: bold;
 }
 
 .add-team-btn {

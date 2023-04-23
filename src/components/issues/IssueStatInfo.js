@@ -28,12 +28,14 @@ const IssueStatInfo = ({user,issue,openDate,closeDate,handleStatus,refresh}) => 
         return (
         <>
         <span
-        className={person._id===issue.owner._id?"hide":""}
+        className={person._id===issue.owner._id?"hide":"team-member"}
         onClick={()=>handleRemoval(person._id)}
         >{`${person.firstName} ${person.lastName}`} 
-        <TiUserDelete
-        className="hidez"/></span>
-   
+        </span>
+        <span className="remove-member">
+            &nbsp;&nbsp;
+            <TiUserDelete/>Remove member from issue
+        </span>
         </>
         )
 
